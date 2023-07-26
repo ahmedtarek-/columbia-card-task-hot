@@ -547,15 +547,15 @@ var instructions_block = {
 	
     '<div class = centerbox><p class = block-text><strong>Unknown Cards:</strong>'+
     '<p> This is what unknown cards looks like.  Turn it over by clicking on it.</p>'+
-    "<p><input type='image' id = '133' src='images/new_beforeChosen.png' onclick = instructButton(this.id)>"+
+    "<p><input type='image' id = '133' src='images/new_beforeChosen.png' style='width:150px;' onclick = instructButton(this.id)>"+
 	'</p></div>',
 	
 	'<div class = centerbox><p class = block-text>'+
 	'<p><strong>The Gain Card:</strong></p>'+
 	'<p>For every gain card you turn over, your score increases by either 10 or 30 points in different rounds.</p>'+
-	"<p><input type='image' src='images/new_chosen.png'>"+
+	"<p><input type='image' src='images/new_chosen.png' style='width:150px;'>"+
 	'<p><strong>The Loss Card:</strong></p>'+
-	"<p><input type='image' src='images/new_loss.png'></p>"+
+	"<p><input type='image' src='images/new_loss.png' style='width:150px;'></p>"+
 	'<p>For every loss card you turn over, your score decreases by either 250 or 750 points in different rounds. Furthermore, the round immediately ends (you cannot turn over any more cards). There will be either 1 or 3 loss cards in any given round.</p>'+
 	'<p>The number of loss cards and the value of points that can be won or lost by turning over a gain or loss card are fixed in each round. This information will always be on display so you know what kind of round you are in.</p>'+
 	'</p></div>',
