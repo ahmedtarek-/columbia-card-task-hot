@@ -167,6 +167,7 @@ var getRound = function() {
 		gameState = appendTextAfter(gameState, 'Game Round: ', whichRound)
 		// gameState = appendTextAfter(gameState, 'Loss Amount: ', lossAmt)
 		gameState = appendTextAfter2(gameState, 'Temporary Account: ', roundPoints, '0')
+		gameState = appendTextAfter2(gameState, 'Global Account: ', totalEpisodePoints, '0')
 		// gameState = appendTextAfter(gameState, 'Number of Loss Cards: ', numLossCards)
 		gameState = appendTextAfter(gameState, 'Gain Amount: ', gainAmt)
 		gameState = appendTextAfter(gameState, "endRound()", " disabled")
@@ -176,6 +177,7 @@ var getRound = function() {
 		gameState = appendTextAfter(gameState, 'Game Round: ', whichRound)
 		// gameState = appendTextAfter(gameState, 'Loss Amount: ', lossAmt)
 		gameState = appendTextAfter2(gameState, 'Temporary Account: ', roundPoints, '0')
+		gameState = appendTextAfter2(gameState, 'Global Account: ', totalEpisodePoints, '0')
 		// gameState = appendTextAfter(gameState, 'Number of Loss Cards: ', numLossCards)
 		gameState = appendTextAfter(gameState, 'Gain Amount: ', gainAmt)
 		gameState = appendTextAfter(gameState, "noCard()", " disabled")
@@ -253,11 +255,11 @@ var turnOneCard = function(whichCard, win) {
 	}
 }
 
-function doSetTimeout(card_i, delay, points, total_episode_points, win) {
+function doSetTimeout(card_i, delay, points, totalEpisodePoints, win) {
 	CCT_timeouts.push(setTimeout(function() {
 		turnOneCard(card_i, win);
 		document.getElementById("current_round").innerHTML = 'Temporary Account: ' + points
-		document.getElementById("global_account").innerHTML = 'Global Account: ' + total_episode_points
+		document.getElementById("global_account").innerHTML = 'Global Account: ' + totalEpisodePoints
 	}, delay));
 }
 
@@ -353,8 +355,8 @@ var instructFunction = function() {
 		var card_i = cards_to_turn[i]
 		delay += 250
 		total_points += points_per_card
-		total_episode_points = total_points
-		doSetTimeout(card_i, delay, total_points, total_episode_points, 'win')
+		totalEpisodePoints = total_points
+		doSetTimeout(card_i, delay, total_points, totalEpisodePoints, 'win')
 	}
 	CCT_timeouts.push(setTimeout(function() {
 		document.getElementById("instruct1").innerHTML =
@@ -396,15 +398,15 @@ var instructFunction2 = function() {
 		var card_i = cards_to_turn[i]
 		delay += 250
 		total_points += points_per_card
-		total_episode_points = total_points
-		doSetTimeout(card_i, delay, total_points, total_episode_points, 'win')
+		totalEpisodePoints = total_points
+		doSetTimeout(card_i, delay, total_points, totalEpisodePoints, 'win')
 	}
 	delay += 250
 	total_points -= 250
-	total_episode_points = total_points
+	totalEpisodePoints = total_points
 	console.log("Inside instructFunction2")
 	console.log(roundPointsArray)
-	doSetTimeout(13, delay, total_points, total_episode_points, 'loss')
+	doSetTimeout(13, delay, total_points, totalEpisodePoints, 'loss')
 	CCT_timeouts.push(setTimeout(function() {
 		document.getElementById("instruct2").innerHTML =
 			'<strong>Example 2: </strong>In the example below, you see 32 unknown cards. The display shows you that 3 of these cards are loss cards. It also tells you that turning over each gain card is worth 30 points to you, and that turning over the loss card will cost you 250 points. Let us suppose you decided to turn over 10 cards and then decided to stop. Please click the "See Result" button to see what happens: <font color = "red">This time, the fourth card you turned over was a loss card. As you saw, the round will immediately end when you turn over the loss card. You had earned 90 points for the 3 gain cards, and then 250 points were subtracted for the loss card, so your score for this round was -160. After the loss points were subtracted from your Round Total, the computer also showed you the cards that you had not yet turned over. Please click the next button.</font>'
@@ -444,6 +446,7 @@ var whichRound = 1
 var round_type = lossRounds.indexOf(whichRound)==-1 ? 'rigged_win' : 'rigged_loss'
 var roundPoints = 0
 var totalPoints = 0
+var totalEpisodePoints = 0
 var roundOver = 0 //0 at beginning of round, 1 during round, 2 at end of round
 var instructPoints = 0
 var clickedGainCards = []
@@ -560,14 +563,14 @@ var instructions_block = {
 	
 	"<div class = practiceText><div class = block-text2 id = instruct1><strong>Example 1: </strong>In the example below, you see 32 unknown cards. The display shows you that 1 of these cards is a loss card. It also tells you that turning over each gain card is worth 10 points to you, and that turning over the loss card will cost you 750 points. Let us suppose you decided to turn over 7 cards and then decided to stop. Please click the 'See Result' button to see what happens:</div></div>"+
 	"<div class = cct-box2>"+
-	"<div class = titleBigBox>   <div class = titleboxLeft><div class = center-text>Game Round: 1</div></div>   <div class = titleboxMiddle1><div class = center-text>Gain Amount: 10</div></div>    <div class = titlebox><div class = center-text>How many cards do you want to take? </div></div>  <div class = titleboxRight><div class = center-text id = current_round>Temporary Account: 0</div></div>"+
+	"<div class = titleBigBox>   <div class = titleboxLeft><div class = center-text>Game Round: 1</div></div>   <div class = titleboxMiddle1><div class = center-text>Gain Amount: 10</div></div>    <div class = titlebox><div class = center-text>How many cards do you want to take? </div></div>  <div class = center-text id = global_account>Global Account: 0</div></div> <div class = titleboxRight><div class = center-text id = current_round>Temporary Account: 0</div></div>"+
 	"<div class = buttonbox><button type='button' class = 'CCT-btn select-button' id = NoCardButton disabled>No Card</button><button type='button' class = 'CCT-btn select-button' class = 'CCT-btn select-button' id = turnButton disabled>STOP/Turn Over</button><button type='button' class = 'CCT-btn select-button' id = collectButton  disabled>Next Round</button></div>"+
 	"<div class = buttonbox2><button type='button' class = CCT-btn id = instructButton onclick= instructFunction()>See Result</button></div></div>"+
 	getBoard(2),
 	
 	"<div class = practiceText><div class = block-text2 id = instruct2><strong>Example 2: </strong>In the example below, you see 32 unknown cards. The display shows you that 3 of these cards are loss cards. It also tells you that turning over each gain card is worth 30 points to you, and that turning over the loss card will cost you 250 points. Let us suppose you decided to turn over 10 cards and then decided to stop. Please click the 'See Result' button to see what happens:</div></div>"+
 	"<div class = cct-box2>"+
-	"<div class = titleBigBox>   <div class = titleboxLeft><div class = center-text>Game Round: 1</div></div>    <div class = titleboxMiddle1><div class = center-text>Gain Amount: 30</div></div>    <div class = titlebox><div class = center-text>How many cards do you want to take? </div></div>  <div class = titleboxRight><div class = center-text id = current_round>Temporary Account: 0</div></div>"+
+	"<div class = titleBigBox>   <div class = titleboxLeft><div class = center-text>Game Round: 1</div></div>    <div class = titleboxMiddle1><div class = center-text>Gain Amount: 30</div></div>    <div class = titlebox><div class = center-text>How many cards do you want to take? </div></div>  <div class = center-text id = global_account>Global Account: 0</div></div> <div class = titleboxRight><div class = center-text id = current_round>Temporary Account: 0</div></div>"+
 	"<div class = buttonbox><button type='button' class = 'CCT-btn select-button' id = NoCardButton disabled>No Card</button><button type='button' class = 'CCT-btn select-button' class = 'CCT-btn select-button' id = turnButton disabled>STOP/Turn Over</button><button type='button' class = 'CCT-btn select-button' id = collectButton  disabled>Next Round</button></div>"+
 	"<div class = buttonbox2><button type='button' class = CCT-btn id = instructButton onclick= instructFunction2()>See Result</button></div></div>"+
 	getBoard(2),
@@ -693,6 +696,7 @@ var test_node = {
 	loop_function: function(data) {
 		if (currID == 'collectButton') {
 			roundPointsArray.push(roundPoints)
+			totalEpisodePoints += roundPoints
 			roundOver = 0
 			roundPoints = 0
 			whichClickInRound = 0
