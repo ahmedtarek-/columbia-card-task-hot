@@ -160,23 +160,23 @@ var getRound = function() {
 		clickedGainCards = [] //num
 		clickedLossCards = [] //num
 		roundParams = shuffledParamsArray.shift()
-		numLossCards = roundParams[0]
+		numLossCards = 1
 		gainAmt = roundParams[1]
 		lossAmt = roundParams[2]
 
 		gameState = appendTextAfter(gameState, 'Game Round: ', whichRound)
-		gameState = appendTextAfter(gameState, 'Loss Amount: ', lossAmt)
-		gameState = appendTextAfter2(gameState, 'Current Round Points: ', roundPoints, '0')
-		gameState = appendTextAfter(gameState, 'Number of Loss Cards: ', numLossCards)
+		// gameState = appendTextAfter(gameState, 'Loss Amount: ', lossAmt)
+		gameState = appendTextAfter2(gameState, 'Temporary Account: ', roundPoints, '0')
+		// gameState = appendTextAfter(gameState, 'Number of Loss Cards: ', numLossCards)
 		gameState = appendTextAfter(gameState, 'Gain Amount: ', gainAmt)
 		gameState = appendTextAfter(gameState, "endRound()", " disabled")
 		roundOver = 1
 		return gameState
 	} else if (roundOver == 1) { //this is for during the round
 		gameState = appendTextAfter(gameState, 'Game Round: ', whichRound)
-		gameState = appendTextAfter(gameState, 'Loss Amount: ', lossAmt)
-		gameState = appendTextAfter2(gameState, 'Current Round Points: ', roundPoints, '0')
-		gameState = appendTextAfter(gameState, 'Number of Loss Cards: ', numLossCards)
+		// gameState = appendTextAfter(gameState, 'Loss Amount: ', lossAmt)
+		gameState = appendTextAfter2(gameState, 'Temporary Account: ', roundPoints, '0')
+		// gameState = appendTextAfter(gameState, 'Number of Loss Cards: ', numLossCards)
 		gameState = appendTextAfter(gameState, 'Gain Amount: ', gainAmt)
 		gameState = appendTextAfter(gameState, "noCard()", " disabled")
 		gameState = appendTextAfter2(gameState, "class = 'CCT-btn "," ' disabled", "select-button' onclick = noCard()")
@@ -187,9 +187,9 @@ var getRound = function() {
 	} else if (roundOver == 2) { //this is for end the round
 		roundOver = 3
 		gameState = appendTextAfter(gameState, 'Game Round: ', whichRound)
-		gameState = appendTextAfter(gameState, 'Loss Amount: ', lossAmt)
-		gameState = appendTextAfter2(gameState, 'Current Round Points: ', roundPoints, '0')
-		gameState = appendTextAfter(gameState, 'Number of Loss Cards: ', numLossCards)
+		// gameState = appendTextAfter(gameState, 'Loss Amount: ', lossAmt)
+		gameState = appendTextAfter2(gameState, 'Temporary Account: ', roundPoints, '0')
+		// gameState = appendTextAfter(gameState, 'Number of Loss Cards: ', numLossCards)
 		gameState = appendTextAfter(gameState, 'Gain Amount: ', gainAmt)
 		gameState = appendTextAfter2(gameState, "id = collectButton class = 'CCT-btn", " select-button' onclick = collect()", "'")
 		gameState = appendTextAfter(gameState, "endRound()", " disabled")
@@ -253,10 +253,11 @@ var turnOneCard = function(whichCard, win) {
 	}
 }
 
-function doSetTimeout(card_i, delay, points, win) {
+function doSetTimeout(card_i, delay, points, total_episode_points, win) {
 	CCT_timeouts.push(setTimeout(function() {
 		turnOneCard(card_i, win);
-		document.getElementById("current_round").innerHTML = 'Current Round Points: ' + points
+		document.getElementById("current_round").innerHTML = 'Temporary Account: ' + points
+		document.getElementById("global_account").innerHTML = 'Global Account: ' + total_episode_points
 	}, delay));
 }
 
@@ -288,7 +289,7 @@ var getPractice2 = function() {
 	]
 	clickedGainCards = [] //num
 	clickedLossCards = [] //num
-	numLossCards = 3
+	numLossCards = 1
 	gainAmt = 10
 	lossAmt = 750
 
@@ -309,9 +310,12 @@ var instructCard = function(clicked_id) {
 	document.getElementById("NoCardButton").disabled = true;
 	document.getElementById("turnButton").disabled = false;
 	appendTextAfter(gameState, 'turnButton', ' onclick = turnCards()')
+	console.log("DEBUGGING")
+	console.log("roundPointsArray")
+	console.log(roundPointsArray)
 	if (whichLossCards.indexOf(currID) == -1) {
 		instructPoints = instructPoints + gainAmt
-		document.getElementById('current_round').innerHTML = 'Current Round Points: ' + instructPoints;
+		document.getElementById('current_round').innerHTML = 'Temporary Account: ' + instructPoints;
 		document.getElementById(clicked_id).disabled = true;
 
 		document.getElementById(clicked_id).src =
@@ -319,7 +323,7 @@ var instructCard = function(clicked_id) {
 	} else if (whichLossCards.indexOf(currID) != -1) {
 		instructPoints = instructPoints - lossAmt
 		document.getElementById(clicked_id).disabled = true;
-		document.getElementById('current_round').innerHTML = 'Current Round Points: ' + instructPoints;
+		document.getElementById('current_round').innerHTML = 'Temporary Account: ' + instructPoints;
 		document.getElementById(clicked_id).src =
 			'images/loss.png';
 		 $("input.card_image").attr("disabled", true);
@@ -349,7 +353,8 @@ var instructFunction = function() {
 		var card_i = cards_to_turn[i]
 		delay += 250
 		total_points += points_per_card
-		doSetTimeout(card_i, delay, total_points, 'win')
+		total_episode_points = total_points
+		doSetTimeout(card_i, delay, total_points, total_episode_points, 'win')
 	}
 	CCT_timeouts.push(setTimeout(function() {
 		document.getElementById("instruct1").innerHTML =
@@ -391,11 +396,15 @@ var instructFunction2 = function() {
 		var card_i = cards_to_turn[i]
 		delay += 250
 		total_points += points_per_card
-		doSetTimeout(card_i, delay, total_points, 'win')
+		total_episode_points = total_points
+		doSetTimeout(card_i, delay, total_points, total_episode_points, 'win')
 	}
 	delay += 250
 	total_points -= 250
-	doSetTimeout(13, delay, total_points, 'loss')
+	total_episode_points = total_points
+	console.log("Inside instructFunction2")
+	console.log(roundPointsArray)
+	doSetTimeout(13, delay, total_points, total_episode_points, 'loss')
 	CCT_timeouts.push(setTimeout(function() {
 		document.getElementById("instruct2").innerHTML =
 			'<strong>Example 2: </strong>In the example below, you see 32 unknown cards. The display shows you that 3 of these cards are loss cards. It also tells you that turning over each gain card is worth 30 points to you, and that turning over the loss card will cost you 250 points. Let us suppose you decided to turn over 10 cards and then decided to stop. Please click the "See Result" button to see what happens: <font color = "red">This time, the fourth card you turned over was a loss card. As you saw, the round will immediately end when you turn over the loss card. You had earned 90 points for the 3 gain cards, and then 250 points were subtracted for the loss card, so your score for this round was -160. After the loss points were subtracted from your Round Total, the computer also showed you the cards that you had not yet turned over. Please click the next button.</font>'
@@ -472,21 +481,24 @@ for (var i = 0; i < numLossRounds; i++) {
 
 var gameSetup =
 	"<div class = cct-box>"+
-	"<div class = titleBigBox>   <div class = titleboxLeft><div class = center-text id = game_round>Game Round: </div></div>   <div class = titleboxLeft1><div class = center-text id = loss_amount>Loss Amount: </div></div>    <div class = titleboxMiddle1><div class = center-text id = gain_amount>Gain Amount: </div></div>    <div class = titlebox><div class = center-text>How many cards do you want to take? </div></div>     <div class = titleboxRight1><div class = center-text id = num_loss_cards>Number of Loss Cards: </div></div>   <div class = titleboxRight><div class = center-text id = current_round>Current Round Points: 0</div></div>"+
+	"<div><h4>Playing for Emma</h4></div>" + 
+	"<div class = titleBigBox>   <div class = titleboxLeft><div class = center-text id = game_round>Game Round: </div></div>   <div class = titleboxLeft1><div class = center-text id = REMOVE>REMOVING</div></div>    <div class = titleboxMiddle1><div class = center-text id = gain_amount>Gain Amount: </div></div>    <div class = titlebox><div class = center-text>How many cards do you want to take? </div></div>     <div class = titleboxRight1><div class = center-text id = global_account>Global Account: 0</div></div>   <div class = titleboxRight><div class = center-text id = current_round>Temporary Account: 0</div></div>"+
 	"<div class = buttonbox><button type='button' id = NoCardButton class = 'CCT-btn select-button' onclick = noCard()>No Card</button><button type='button' id = turnButton class = 'CCT-btn select-button' onclick = endRound()>STOP/Turn Over</button><button type='button' id = collectButton class = 'CCT-btn' disabled>Next Round</button></div></div>"+
 	getBoard()
 
 var practiceSetup =
 	"<div class = practiceText><div class = block-text2 id = instruct1><strong>Practice 1: </strong> As you click on cards, you can see your Round Total change in the box in the upper right.  If you turn over a few cards and then want to stop and go to the next round, click the <strong>Stop/Turn Over</strong> button and then <strong>Next Round</strong>.  If turning over cards seems too risky, you can click the <strong>No Card</strong> button, in which case your score for the round will automatically be zero.  This is a practice round, that looks just like the game you will play.  Please select the number of cards you would turn over, given the number of loss cards and the amounts of the gain and loss cards shown below.</div></div>"+
 	"<div class = cct-box2>"+
-	"<div class = titleBigBox>   <div class = titleboxLeft><div class = center-text id = game_round>Game Round: 1</div></div>   <div class = titleboxLeft1><div class = center-text id = loss_amount>Loss Amount: 250</div></div>    <div class = titleboxMiddle1><div class = center-text id = gain_amount>Gain Amount: 30</div></div>    <div class = titlebox><div class = center-text>How many cards do you want to take? </div></div>     <div class = titleboxRight1><div class = center-text id = num_loss_cards>Number of Loss Cards: 1</div></div>   <div class = titleboxRight><div class = center-text id = current_round>Current Round Points: 0</div></div>"+
+	"<div><h4>Playing for Emma</h4></div>" +
+	"<div class = titleBigBox>   <div class = titleboxLeft><div class = center-text id = game_round>Game Round: 1</div></div>   <div class = titleboxLeft1><div class = center-text id = REMOVE>REMOVING</div></div>    <div class = titleboxMiddle1><div class = center-text id = gain_amount>Gain Amount: 30</div></div>    <div class = titlebox><div class = center-text>How many cards do you want to take? </div></div>     <div class = titleboxRight1><div class = center-text id = global_account>Global Account: 0</div></div>   <div class = titleboxRight><div class = center-text id = current_round>Temporary Account: 0</div></div>"+
 	"<div class = buttonbox><button type='button' class = CCT-btn id = NoCardButton onclick = turnCards()>No Card</button><button type='button' class = CCT-btn id = turnButton onclick = turnCards() disabled>STOP/Turn Over</button><button type='button' class = 'CCT-btn select-button' id = collectButton  onclick = collect() disabled>Next Round</button></div></div>"+
 	getBoard(2)
 
 var practiceSetup2 =
 	"<div class = practiceText><div class = block-text2 id = instruct2><strong>Practice 2: </strong> The computer will record your points for each round and will show you the total after you finish all " + numRounds + " rounds of the game.  This is the second practice round. Please again turn over as many cards as you would like to, given the number of loss cards and the amounts that you can win or lose if you turn over a gain or loss card, as shown below.</div></div>"+
 	"<div class = cct-box2>"+
-	"<div class = titleBigBox>   <div class = titleboxLeft><div class = center-text id = game_round>Game Round: 2</div></div>   <div class = titleboxLeft1><div class = center-text id = loss_amount>Loss Amount: 750</div></div>    <div class = titleboxMiddle1><div class = center-text gain_amount>Gain Amount: 10</div></div>    <div class = titlebox><div class = center-text>How many cards do you want to take? </div></div>     <div class = titleboxRight1><div class = center-text id = num_loss_cards>Number of Loss Cards: 3</div></div>   <div class = titleboxRight><div class = center-text id = current_round>Current Round Points: 0</div></div>"+
+	"<div><h4>Playing for Emma</h4></div>" +
+	"<div class = titleBigBox>   <div class = titleboxLeft><div class = center-text id = game_round>Game Round: 2</div></div>   <div class = titleboxLeft1><div class = center-text id = REMOVE>REMOVING</div></div>    <div class = titleboxMiddle1><div class = center-text gain_amount>Gain Amount: 10</div></div>    <div class = titlebox><div class = center-text>How many cards do you want to take? </div></div>     <div class = titleboxRight1><div class = center-text id = global_account>Global Account: 0</div></div>   <div class = titleboxRight><div class = center-text id = current_round>Temporary Account: 0</div></div>"+
 	"<div class = buttonbox><button type='button' class = CCT-btn id = NoCardButton onclick = turnCards()>No Card</button><button type='button' class = CCT-btn id = turnButton onclick = turnCards() disabled>STOP/Turn Over</button><button type='button' class = 'CCT-btn select-button' id = collectButton  onclick = collect() disabled>Next Round</button></div></div>"+
 	getBoard(2)
 
@@ -548,14 +560,14 @@ var instructions_block = {
 	
 	"<div class = practiceText><div class = block-text2 id = instruct1><strong>Example 1: </strong>In the example below, you see 32 unknown cards. The display shows you that 1 of these cards is a loss card. It also tells you that turning over each gain card is worth 10 points to you, and that turning over the loss card will cost you 750 points. Let us suppose you decided to turn over 7 cards and then decided to stop. Please click the 'See Result' button to see what happens:</div></div>"+
 	"<div class = cct-box2>"+
-	"<div class = titleBigBox>   <div class = titleboxLeft><div class = center-text>Game Round: 1</div></div>   <div class = titleboxLeft1><div class = center-text>Loss Amount: 750</div></div>    <div class = titleboxMiddle1><div class = center-text>Gain Amount: 10</div></div>    <div class = titlebox><div class = center-text>How many cards do you want to take? </div></div>     <div class = titleboxRight1><div class = center-text>Number of Loss Cards: 1</div></div>   <div class = titleboxRight><div class = center-text id = current_round>Current Round Points: 0</div></div>"+
+	"<div class = titleBigBox>   <div class = titleboxLeft><div class = center-text>Game Round: 1</div></div>   <div class = titleboxMiddle1><div class = center-text>Gain Amount: 10</div></div>    <div class = titlebox><div class = center-text>How many cards do you want to take? </div></div>  <div class = titleboxRight><div class = center-text id = current_round>Temporary Account: 0</div></div>"+
 	"<div class = buttonbox><button type='button' class = 'CCT-btn select-button' id = NoCardButton disabled>No Card</button><button type='button' class = 'CCT-btn select-button' class = 'CCT-btn select-button' id = turnButton disabled>STOP/Turn Over</button><button type='button' class = 'CCT-btn select-button' id = collectButton  disabled>Next Round</button></div>"+
 	"<div class = buttonbox2><button type='button' class = CCT-btn id = instructButton onclick= instructFunction()>See Result</button></div></div>"+
 	getBoard(2),
 	
 	"<div class = practiceText><div class = block-text2 id = instruct2><strong>Example 2: </strong>In the example below, you see 32 unknown cards. The display shows you that 3 of these cards are loss cards. It also tells you that turning over each gain card is worth 30 points to you, and that turning over the loss card will cost you 250 points. Let us suppose you decided to turn over 10 cards and then decided to stop. Please click the 'See Result' button to see what happens:</div></div>"+
 	"<div class = cct-box2>"+
-	"<div class = titleBigBox>   <div class = titleboxLeft><div class = center-text>Game Round: 1</div></div>   <div class = titleboxLeft1><div class = center-text>Loss Amount: 250</div></div>    <div class = titleboxMiddle1><div class = center-text>Gain Amount: 30</div></div>    <div class = titlebox><div class = center-text>How many cards do you want to take? </div></div>     <div class = titleboxRight1><div class = center-text>Number of Loss Cards: 3</div></div>   <div class = titleboxRight><div class = center-text id = current_round>Current Round Points: 0</div></div>"+
+	"<div class = titleBigBox>   <div class = titleboxLeft><div class = center-text>Game Round: 1</div></div>    <div class = titleboxMiddle1><div class = center-text>Gain Amount: 30</div></div>    <div class = titlebox><div class = center-text>How many cards do you want to take? </div></div>  <div class = titleboxRight><div class = center-text id = current_round>Temporary Account: 0</div></div>"+
 	"<div class = buttonbox><button type='button' class = 'CCT-btn select-button' id = NoCardButton disabled>No Card</button><button type='button' class = 'CCT-btn select-button' class = 'CCT-btn select-button' id = turnButton disabled>STOP/Turn Over</button><button type='button' class = 'CCT-btn select-button' id = collectButton  disabled>Next Round</button></div>"+
 	"<div class = buttonbox2><button type='button' class = CCT-btn id = instructButton onclick= instructFunction2()>See Result</button></div></div>"+
 	getBoard(2),
