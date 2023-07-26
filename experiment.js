@@ -56,14 +56,14 @@ var getBoard = function(board_type) {
 		board = "<div class = cardbox>"
 		for (i = 1; i < 33; i++) {
 			board += "<div class = square><input type='image' id = " + i +
-				" class = 'card_image' src='images/beforeChosen.png' onclick = instructCard(this.id)></div>"
+				" class = 'card_image' src='images/new_beforeChosen.png' onclick = instructCard(this.id)></div>"
 		}
 
 	} else {
 		board = "<div class = cardbox>"
 		for (i = 1; i < 33; i++) {
 			board += "<div class = square><input type='image' id = " + i +
-				" class = 'card_image select-button' src='images/beforeChosen.png' onclick = chooseCard(this.id)></div>"
+				" class = 'card_image select-button' src='images/new_beforeChosen.png' onclick = chooseCard(this.id)></div>"
 		}
 	}
 	board += "</div>"
@@ -183,7 +183,7 @@ var getRound = function() {
 		gameState = appendTextAfter(gameState, "noCard()", " disabled")
 		gameState = appendTextAfter2(gameState, "class = 'CCT-btn "," ' disabled", "select-button' onclick = noCard()")
 		for (i = 0; i < clickedGainCards.length; i++) {
-			gameState = appendTextAfter2(gameState, "id = " + "" + clickedGainCards[i] + ""," class = 'card_image' src='images/chosen.png'", " class = 'card_image select-button' src='images/beforeChosen.png' onclick = chooseCard(this.id)")
+			gameState = appendTextAfter2(gameState, "id = " + "" + clickedGainCards[i] + ""," class = 'card_image' src='images/new_chosen.png'", " class = 'card_image select-button' src='images/new_beforeChosen.png' onclick = chooseCard(this.id)")
 		}
 		return gameState
 	} else if (roundOver == 2) { //this is for end the round
@@ -204,22 +204,22 @@ var getRound = function() {
 		gainCardsToTurn = notClicked.slice(numLossCards-clickedLossCards.length)
 		for (var i = 1; i < cardArray.length + 1; i++) {
 			if (clickedGainCards.indexOf(i) != -1 ) {
-				gameState = appendTextAfter2(gameState, "id = " + "" + i + ""," class = 'card_image' src='images/chosen.png'", " class = 'card_image select-button' src='images/beforeChosen.png' onclick = chooseCard(this.id)")
+				gameState = appendTextAfter2(gameState, "id = " + "" + i + ""," class = 'card_image' src='images/new_chosen.png'", " class = 'card_image select-button' src='images/new_beforeChosen.png' onclick = chooseCard(this.id)")
 			} else if (clickedLossCards.indexOf(i) != -1 ) {
-				gameState = appendTextAfter2(gameState, "id = " + "" + i + ""," class = 'card_image' src='images/loss.png'", " class = 'card_image select-button' src='images/beforeChosen.png' onclick = chooseCard(this.id)")
+				gameState = appendTextAfter2(gameState, "id = " + "" + i + ""," class = 'card_image' src='images/new_loss.png'", " class = 'card_image select-button' src='images/new_beforeChosen.png' onclick = chooseCard(this.id)")
 			} else {
-				gameState = appendTextAfter2(gameState, "id = " + "" + i + ""," class = 'card_image' src='images/beforeChosen.png'", " class = 'card_image select-button' src='images/beforeChosen.png' onclick = chooseCard(this.id)")
+				gameState = appendTextAfter2(gameState, "id = " + "" + i + ""," class = 'card_image' src='images/new_beforeChosen.png'", " class = 'card_image select-button' src='images/new_beforeChosen.png' onclick = chooseCard(this.id)")
 			}
 		}
 		
 		setTimeout(function() {
 			for (var k = 0; k < lossCardsToTurn.length; k++) {
 				document.getElementById('' + lossCardsToTurn[k] + '').src =
-				'images/loss.png';
+				'images/new_loss.png';
 			}
 			for (var j = 0; j < gainCardsToTurn.length; j++) {
 				document.getElementById('' + gainCardsToTurn[j] + '').src =
-				'images/chosen.png';
+				'images/new_chosen.png';
 			}
 			$('#collectButton').prop('disabled', false)
 		}, 1500)
@@ -237,10 +237,10 @@ var turnCards = function(cards) {
 	for (i = 0; i < 33; i++) {
 		if (whichGainCards.indexOf(i) != -1) {
 			document.getElementById('' + i + '').src =
-				'images/chosen.png';
+				'images/new_chosen.png';
 		} else if (whichLossCards.indexOf(i) != -1) {
 			document.getElementById('' + i + '').src =
-				'images/loss.png';
+				'images/new_loss.png';
 		}
 	}
 }
@@ -248,10 +248,10 @@ var turnCards = function(cards) {
 var turnOneCard = function(whichCard, win) {
 	if (win === 'loss') {
 		document.getElementById("" + whichCard + "").src =
-			'images/loss.png';
+			'images/new_loss.png';
 	} else {
 		document.getElementById("" + whichCard + "").src =
-			'images/chosen.png';
+			'images/new_chosen.png';
 	}
 }
 
@@ -318,16 +318,18 @@ var instructCard = function(clicked_id) {
 	if (whichLossCards.indexOf(currID) == -1) {
 		instructPoints = instructPoints + gainAmt
 		document.getElementById('current_round').innerHTML = 'Temporary Account: ' + instructPoints;
+		document.getElementById("global_account").innerHTML = 'Global Account: ' + totalEpisodePoints
 		document.getElementById(clicked_id).disabled = true;
 
 		document.getElementById(clicked_id).src =
-			'images/chosen.png';
+			'images/new_chosen.png';
 	} else if (whichLossCards.indexOf(currID) != -1) {
 		instructPoints = instructPoints - lossAmt
 		document.getElementById(clicked_id).disabled = true;
 		document.getElementById('current_round').innerHTML = 'Temporary Account: ' + instructPoints;
+		document.getElementById("global_account").innerHTML = 'Global Account: ' + totalEpisodePoints
 		document.getElementById(clicked_id).src =
-			'images/loss.png';
+			'images/new_loss.png';
 		 $("input.card_image").attr("disabled", true);
 		CCT_timeouts.push(setTimeout(function() {turnCards()}, 2000))
 	}
@@ -370,12 +372,12 @@ var instructFunction2 = function() {
 		27, 28, 29, 31, 32
 	]
 	var instructTurnCards = function() {
-		document.getElementById("8").src = 'images/loss.png';
-		document.getElementById("2").src = 'images/loss.png';
+		document.getElementById("8").src = 'images/new_loss.png';
+		document.getElementById("2").src = 'images/new_loss.png';
 
 		for (i = 0; i < tempArray.length; i++) {
 			document.getElementById("" + tempArray[i] + "").src =
-				'images/chosen.png';
+				'images/new_chosen.png';
 		}
 	}
 
@@ -417,7 +419,7 @@ var instructFunction2 = function() {
 var instructButton = function(clicked_id) {
 	currID = parseInt(clicked_id)
 	document.getElementById(clicked_id).src =
-		'images/chosen.png';
+		'images/new_chosen.png';
 }
 
 /* ************************************ */
@@ -484,7 +486,6 @@ for (var i = 0; i < numLossRounds; i++) {
 
 var gameSetup =
 	"<div class = cct-box>"+
-	"<div><h4>Playing for Emma</h4></div>" + 
 	"<div class = titleBigBox>   <div class = titleboxLeft><div class = center-text id = game_round>Game Round: </div></div>   <div class = titleboxLeft1><div class = center-text id = REMOVE>REMOVING</div></div>    <div class = titleboxMiddle1><div class = center-text id = gain_amount>Gain Amount: </div></div>    <div class = titlebox><div class = center-text>How many cards do you want to take? </div></div>     <div class = titleboxRight1><div class = center-text id = global_account>Global Account: 0</div></div>   <div class = titleboxRight><div class = center-text id = current_round>Temporary Account: 0</div></div>"+
 	"<div class = buttonbox><button type='button' id = NoCardButton class = 'CCT-btn select-button' onclick = noCard()>No Card</button><button type='button' id = turnButton class = 'CCT-btn select-button' onclick = endRound()>STOP/Turn Over</button><button type='button' id = collectButton class = 'CCT-btn' disabled>Next Round</button></div></div>"+
 	getBoard()
@@ -492,7 +493,6 @@ var gameSetup =
 var practiceSetup =
 	"<div class = practiceText><div class = block-text2 id = instruct1><strong>Practice 1: </strong> As you click on cards, you can see your Round Total change in the box in the upper right.  If you turn over a few cards and then want to stop and go to the next round, click the <strong>Stop/Turn Over</strong> button and then <strong>Next Round</strong>.  If turning over cards seems too risky, you can click the <strong>No Card</strong> button, in which case your score for the round will automatically be zero.  This is a practice round, that looks just like the game you will play.  Please select the number of cards you would turn over, given the number of loss cards and the amounts of the gain and loss cards shown below.</div></div>"+
 	"<div class = cct-box2>"+
-	"<div><h4>Playing for Emma</h4></div>" +
 	"<div class = titleBigBox>   <div class = titleboxLeft><div class = center-text id = game_round>Game Round: 1</div></div>   <div class = titleboxLeft1><div class = center-text id = REMOVE>REMOVING</div></div>    <div class = titleboxMiddle1><div class = center-text id = gain_amount>Gain Amount: 30</div></div>    <div class = titlebox><div class = center-text>How many cards do you want to take? </div></div>     <div class = titleboxRight1><div class = center-text id = global_account>Global Account: 0</div></div>   <div class = titleboxRight><div class = center-text id = current_round>Temporary Account: 0</div></div>"+
 	"<div class = buttonbox><button type='button' class = CCT-btn id = NoCardButton onclick = turnCards()>No Card</button><button type='button' class = CCT-btn id = turnButton onclick = turnCards() disabled>STOP/Turn Over</button><button type='button' class = 'CCT-btn select-button' id = collectButton  onclick = collect() disabled>Next Round</button></div></div>"+
 	getBoard(2)
@@ -500,7 +500,6 @@ var practiceSetup =
 var practiceSetup2 =
 	"<div class = practiceText><div class = block-text2 id = instruct2><strong>Practice 2: </strong> The computer will record your points for each round and will show you the total after you finish all " + numRounds + " rounds of the game.  This is the second practice round. Please again turn over as many cards as you would like to, given the number of loss cards and the amounts that you can win or lose if you turn over a gain or loss card, as shown below.</div></div>"+
 	"<div class = cct-box2>"+
-	"<div><h4>Playing for Emma</h4></div>" +
 	"<div class = titleBigBox>   <div class = titleboxLeft><div class = center-text id = game_round>Game Round: 2</div></div>   <div class = titleboxLeft1><div class = center-text id = REMOVE>REMOVING</div></div>    <div class = titleboxMiddle1><div class = center-text gain_amount>Gain Amount: 10</div></div>    <div class = titlebox><div class = center-text>How many cards do you want to take? </div></div>     <div class = titleboxRight1><div class = center-text id = global_account>Global Account: 0</div></div>   <div class = titleboxRight><div class = center-text id = current_round>Temporary Account: 0</div></div>"+
 	"<div class = buttonbox><button type='button' class = CCT-btn id = NoCardButton onclick = turnCards()>No Card</button><button type='button' class = CCT-btn id = turnButton onclick = turnCards() disabled>STOP/Turn Over</button><button type='button' class = 'CCT-btn select-button' id = collectButton  onclick = collect() disabled>Next Round</button></div></div>"+
 	getBoard(2)
@@ -548,15 +547,15 @@ var instructions_block = {
 	
     '<div class = centerbox><p class = block-text><strong>Unknown Cards:</strong>'+
     '<p> This is what unknown cards looks like.  Turn it over by clicking on it.</p>'+
-    "<p><input type='image' id = '133' src='images/beforeChosen.png' onclick = instructButton(this.id)>"+
+    "<p><input type='image' id = '133' src='images/new_beforeChosen.png' onclick = instructButton(this.id)>"+
 	'</p></div>',
 	
 	'<div class = centerbox><p class = block-text>'+
 	'<p><strong>The Gain Card:</strong></p>'+
 	'<p>For every gain card you turn over, your score increases by either 10 or 30 points in different rounds.</p>'+
-	"<p><input type='image' src='images/chosen.png'>"+
+	"<p><input type='image' src='images/new_chosen.png'>"+
 	'<p><strong>The Loss Card:</strong></p>'+
-	"<p><input type='image' src='images/loss.png'></p>"+
+	"<p><input type='image' src='images/new_loss.png'></p>"+
 	'<p>For every loss card you turn over, your score decreases by either 250 or 750 points in different rounds. Furthermore, the round immediately ends (you cannot turn over any more cards). There will be either 1 or 3 loss cards in any given round.</p>'+
 	'<p>The number of loss cards and the value of points that can be won or lost by turning over a gain or loss card are fixed in each round. This information will always be on display so you know what kind of round you are in.</p>'+
 	'</p></div>',
