@@ -56,7 +56,7 @@ var getBoard = function(board_type) {
 		board = "<div class = cardbox>"
 		for (i = 1; i < 33; i++) {
 			board += "<div class = square><input type='image' id = " + i +
-				" class = 'card_image' src='images/final_closed.png' onclick = instructCard(this.id)></div>"
+				" class = 'card_image' src='images/final_closed.png' style='width:60px;' onclick = instructCard(this.id)></div>"
 		}
 
 	} else {
