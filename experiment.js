@@ -73,8 +73,7 @@ var getBoard = function(board_type) {
 
 
 var getText = function() {
-	return '<div class = centerbox><p class = block-text>Overall, you earned ' + totalPoints + ' points. These are the points used for your bonus from three randomly picked trials:  ' +
-		'<ul list-text><li>' + prize1 + '</li><li>' + prize2 + '</li><li>' + prize3 + '</li></ul>' +
+	return '<div class = centerbox><p class = block-text>Overall, you earned ' + formatAmount(totalPoints) + 
 		'</p><p class = block-text>Press <strong>enter</strong> to continue.</p></div>'
 }
 
@@ -763,7 +762,6 @@ for (i = 0; i < numRounds; i++) {
 
 columbia_card_task_hot_experiment.push(payoutTrial);
 columbia_card_task_hot_experiment.push(payout_text);
-columbia_card_task_hot_experiment.push(post_task_block);
 
 // Second Episode
 for (i = 0; i < numRounds; i++) {
