@@ -444,7 +444,7 @@ var lossAmt = ""
 var CCT_timeouts = []
 var numWinRounds =  24
 var numLossRounds = 4
-var numRounds = 4
+var numRounds = 10
 var lossRounds = jsPsych.randomization.shuffle([1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,23,24,25,26,27,28]).slice(0,numLossRounds)
 var riggedLossCards = []
 var lossClicked = false
@@ -764,6 +764,14 @@ columbia_card_task_hot_experiment.push(payoutTrial);
 columbia_card_task_hot_experiment.push(payout_text);
 
 // Second Episode
+for (i = 0; i < numRounds; i++) {
+	columbia_card_task_hot_experiment.push(test_node);
+}
+
+columbia_card_task_hot_experiment.push(payoutTrial);
+columbia_card_task_hot_experiment.push(payout_text);
+
+// Third Episode
 for (i = 0; i < numRounds; i++) {
 	columbia_card_task_hot_experiment.push(test_node);
 }
