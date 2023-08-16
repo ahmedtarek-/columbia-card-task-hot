@@ -463,6 +463,7 @@ var prize1 = 0
 var prize2 = 0
 var prize3 = 0
 var friendName = ""
+var playingFor = "Yourself"
 
 // this params array is organized such that the 0 index = the number of loss cards in round, the 1 index = the gain amount of each happy card, and the 2nd index = the loss amount when you turn over a sad face
 var paramsArray = [
@@ -490,7 +491,7 @@ for (var i = 0; i < numLossRounds; i++) {
 
 var gameSetup =
 	"<div class = cct-box>"+
-	"<div class = titleBigBox>   <div class = titleboxLeft><div class = center-text id = game_round>Game Round: </div></div>  <div class = titleboxMiddle1><div class = center-text id = gain_amount>Gain Amount: </div></div>    <div class = titlebox><div class = center-text>How many cards do you want to take? </div></div>     <div class = titleboxRight1><div class = center-text id = global_account>Global Account: 0</div></div>   <div class = titleboxRight><div class = center-text id = current_round>Temporary Account: 0</div></div>"+
+	"<div class = titleBigBox>  <h3>Now you're playing for " + playingFor + "</h3> <div class = titleboxLeft><div class = center-text id = game_round>Game Round: </div></div>  <div class = titleboxMiddle1><div class = center-text id = gain_amount>Gain Amount: </div></div>    <div class = titlebox><div class = center-text>How many cards do you want to take? </div></div>     <div class = titleboxRight1><div class = center-text id = global_account>Global Account: 0</div></div>   <div class = titleboxRight><div class = center-text id = current_round>Temporary Account: 0</div></div>"+
 	"<div class = buttonbox><button type='button' id = NoCardButton class = 'CCT-btn select-button' onclick = noCard()>Skip</button><button type='button' id = turnButton class = 'CCT-btn select-button' onclick = endRound()>Collect and Reveal</button><button type='button' id = collectButton class = 'CCT-btn' disabled>Next Round</button></div></div>"+
 	getBoard()
 
@@ -540,7 +541,7 @@ var feedback_instruct_block = {
 };
 
 var userInfoClick = function () {
-  friendName = document.getElementById("friendName");
+  friendName = document.getElementById("friendName").value;
   console.log("friendName: ", friendName)
 }
 
@@ -732,6 +733,13 @@ var test_node = {
 			if (round_type == 'rigged_loss') {
 				whichLossCards = [riggedLossCards.shift()]
 			}
+
+			if (playingFor == 'Yourself'){
+				playingFor = friendName
+			} else {
+				playingFor = 'Some Stranger'
+			}
+
 			lossClicked = false
 			return false
 		} else {
