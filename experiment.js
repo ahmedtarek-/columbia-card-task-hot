@@ -168,6 +168,7 @@ var formatAmount = function(amount) {
 }
 
 var getRound = function() {
+	console.log("-- INSIDE get roundd")
 	var gameState = gameSetup
 	if (roundOver === 0) { //this is for the start of a round
 		whichClickInRound = 0
