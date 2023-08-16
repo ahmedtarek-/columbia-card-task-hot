@@ -122,49 +122,33 @@ var chooseCard = function(clicked_id) {
 	// will add logic here that decrements the number of clicks until we hit the number we generated
 
 	console.log("whichClickInRound: ", whichClickInRound)
-	console.log("clicked_id: ", whichClickInRound)
+	console.log("clicked_id: ", clicked_id)
 	console.log("whichRound: ", whichRound)
 	console.log("lossClickAt: ", lossClickAt)
+	// [Tarek] Old condition: if ((clickedGainCards.length+1) == whichLossCards) {
 	if (whichClickInRound == lossClickAt) {
+		// Tarek: Loss card clicked
 		console.log("== My new condition of checking if clicks hit number of loss cards in there")
-	}
-	if (lossRounds.indexOf(whichRound) == -1) {
-		console.log("-- Condition 1")
-		if ((cardArray.length - clickedGainCards.length) == numLossCards) {
-			// Tarek: Loss card clicked
-			clickedLossCards.push(currID)
-			index = unclickedCards.indexOf(currID, 0)
-			unclickedCards.splice(index, 1)
-			roundPoints = roundPoints - lossAmt
-			lossClicked = true
-			roundOver = 2
-		} else { // if you click on a gain card
-			clickedGainCards.push(currID) // as a string
-			index = unclickedCards.indexOf(currID, 0)
-			unclickedCards.splice(index, 1)
-			roundPoints = roundPoints + gainAmt
-		}
-	} else {
-		console.log("-- Condition 2")
-		if ((clickedGainCards.length+1) == whichLossCards) {
-			// Tarek: Loss card clicked
-			clickedLossCards.push(currID)
-			index = unclickedCards.indexOf(currID, 0)
-			unclickedCards.splice(index, 1)
-			roundPoints = roundPoints - lossAmt
-			lossClicked = true
-			roundOver = 2
-		} else { // if you click on a gain card
-			clickedGainCards.push(currID) //as a string
-			index = unclickedCards.indexOf(currID, 0)
-			unclickedCards.splice(index, 1)
-			roundPoints = roundPoints + gainAmt
-		}
+		clickedLossCards.push(currID)
+		index = unclickedCards.indexOf(currID, 0)
+		unclickedCards.splice(index, 1)
+		roundPoints = roundPoints - lossAmt
+		lossClicked = true
+		roundOver = 2
+	} else { // if you click on a gain card
+		clickedGainCards.push(currID) //as a string
+		index = unclickedCards.indexOf(currID, 0)
+		unclickedCards.splice(index, 1)
+		roundPoints = roundPoints + gainAmt
 	}
 }
 
 var formatAmount = function(amount) {
 	return amount/100 + " €"
+}
+
+var getRandomInt = function (min, max) {
+  return Math.floor(Math.random() * (max - min)) + min;
 }
 
 var getRound = function() {
@@ -710,12 +694,14 @@ var test_node = {
 	timeline: [test_block],
 	loop_function: function(data) {
 		if (currID == 'collectButton') {
+			// Tarek: Apparently here is where we reset variables for a round
 			roundPointsArray.push(roundPoints)
 			totalEpisodePoints += roundPoints
 			roundOver = 0
 			roundPoints = 0
 			whichClickInRound = 0
 			whichRound = whichRound + 1
+			lossClickAt = getRandomInt(2, 32) 
 			round_type = lossRounds.indexOf(whichRound)==-1 ? 'rigged_win' : 'rigged_loss'
 			if (round_type == 'rigged_loss') {
 				whichLossCards = [riggedLossCards.shift()]
