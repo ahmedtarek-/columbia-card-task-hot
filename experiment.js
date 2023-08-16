@@ -120,8 +120,18 @@ var chooseCard = function(clicked_id) {
 	whichClickInRound = whichClickInRound + 1
 	// Tarek: Need to understand these two conditions
 	// will add logic here that decrements the number of clicks until we hit the number we generated
+
+	console.log("whichClickInRound: ", whichClickInRound)
+	console.log("clicked_id: ", whichClickInRound)
+	console.log("whichRound: ", whichRound)
+	console.log("lossClickAt: ", lossClickAt)
+	if (whichClickInRound == lossClickAt) {
+		console.log("== My new condition of checking if clicks hit number of loss cards in there")
+	}
 	if (lossRounds.indexOf(whichRound) == -1) {
+		console.log("-- Condition 1")
 		if ((cardArray.length - clickedGainCards.length) == numLossCards) {
+			// Tarek: Loss card clicked
 			clickedLossCards.push(currID)
 			index = unclickedCards.indexOf(currID, 0)
 			unclickedCards.splice(index, 1)
@@ -129,13 +139,15 @@ var chooseCard = function(clicked_id) {
 			lossClicked = true
 			roundOver = 2
 		} else { // if you click on a gain card
-			clickedGainCards.push(currID) //as a string
+			clickedGainCards.push(currID) // as a string
 			index = unclickedCards.indexOf(currID, 0)
 			unclickedCards.splice(index, 1)
 			roundPoints = roundPoints + gainAmt
 		}
 	} else {
+		console.log("-- Condition 2")
 		if ((clickedGainCards.length+1) == whichLossCards) {
+			// Tarek: Loss card clicked
 			clickedLossCards.push(currID)
 			index = unclickedCards.indexOf(currID, 0)
 			unclickedCards.splice(index, 1)
@@ -449,6 +461,7 @@ var lossRounds = jsPsych.randomization.shuffle([1,2,3,4,5,6,7,8,9,10,11,12,13,14
 var riggedLossCards = []
 var lossClicked = false
 var whichClickInRound = 0
+var lossClickAt = 5
 var whichRound = 1
 var round_type = lossRounds.indexOf(whichRound)==-1 ? 'rigged_win' : 'rigged_loss'
 var roundPoints = 0
@@ -605,9 +618,6 @@ var instruction_node = {
 		}
 	}
 }
-
-
-
 
 
 var end_block = {
