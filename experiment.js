@@ -617,7 +617,8 @@ var instruction_node = {
 	timeline: [feedback_instruct_block, user_info_block],
 	/* This function defines stopping criteria */
 	loop_function: function(data) {
-		if (friendName != ""){
+		console.log("friendName: ", friendName)
+		if (friendName != "" || friendName != null){
 			console.log("-- We got the friend name and hence leaving")
 			return true
 		}
