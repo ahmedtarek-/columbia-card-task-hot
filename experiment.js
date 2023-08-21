@@ -559,7 +559,7 @@ var user_info_block = {
 		'</div></form>'
   ],
   allow_keys: false,
-  show_clickable_nav: true,
+  // show_clickable_nav: true,
   timing_post_trial: 1000
 };
 
@@ -613,9 +613,14 @@ var instructions_block = {
 };
 
 var instruction_node = {
-	timeline: [feedback_instruct_block, user_info_block, instructions_block],
+	// timeline: [feedback_instruct_block, user_info_block, instructions_block],
+	timeline: [feedback_instruct_block, user_info_block],
 	/* This function defines stopping criteria */
 	loop_function: function(data) {
+		if (friendName != ""){
+			console.log("-- We got the friend name and hence leaving")
+			return true
+		}
 		for (i = 0; i < data.length; i++) {
 			if ((data[i].trial_type == 'poldrack-instructions') && (data[i].rt != -1)) {
 				rt = data[i].rt
@@ -736,6 +741,7 @@ var test_node = {
 				whichLossCards = [riggedLossCards.shift()]
 			}
 
+			console.log("playingFor ", playingFor)
 			if (playingFor == 'Yourself'){
 				playingFor = friendName
 			} else {
@@ -780,7 +786,7 @@ var payoutTrial = {
 /* create experiment definition array */
 var columbia_card_task_hot_experiment = [];
 
-// columbia_card_task_hot_experiment.push(instruction_node);
+columbia_card_task_hot_experiment.push(instruction_node);
 columbia_card_task_hot_experiment.push(practice_block1);
 columbia_card_task_hot_experiment.push(practice_block2);
 
