@@ -73,7 +73,7 @@ var getBoard = function(board_type) {
 
 
 var episodeEndText = function() {
-	return '<div class = centerbox><p class = block-text>In der vorhergegangenen Kondition haben Sie XXX' + formatAmount(totalPoints) + '€ gewonnen' +
+	return '<div class = centerbox><p class = block-text>In der vorhergegangenen Kondition haben Sie ' + formatAmount(totalPoints) + ' gewonnen' +
 		'</p><p class = block-text>Press <strong>enter</strong> to continue.</p></div>'
 }
 
@@ -467,6 +467,8 @@ var playingFor = "Yourself"
 
 // this params array is organized such that the 0 index = the number of loss cards in round, the 1 index = the gain amount of each happy card, and the 2nd index = the loss amount when you turn over a sad face
 var paramsArray = [
+	[1, 10, 1000],
+	[1, 10, 1000],
 	[1, 10, 1000],
 	[1, 10, 1000],
 	[1, 10, 1000],
