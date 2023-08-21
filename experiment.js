@@ -226,7 +226,7 @@ var getRound = function() {
 				'images/final_coin.png';
 			}
 			$('#collectButton').prop('disabled', false)
-		}, 1500)
+		}, 10)
 
 		return gameState
 	}
@@ -333,7 +333,7 @@ var instructCard = function(clicked_id) {
 		document.getElementById(clicked_id).src =
 			'images/final_lion.png';
 		 $("input.card_image").attr("disabled", true);
-		CCT_timeouts.push(setTimeout(function() {turnCards()}, 20))
+		CCT_timeouts.push(setTimeout(function() {turnCards()}, 10))
 	}
 }
 
@@ -357,7 +357,7 @@ var instructFunction = function() {
 	var delay = 0
 	for (var i = 0; i < cards_to_turn.length; i++) {
 		var card_i = cards_to_turn[i]
-		delay += 250
+		// delay += 250
 		total_points += points_per_card
 		totalEpisodePoints = total_points
 		doSetTimeout(card_i, delay, total_points, totalEpisodePoints, 'win')
@@ -400,12 +400,12 @@ var instructFunction2 = function() {
 	var delay = 0
 	for (var i = 0; i < cards_to_turn.length; i++) {
 		var card_i = cards_to_turn[i]
-		delay += 250
+		// delay += 250
 		total_points += points_per_card
 		totalEpisodePoints = total_points
 		doSetTimeout(card_i, delay, total_points, totalEpisodePoints, 'win')
 	}
-	delay += 250
+	// delay += 250
 	total_points -= 250
 	totalEpisodePoints = total_points
 	console.log("Inside instructFunction2")
@@ -415,7 +415,7 @@ var instructFunction2 = function() {
 		document.getElementById("instruct2").innerHTML =
 			'<strong>Example 2: </strong>In the example below, you see 32 unknown cards. The display shows you that 3 of these cards are loss cards. It also tells you that turning over each gain card is worth 30 points to you, and that turning over the loss card will cost you 250 points. Let us suppose you decided to turn over 10 cards and then decided to stop. Please click the "See Result" button to see what happens: <font color = "red">This time, the fourth card you turned over was a loss card. As you saw, the round will immediately end when you turn over the loss card. You had earned 90 points for the 3 gain cards, and then 250 points were subtracted for the loss card, so your score for this round was -160. After the loss points were subtracted from your Round Total, the computer also showed you the cards that you had not yet turned over. Please click the next button.</font>'
 	}, delay))
-	CCT_timeouts.push(setTimeout(instructTurnCards, 20))
+	CCT_timeouts.push(setTimeout(instructTurnCards, 10))
 }
 
 var instructButton = function(clicked_id) {
@@ -778,7 +778,7 @@ var payoutTrial = {
 /* create experiment definition array */
 var columbia_card_task_hot_experiment = [];
 
-columbia_card_task_hot_experiment.push(instruction_node);
+// columbia_card_task_hot_experiment.push(instruction_node);
 columbia_card_task_hot_experiment.push(practice_block1);
 columbia_card_task_hot_experiment.push(practice_block2);
 
