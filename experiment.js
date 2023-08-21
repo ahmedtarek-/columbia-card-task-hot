@@ -56,7 +56,7 @@ var getBoard = function(board_type) {
 		board = "<div class = cardbox>"
 		for (i = 1; i < 33; i++) {
 			board += "<div class = square><input type='image' id = " + i +
-				" class = 'card_image' src='images/final_closed.png' style='width:60px; height:60px;' onclick = instructCard(this.id)></div>"
+				" class = 'card_image' src='images/final_closed.png' style='width:70px; height:70px;' onclick = instructCard(this.id)></div>"
 		}
 
 	} else {
@@ -64,7 +64,7 @@ var getBoard = function(board_type) {
 		// Tarek: Here is where we choose card
 		for (i = 1; i < 33; i++) {
 			board += "<div class = square><input type='image' id = " + i +
-				" class = 'card_image select-button' src='images/final_closed.png' style='width:60px; height:60px;' onclick = chooseCard(this.id)></div>"
+				" class = 'card_image select-button' src='images/final_closed.png' style='width:70px; height:70px;' onclick = chooseCard(this.id)></div>"
 		}
 	}
 	board += "</div>"
@@ -186,7 +186,7 @@ var getRound = function() {
 		gameState = appendTextAfter(gameState, "noCard()", " disabled")
 		gameState = appendTextAfter2(gameState, "class = 'CCT-btn "," ' disabled", "select-button' onclick = noCard()")
 		for (i = 0; i < clickedGainCards.length; i++) {
-			gameState = appendTextAfter2(gameState, "id = " + "" + clickedGainCards[i] + ""," class = 'card_image' src='images/final_coin.png' style='width:60px; height:60px;'", " class = 'card_image select-button' src='images/final_closed.png' style='width:60px; height:60px;' onclick = chooseCard(this.id)")
+			gameState = appendTextAfter2(gameState, "id = " + "" + clickedGainCards[i] + ""," class = 'card_image' src='images/final_coin.png' style='width:70px; height:70px;'", " class = 'card_image select-button' src='images/final_closed.png' style='width:70px; height:70px;' onclick = chooseCard(this.id)")
 		}
 		return gameState
 	} else if (roundOver == 2) { //this is for end the round
@@ -208,11 +208,11 @@ var getRound = function() {
 		gainCardsToTurn = notClicked.slice(numLossCards-clickedLossCards.length)
 		for (var i = 1; i < cardArray.length + 1; i++) {
 			if (clickedGainCards.indexOf(i) != -1 ) {
-				gameState = appendTextAfter2(gameState, "id = " + "" + i + ""," class = 'card_image' src='images/final_coin.png' style='width:60px; height:60px;'", " class = 'card_image select-button' src='images/final_closed.png' style='width:60px; height:60px;' onclick = chooseCard(this.id)")
+				gameState = appendTextAfter2(gameState, "id = " + "" + i + ""," class = 'card_image' src='images/final_coin.png' style='width:70px; height:70px;'", " class = 'card_image select-button' src='images/final_closed.png' style='width:70px; height:70px;' onclick = chooseCard(this.id)")
 			} else if (clickedLossCards.indexOf(i) != -1 ) {
-				gameState = appendTextAfter2(gameState, "id = " + "" + i + ""," class = 'card_image' src='images/final_lion.png' style='width:60px; height:60px;'", " class = 'card_image select-button' src='images/final_closed.png' style='width:60px; height:60px;' onclick = chooseCard(this.id)")
+				gameState = appendTextAfter2(gameState, "id = " + "" + i + ""," class = 'card_image' src='images/final_lion.png' style='width:70px; height:70px;'", " class = 'card_image select-button' src='images/final_closed.png' style='width:70px; height:70px;' onclick = chooseCard(this.id)")
 			} else {
-				gameState = appendTextAfter2(gameState, "id = " + "" + i + ""," class = 'card_image' src='images/final_closed.png' style='width:60px; height:60px;'", " class = 'card_image select-button' src='images/final_closed.png' style='width:60px; height:60px;' onclick = chooseCard(this.id)")
+				gameState = appendTextAfter2(gameState, "id = " + "" + i + ""," class = 'card_image' src='images/final_closed.png' style='width:70px; height:70px;'", " class = 'card_image select-button' src='images/final_closed.png' style='width:70px; height:70px;' onclick = chooseCard(this.id)")
 			}
 		}
 		
@@ -591,15 +591,15 @@ var instructions_block = {
 		// ------
 		"<div class = practiceText><div class = block-text2 id = instruct1><strong>Example 1: </strong>In the example below, you see 32 unknown cards. The display shows you that 1 of these cards is a loss card. It also tells you that turning over each gain card is worth 10 points to you, and that turning over the loss card will cost you 750 points. Let us suppose you decided to turn over 7 cards and then decided to stop. Please click the 'See Result' button to see what happens:</div></div>"+
 		"<div class = cct-box2>"+
-		"<div class = titleBigBox><div class = titleboxMiddle1><div class = center-text id = game_round>Game Round: 1</div></div>     <div class = center-text id = global_account>Global Account: 0</div></div> <div class = titleboxRight><div class = center-text id = current_round>Temporary Account: 0</div></div>"+
+		"<div class = titleBigBox><div class = titleboxMiddle1><div class = center-text id = game_round>Game Round: 1</div></div>     <div class = center-text id = global_account>Global Account: 0</div> <div class = titleboxRight><div class = center-text id = current_round>Temporary Account: 0</div></div>"+
 		"<div class = buttonbox><button type='button' class = 'CCT-btn select-button' id = NoCardButton disabled>Skip</button><button type='button' class = 'CCT-btn select-button' class = 'CCT-btn select-button' id = turnButton disabled>Collect and Reveal</button><button type='button' class = 'CCT-btn select-button' id = collectButton  disabled>Next Round</button></div>"+
-		"<div class = buttonbox2><button type='button' class = CCT-btn id = instructButton onclick= instructFunction()>See Result</button></div></div>"+
+		"<div class = buttonbox2><button type='button' class = CCT-btn id = instructButton onclick= instructFunction()>See Result</button></div></div></div>"+
 		getBoard(2),
 		
 		// ------
 		"<div class = practiceText><div class = block-text2 id = instruct2><strong>Example 2: </strong>In the example below, you see 32 unknown cards. The display shows you that 3 of these cards are loss cards. It also tells you that turning over each gain card is worth 30 points to you, and that turning over the loss card will cost you 250 points. Let us suppose you decided to turn over 10 cards and then decided to stop. Please click the 'See Result' button to see what happens:</div></div>"+
 		"<div class = cct-box2>"+
-		"<div class = titleboxMiddle1><div class = center-text id = game_round>Game Round: 2</div></div>     <div class = center-text id = global_account>Global Account: 0</div></div> <div class = titleboxRight><div class = center-text id = current_round>Temporary Account: 0</div></div>"+
+		"<div class = titleboxMiddle1><div class = center-text id = game_round>Game Round: 2</div></div>     <div class = center-text id = global_account>Global Account: 0</div> <div class = titleboxRight><div class = center-text id = current_round>Temporary Account: 0</div></div>"+
 		"<div class = buttonbox><button type='button' class = 'CCT-btn select-button' id = NoCardButton disabled>Skip</button><button type='button' class = 'CCT-btn select-button' class = 'CCT-btn select-button' id = turnButton disabled>Collect and Reveal</button><button type='button' class = 'CCT-btn select-button' id = collectButton  disabled>Next Round</button></div>"+
 		"<div class = buttonbox2><button type='button' class = CCT-btn id = instructButton onclick= instructFunction2()>See Result</button></div></div>"+
 		getBoard(2),
