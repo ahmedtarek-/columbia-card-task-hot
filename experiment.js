@@ -746,6 +746,7 @@ var test_node = {
 			}
 
 			if (whichRound > 1 && whichRound % 10 == 1){
+				totalEpisodePoints = 0
 				console.log("== playingFor ", playingFor)
 				if (playingFor == 'Yourself'){
 					playingFor = friendName
