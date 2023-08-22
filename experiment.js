@@ -73,7 +73,7 @@ var getBoard = function(board_type) {
 
 
 var episodeEndText = function() {
-	return '<div class = centerbox><p class = block-text>In der vorhergegangenen Kondition haben Sie ' + formatAmount(totalPoints) + ' gewonnen' +
+	return '<div class = centerbox><p class = block-text>In der vorhergegangenen Kondition haben Sie ' + formatAmount(totalEpisodePoints) + ' gewonnen' +
 		'</p><p class = block-text>Press <strong>enter</strong> to continue.</p></div>'
 }
 
