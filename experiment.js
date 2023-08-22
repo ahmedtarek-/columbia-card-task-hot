@@ -497,7 +497,7 @@ for (var i = 0; i < numLossRounds; i++) {
 
 var gameSetup =
 	"<div class = cct-box>"+
-	"<div class = titleBigBox>  <h3>Now you're playing for " + playingFor + "</h3>" + "<div class = titleboxMiddle1><div class = center-text id = game_round>Game Round: </div></div>  <div class = titleboxRight1><div class = center-text id = global_account>Global Account: 0</div></div>   <div class = titleboxRight><div class = center-text id = current_round>Temporary Account: 0</div></div>"+
+	"<div class = titleBigBox>  <h3>Now you're playing for </h3>" + "<div class = titleboxMiddle1><div class = center-text id = game_round>Game Round: </div></div>  <div class = titleboxRight1><div class = center-text id = global_account>Global Account: 0</div></div>   <div class = titleboxRight><div class = center-text id = current_round>Temporary Account: 0</div></div>"+
 	"<div class = buttonbox><button type='button' id = NoCardButton class = 'CCT-btn select-button' onclick = noCard()>Skip</button><button type='button' id = turnButton class = 'CCT-btn select-button' onclick = endRound()>Collect and Reveal</button><button type='button' id = collectButton class = 'CCT-btn' disabled>Next Round</button></div></div>"+
 	getBoard()
 
@@ -745,7 +745,7 @@ var test_node = {
 				whichLossCards = [riggedLossCards.shift()]
 			}
 
-			if (whichRound % 10 == 0){
+			if (whichRound > 1 && whichRound % 10 == 1){
 				console.log("== playingFor ", playingFor)
 				if (playingFor == 'Yourself'){
 					playingFor = friendName
