@@ -561,7 +561,7 @@ var user_info_block = {
 		'<p>You have any friends?</p>' +
 	  '<p>Nicee, give us a name of a close friend of yours</p>' +
 	  "<form'><div><input type='text' id='friendName' name='friendName'>" +
-	  "<button class='CCT-btn select-button' onclick='userInfoClick()'>Submit</button>" +
+	  "<button class='CCT-btn select-button' onclick='userInfoClick()'>Submit (avoid)</button>" +
 		'</div></form>'
   ],
   allow_keys: false,
@@ -608,7 +608,14 @@ var instruction_node = {
 	timeline: [feedback_instruct_block, user_info_block, instructions_block],
 	/* This function defines stopping criteria */
 	loop_function: function(data) {
-		document.getElementById("jspsych-instructions-next").hidden = true;
+		$('#jspsych-instructions-next').click(function() {
+			// overriding functionality
+			console.log("inside overriden button")
+			friendName = document.getElementById("friendName").value;
+		  friendNameFilled = true
+
+		  console.log("friendName: ", friendName)
+		})
 		// if (friendNameFilled == true){
 		// 	console.log("friendNameFilled: ", friendNameFilled)
 		// 	console.log("friendName: ", friendName)
