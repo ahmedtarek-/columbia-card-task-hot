@@ -562,7 +562,7 @@ var user_info_block = {
 		'</div></form>'
   ],
   allow_keys: false,
-  // show_clickable_nav: true,
+  show_clickable_nav: true,
   timing_post_trial: 1000
 };
 
@@ -605,7 +605,6 @@ var instruction_node = {
 	timeline: [feedback_instruct_block, user_info_block, instructions_block],
 	/* This function defines stopping criteria */
 	loop_function: function(data) {
-		console.log("friendNameFilled: ", friendNameFilled)
 		for (i = 0; i < data.length; i++) {
 			if ((data[i].trial_type == 'poldrack-instructions') && (data[i].rt != -1)) {
 				rt = data[i].rt
