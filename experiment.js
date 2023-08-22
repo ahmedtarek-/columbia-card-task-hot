@@ -612,16 +612,12 @@ var instructions_block = {
   timing_post_trial: 1000
 };
 
+// timeline: [feedback_instruct_block, user_info_block, instructions_block],
 var instruction_node = {
-	// timeline: [feedback_instruct_block, user_info_block, instructions_block],
 	timeline: [feedback_instruct_block, user_info_block],
 	/* This function defines stopping criteria */
 	loop_function: function(data) {
 		console.log("friendName: ", friendName)
-		if (friendName != "" || friendName != null){
-			console.log("-- We got the friend name and hence leaving")
-			return true
-		}
 		for (i = 0; i < data.length; i++) {
 			if ((data[i].trial_type == 'poldrack-instructions') && (data[i].rt != -1)) {
 				rt = data[i].rt
@@ -632,7 +628,8 @@ var instruction_node = {
 			feedback_instruct_text =
 				'Read through instructions too quickly.  Please take your time and make sure you understand the instructions.  Press <strong>enter</strong> to continue.'
 			return true
-		} else if (sumInstructTime > instructTimeThresh * 1000) {
+		} else if (sumInstructTime > instructTimeThresh * 1000 || friendName != "" || friendName != null) {
+			console.log("-- We got the friend name and hence leaving")
 			feedback_instruct_text = 'Done with instructions. Press <strong>enter</strong> to continue.'
 			return false
 		}
