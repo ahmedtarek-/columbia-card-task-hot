@@ -589,23 +589,6 @@ var instructions_block = {
 		'<p>For every loss card you turn over, your score decreases by either 250 or 750 points in different rounds. Furthermore, the round immediately ends (you cannot turn over any more cards). There will be either 1 or 3 loss cards in any given round.</p>'+
 		'<p>The number of loss cards and the value of points that can be won or lost by turning over a gain or loss card are fixed in each round. This information will always be on display so you know what kind of round you are in.</p>'+
 		'</p></div>',
-		
-		// ------
-		"<div class = practiceText><div class = block-text2 id = instruct1><strong>Example 1: </strong>In the example below, you see 32 unknown cards. The display shows you that 1 of these cards is a loss card. It also tells you that turning over each gain card is worth 10 points to you, and that turning over the loss card will cost you 750 points. Let us suppose you decided to turn over 7 cards and then decided to stop. Please click the 'See Result' button to see what happens:</div></div>"+
-		"<div class = cct-box2>"+
-		"<div class = titleBigBox><div class = titleboxMiddle1><div class = center-text id = game_round>Game Round: 1</div></div>     <div class = center-text id = global_account>Global Account: 0</div> <div class = titleboxRight><div class = center-text id = current_round>Temporary Account: 0</div></div>"+
-		"<div class = buttonbox><button type='button' class = 'CCT-btn select-button' id = NoCardButton disabled>Skip</button><button type='button' class = 'CCT-btn select-button' class = 'CCT-btn select-button' id = turnButton disabled>Collect and Reveal</button><button type='button' class = 'CCT-btn select-button' id = collectButton  disabled>Next Round</button></div>"+
-		"<div class = buttonbox2><button type='button' class = CCT-btn id = instructButton onclick= instructFunction()>See Result</button></div></div></div>"+
-		getBoard(2),
-		
-		// ------
-		"<div class = practiceText><div class = block-text2 id = instruct2><strong>Example 2: </strong>In the example below, you see 32 unknown cards. The display shows you that 3 of these cards are loss cards. It also tells you that turning over each gain card is worth 30 points to you, and that turning over the loss card will cost you 250 points. Let us suppose you decided to turn over 10 cards and then decided to stop. Please click the 'See Result' button to see what happens:</div></div>"+
-		"<div class = cct-box2>"+
-		"<div class = titleboxMiddle1><div class = center-text id = game_round>Game Round: 2</div></div>     <div class = center-text id = global_account>Global Account: 0</div> <div class = titleboxRight><div class = center-text id = current_round>Temporary Account: 0</div></div>"+
-		"<div class = buttonbox><button type='button' class = 'CCT-btn select-button' id = NoCardButton disabled>Skip</button><button type='button' class = 'CCT-btn select-button' class = 'CCT-btn select-button' id = turnButton disabled>Collect and Reveal</button><button type='button' class = 'CCT-btn select-button' id = collectButton  disabled>Next Round</button></div>"+
-		"<div class = buttonbox2><button type='button' class = CCT-btn id = instructButton onclick= instructFunction2()>See Result</button></div></div>"+
-		getBoard(2),
-		"<div class = centerbox><p class = block-text>After you end the instructions you will complete two practice rounds before proceeding. Please make sure you understand the examples on the last two pages before ending the instructions.</p></div>"
   ],
   allow_keys: false,
   show_clickable_nav: true,
@@ -617,7 +600,7 @@ var instructions_block = {
 // || friendName != "" || friendName != null
 // console.log("-- We got the friend name and hence leaving")
 var instruction_node = {
-	timeline: [feedback_instruct_block, user_info_block],
+	timeline: [feedback_instruct_block, user_info_block, instructions_block],
 	/* This function defines stopping criteria */
 	loop_function: function(data) {
 		for (i = 0; i < data.length; i++) {
