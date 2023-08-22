@@ -782,7 +782,7 @@ var payoutTrial = {
 		trial_id: 'calculate reward'
 	},
 	func: function() {
-		totalPoints = math.sum(roundPointsArray)
+		// totalPoints = math.sum(roundPointsArray)
 		randomRoundPointsArray = jsPsych.randomization.repeat(roundPointsArray, 1)
 		prize1 = randomRoundPointsArray.pop()
 		prize2 = randomRoundPointsArray.pop()
