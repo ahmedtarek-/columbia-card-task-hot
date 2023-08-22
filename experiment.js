@@ -463,6 +463,7 @@ var prize1 = 0
 var prize2 = 0
 var prize3 = 0
 var friendName = ""
+var friendNameFilled = false
 var playingFor = "Yourself"
 
 // this params array is organized such that the 0 index = the number of loss cards in round, the 1 index = the gain amount of each happy card, and the 2nd index = the loss amount when you turn over a sad face
@@ -544,6 +545,8 @@ var feedback_instruct_block = {
 
 var userInfoClick = function () {
   friendName = document.getElementById("friendName").value;
+  friendNameFilled = true
+
   console.log("friendName: ", friendName)
 }
 
@@ -596,13 +599,13 @@ var instructions_block = {
 };
 
 // timeline: [feedback_instruct_block, user_info_block, instructions_block],
-// console.log("friendName: ", friendName)
 // || friendName != "" || friendName != null
 // console.log("-- We got the friend name and hence leaving")
 var instruction_node = {
 	timeline: [feedback_instruct_block, user_info_block, instructions_block],
 	/* This function defines stopping criteria */
 	loop_function: function(data) {
+		console.log("friendNameFilled: ", friendNameFilled)
 		for (i = 0; i < data.length; i++) {
 			if ((data[i].trial_type == 'poldrack-instructions') && (data[i].rt != -1)) {
 				rt = data[i].rt
