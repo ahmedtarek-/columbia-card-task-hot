@@ -605,6 +605,12 @@ var instruction_node = {
 	timeline: [feedback_instruct_block, user_info_block, instructions_block],
 	/* This function defines stopping criteria */
 	loop_function: function(data) {
+		if (friendNameFilled == true){
+			console.log("friendNameFilled: ", friendNameFilled)
+			console.log("friendName: ", friendName)
+			feedback_instruct_text = 'Done with instructions. Press <strong>enter</strong> to continue.'
+			return false
+		}
 		for (i = 0; i < data.length; i++) {
 			if ((data[i].trial_type == 'poldrack-instructions') && (data[i].rt != -1)) {
 				rt = data[i].rt
@@ -725,7 +731,7 @@ var test_node = {
 				whichLossCards = [riggedLossCards.shift()]
 			}
 
-			console.log("playingFor ", playingFor)
+			console.log("== playingFor ", playingFor)
 			if (playingFor == 'Yourself'){
 				playingFor = friendName
 			} else {
