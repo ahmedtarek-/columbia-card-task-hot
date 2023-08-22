@@ -73,7 +73,7 @@ var getBoard = function(board_type) {
 
 
 var episodeEndText = function() {
-	return '<div class = centerbox><p class = block-text>In der vorhergegangenen Kondition haben Sie ' + formatAmount(totalEpisodePoints) + ' gewonnen' +
+	return '<div class = centerbox><p class = block-text>In der vorhergegangenen Kondition haben Sie ' + formatAmount(totalPoints) + ' gewonnen' +
 		'</p><p class = block-text>Press <strong>enter</strong> to continue.</p></div>'
 }
 
@@ -746,6 +746,7 @@ var test_node = {
 			}
 
 			if (whichRound > 1 && whichRound % 10 == 1){
+				totalPoints = totalEpisodePoints
 				totalEpisodePoints = 0
 				console.log("== playingFor ", playingFor)
 				if (playingFor == 'Yourself'){
