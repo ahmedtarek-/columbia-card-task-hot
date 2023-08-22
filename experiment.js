@@ -167,6 +167,7 @@ var getRound = function() {
 		gainAmt = roundParams[1]
 		lossAmt = roundParams[2]
 
+		gameState = appendTextAfter(gameState, 'playing for ', playingFor)
 		gameState = appendTextAfter(gameState, 'Game Round: ', whichRound)
 		// gameState = appendTextAfter(gameState, 'Loss Amount: ', lossAmt)
 		gameState = appendTextAfter2(gameState, 'Temporary Account: ', formatAmount(roundPoints), '0')
@@ -177,6 +178,7 @@ var getRound = function() {
 		roundOver = 1
 		return gameState
 	} else if (roundOver == 1) { //this is for during the round
+		gameState = appendTextAfter(gameState, 'playing for ', playingFor)
 		gameState = appendTextAfter(gameState, 'Game Round: ', whichRound)
 		// gameState = appendTextAfter(gameState, 'Loss Amount: ', lossAmt)
 		gameState = appendTextAfter2(gameState, 'Temporary Account: ', formatAmount(roundPoints), '0')
@@ -191,6 +193,7 @@ var getRound = function() {
 		return gameState
 	} else if (roundOver == 2) { //this is for end the round
 		roundOver = 3
+		gameState = appendTextAfter(gameState, 'playing for ', playingFor)
 		gameState = appendTextAfter(gameState, 'Game Round: ', whichRound)
 		// gameState = appendTextAfter(gameState, 'Loss Amount: ', lossAmt)
 		gameState = appendTextAfter2(gameState, 'Temporary Account: ', formatAmount(roundPoints), '0')
@@ -561,7 +564,7 @@ var user_info_block = {
 		'<p>You have any friends?</p>' +
 	  '<p>Nicee, give us a name of a close friend of yours</p>' +
 	  "<form'><div><input type='text' id='friendName' name='friendName'>" +
-	  "<button class='CCT-btn select-button' onclick='userInfoClick()'>Submit (avoid)</button>" +
+	  "<button class='CCT-btn select-button' onclick='userInfoClick()'>Submit</button>" +
 		'</div></form>'
   ],
   allow_keys: false,
