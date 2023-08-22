@@ -547,7 +547,7 @@ var userInfoClick = function () {
   friendName = document.getElementById("friendName").value;
   friendNameFilled = true
 
-  document.getElementById("jspsych-instructions-next").disabled = false;
+  document.getElementById("jspsych-instructions-next").hidden = false;
   // $('#instructButton').prop('disabled', true);
 
   console.log("friendName: ", friendName)
@@ -608,7 +608,7 @@ var instruction_node = {
 	timeline: [feedback_instruct_block, user_info_block, instructions_block],
 	/* This function defines stopping criteria */
 	loop_function: function(data) {
-		document.getElementById("jspsych-instructions-next").disabled = true;
+		document.getElementById("jspsych-instructions-next").hidden = true;
 		// if (friendNameFilled == true){
 		// 	console.log("friendNameFilled: ", friendNameFilled)
 		// 	console.log("friendName: ", friendName)
