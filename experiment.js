@@ -466,6 +466,7 @@ var prize1 = 0
 var prize2 = 0
 var prize3 = 0
 var friendName = ""
+var strangerName = ""
 var friendNameFilled = false
 var playingFor = "Yourself"
 
@@ -548,6 +549,7 @@ var feedback_instruct_block = {
 
 var userInfoClick = function () {
   friendName = document.getElementById("friendName").value;
+  strangerName = document.getElementById("strangerName").value;
   friendNameFilled = true
 
   document.getElementById("jspsych-instructions-next").hidden = false;
@@ -560,12 +562,23 @@ var user_info_block = {
   type: 'poldrack-instructions',
   data: {trial_id: 'user-info'},
   pages: [
-		'<div class = centerbox><p class = block-text><strong>Getting to know each other</strong>' +
-		'<p>You have any friends?</p>' +
-	  '<p>Nicee, give us a name of a close friend of yours</p>' +
+  	// - Close friend
+		'<div class = centerbox><p class = block-text><strong>Freunde</strong>' +
+		'<p>In den folgenden Runden werden Sie für einen engen Freund/eine enge Freundin spielen. </p>' +
+	  '<p>Bitte schauen Sie sich die folgenden Bilder an. Die Beziehungen zwischen zwei Personen werden durch die dargestellten Kreise ausgedrückt. Bitte schreiben Sie den Namen eines engen Freundes oder Freundin auf, mit der Sie die durch 7 gekennzeichnete Beziehung haben.Name der Person:</p>' +
+	  '<img src="close_friend.png" alt="Freund (8)" width="200">' +
 	  "<form'><div><input type='text' id='friendName' name='friendName'>" +
 	  "<button class='CCT-btn select-button' onclick='userInfoClick()'>Submit</button>" +
-		'</div></form>'
+		'</div></form>',
+
+		// - Distant friend
+		'<div class = centerbox><p class = block-text><strong>Nicht so freunde</strong>' +
+		'<p>In den folgenden Runden werden Sie für eine fremde Person spielen.</p>' +
+	  '<p>Bitte schauen Sie sich die folgenden Bilder an. Mit der fremden Person, haben Sie die durch die Kreise symbolisierte Beziehung (mit 1 gekennzeichnet)</p>' +
+	  '<img src="strange_friend.png" alt="Nich so freunde (1)" width="200">' +
+	  "<form'><div><input type='text' id='strangerName' name='strangerName'>" +
+	  "<button class='CCT-btn select-button' onclick='userInfoClick()'>Submit</button>" +
+		'</div></form>',
   ],
   allow_keys: false,
   show_clickable_nav: true,
@@ -577,30 +590,29 @@ var instructions_block = {
   type: 'poldrack-instructions',
   data: {trial_id: 'instruction'},
   pages: [
-		'<div class = centerbox><p class = block-text><strong>Introduction and Explanation</strong>'+
-		'<p>-You are now going to participate in a card game.  In this game, you will turn over cards to win or lose points which are worth money.</p>'+
-		'<p>-In each game round, you will see 32 cards on the computer screen, face down. You will decide how many of these cards to turn over. Each card is either a gain card or a loss card (there are no neutral cards). You will know how many gain cards and loss cards are in the deck of 32, and how many points you will gain or lose if you turn over a gain or loss card. What you do not know is which of the 32 cards that you see face-down are gain cards and which are loss cards. </p>'+
-		'<p>-You indicate which cards you want to flip over by clicking on them. For each gain card turned over, points are added to your round total. You continue turning over cards until a loss card is uncovered or you decide to stop. The first time a loss card is turned over, the loss points will be subtracted from your current point total and the round is over. The accumulated total will be your number of points for that round, and you go on to the next round. Each new round starts with a score of 0 points; that means you play each round independently of the other rounds.</p>'+
-		'<p>-You will play a total of ' + numRounds + ' rounds, three of which will be randomly selected at the end of the session, and you will get a bonus payment proportional to those rounds.</p>',
+		'<div class = centerbox><p class = block-text><strong>Anleitung</strong>'+
+		'<p>-Im Folgenden präsentieren wir Ihnen 32 geschlossene Boxen. Hinter 31  Boxen sind jeweils 0,10 € versteckt. Jede der Boxen kann durch einen Mausklick geöffnet werden. Sie können in beliebiger Reihenfolge so viele Boxen öffnen, wie Sie möchten. Sie können jederzeit aufhören zu spielen, um ihre Gewinne in dieser Runde zu sichern. Dafür müssen Sie auf die Schaltfläche "Geld sammeln" klicken.</p>' +
+		'<p>-Hinter einer Box befindet sich allerdings ein "Löwe“, der alle Gewinne zunichte macht. Sobald der Löwe erscheint, verlieren Sie sämtliche Gewinne in dieser Runde . Nachdem Sie sich entweder die Gewinne gesichert haben oder der Löwe erschienen ist, beginnt eine neue Runde. </p>'+
+		'<p>-Beachten Sie, dass Sie höhere Gewinne erzielen, je mehr Boxen Sie öffnen. Zugleich erhöht sich mit jedem Öffnen einer weiteren Box auch die Wahrscheinlichkeit, den Löwen zu erwischen und damit sämtliche gewinne der Runde zu verlieren.</p>',
 		
-	    '<div class = centerbox><p class = block-text><strong>Unknown Cards:</strong>'+
-	    '<p> This is what unknown cards looks like.  Turn it over by clicking on it.</p>'+
-	    "<p><input type='image' id = '133' src='images/final_closed.png' style='width:110px' onclick = instructButton(this.id)>"+
+	  '<div class = centerbox><p class = block-text><strong>Geschlossene Box:</strong>'+
+	  '<p>So sehen geschlossene Boxen aus. Drehen Sie die Box um, indem Sie sie anklicken.</p>'+
+	  "<p><input type='image' id = '133' src='images/final_closed.png' style='width:110px' onclick = instructButton(this.id)>"+
 		'</p></div>',
 		
 		// ------
 		'<div class = centerbox><p class = block-text>'+
-		'<p><strong>The Gain Card:</strong></p>'+
-		'<p>For every gain card you turn over, your score increases by either 10 or 30 points in different rounds.</p>'+
+		'<p><strong>Box mit Geld</strong></p>'+
+		'<p>Für jede Box, hinter der Geld versteckt ist, gewinnen Sie 0,10 €.</p>'+
 		"<p><input type='image' src='images/final_coin.png' style='width:110px'>"+
-		'<p><strong>The Loss Card:</strong></p>'+
+		'<p><strong>Box mit Löwe</strong></p>'+
 		"<p><input type='image' src='images/final_lion.png' style='width:110px'></p>"+
-		'<p>For every loss card you turn over, your score decreases by either 250 or 750 points in different rounds. Furthermore, the round immediately ends (you cannot turn over any more cards). There will be either 1 or 3 loss cards in any given round.</p>'+
-		'<p>The number of loss cards and the value of points that can be won or lost by turning over a gain or loss card are fixed in each round. This information will always be on display so you know what kind of round you are in.</p>'+
+		'<p>Sobald Sie die Box mit dem Löwen auswählen, verlieren Sie sämtliches zuvor gewonnenes Geld und das Spiel ist vorbei.</p>'+
 		'</p></div>',
   ],
   allow_keys: false,
   show_clickable_nav: true,
+  button_label_next: "Weiter",
   timing_post_trial: 1000
 };
 
@@ -608,7 +620,7 @@ var instructions_block = {
 // || friendName != "" || friendName != null
 // console.log("-- We got the friend name and hence leaving")
 var instruction_node = {
-	timeline: [feedback_instruct_block, user_info_block, instructions_block],
+	timeline: [feedback_instruct_block, instructions_block, user_info_block],
 	/* This function defines stopping criteria */
 	loop_function: function(data) {
 		$('#jspsych-instructions-next').click(function() {
@@ -752,7 +764,7 @@ var test_node = {
 				if (playingFor == 'Yourself'){
 					playingFor = friendName
 				} else {
-					playingFor = 'Some Stranger'
+					playingFor = strangerName
 				}
 			}
 
