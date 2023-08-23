@@ -556,6 +556,7 @@ var userInfoClick = function () {
   // $('#instructButton').prop('disabled', true);
 
   console.log("friendName: ", friendName)
+  console.log("strangerName: ", strangerName)
 }
 
 var user_info_block = {
@@ -582,6 +583,8 @@ var user_info_block = {
   ],
   allow_keys: false,
   show_clickable_nav: true,
+  button_label_next: "Weiter",
+  button_label_previous: "Zurück",
   timing_post_trial: 1000
 };
 
@@ -613,6 +616,7 @@ var instructions_block = {
   allow_keys: false,
   show_clickable_nav: true,
   button_label_next: "Weiter",
+  button_label_previous: "Zurück",
   timing_post_trial: 1000
 };
 
