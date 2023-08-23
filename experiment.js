@@ -72,7 +72,7 @@ var getBoard = function(board_type) {
 }
 
 var playingForText = function() {
-	return '<div class = centerbox><p class = block-text>Sie spielen die folgenden Runden für ' + playingFor +
+	return '<div class = centerbox><p class = block-text>Sie spielen die folgenden Runden für <strong>' + playingFor + '</strong>' +
 		'</p><small class = block-text>Drücken Sie <strong>Enter</strong>, um fortzufahren.</small></div>'
 }
 
@@ -172,7 +172,7 @@ var getRound = function() {
 		lossAmt = roundParams[2]
 
 		gameState = appendTextAfter(gameState, 'Runden für ', playingFor)
-		gameState = appendTextAfter(gameState, 'Game Round: ', whichRound)
+		// gameState = appendTextAfter(gameState, 'Game Round: ', whichRound)
 		// gameState = appendTextAfter(gameState, 'Loss Amount: ', lossAmt)
 		gameState = appendTextAfter2(gameState, 'Konto: ', formatAmount(roundPoints), '0')
 		// gameState = appendTextAfter2(gameState, 'Global Account: ', formatAmount(totalEpisodePoints), '0')
@@ -183,7 +183,7 @@ var getRound = function() {
 		return gameState
 	} else if (roundOver == 1) { //this is for during the round
 		gameState = appendTextAfter(gameState, 'Runden für ', playingFor)
-		gameState = appendTextAfter(gameState, 'Game Round: ', whichRound)
+		// gameState = appendTextAfter(gameState, 'Game Round: ', whichRound)
 		// gameState = appendTextAfter(gameState, 'Loss Amount: ', lossAmt)
 		gameState = appendTextAfter2(gameState, 'Konto: ', formatAmount(roundPoints), '0')
 		// gameState = appendTextAfter2(gameState, 'Global Account: ', formatAmount(totalEpisodePoints), '0')
@@ -198,7 +198,7 @@ var getRound = function() {
 	} else if (roundOver == 2) { //this is for end the round
 		roundOver = 3
 		gameState = appendTextAfter(gameState, 'Runden für ', playingFor)
-		gameState = appendTextAfter(gameState, 'Game Round: ', whichRound)
+		// gameState = appendTextAfter(gameState, 'Game Round: ', whichRound)
 		// gameState = appendTextAfter(gameState, 'Loss Amount: ', lossAmt)
 		gameState = appendTextAfter2(gameState, 'Konto: ', formatAmount(roundPoints), '0')
 		// gameState = appendTextAfter2(gameState, 'Global Account: ', formatAmount(totalEpisodePoints), '0')
@@ -501,21 +501,21 @@ for (var i = 0; i < numLossRounds; i++) {
 
 var gameSetup =
 	"<div class = cct-box>"+
-	"<div class = titleBigBox>  <h3>Sie spielen die folgenden Runden für  </h3>" + "<div class = titleboxMiddle1><div class = center-text id = game_round>Game Round: </div></div>  <div class = titleboxRight><div class = center-text id = current_round>Konto: 0</div></div>"+
+	"<div class = titleBigBox>  <h3>Sie spielen die folgenden Runden für  </h3>" + "<div class = titleboxMiddle1></div> <div class = titleboxRight><div class = center-text id = current_round>Konto: 0</div></div>"+
 	"<div class = buttonbox><button type='button' id = NoCardButton class = 'CCT-btn select-button' onclick = noCard()>Skip</button><button type='button' id = turnButton class = 'CCT-btn select-button' onclick = endRound()>Collect and Reveal</button><button type='button' id = collectButton class = 'CCT-btn' disabled>Next Round</button></div></div>"+
 	getBoard()
 
 var practiceSetup =
 	"<div class = practiceText><div class = block-text2 id = instruct1><strong>Practice 1: </strong> As you click on cards, you can see your Round Total change in the box in the upper right.  If you turn over a few cards and then want to stop and go to the next round, click the <strong>Collect and Reveal</strong> button and then <strong>Next Round</strong>.  If turning over cards seems too risky, you can click the <strong>Skip</strong> button, in which case your score for the round will automatically be zero.  This is a practice round, that looks just like the game you will play.  Please select the number of cards you would turn over, given the number of loss cards and the amounts of the gain and loss cards shown below.</div></div>"+
 	"<div class = cct-box2>"+
-	"<div class = titleBigBox> <div class = titleboxMiddle1><div class = center-text id = game_round>Game Round: 1</div></div>    <div class = titleboxRight><div class = center-text id = current_round>Konto: 0</div></div>"+
+	"<div class = titleBigBox> <div class = titleboxMiddle1></div>    <div class = titleboxRight><div class = center-text id = current_round>Konto: 0</div></div>"+
 	"<div class = buttonbox><button type='button' class = CCT-btn id = NoCardButton onclick = turnCards()>Skip</button><button type='button' class = CCT-btn id = turnButton onclick = turnCards() disabled>Collect and Reveal</button><button type='button' class = 'CCT-btn select-button' id = collectButton  onclick = collect() disabled>Next Round</button></div></div>"+
 	getBoard(2)
 
 var practiceSetup2 =
 	"<div class = practiceText><div class = block-text2 id = instruct2><strong>Practice 2: </strong> The computer will record your points for each round and will show you the total after you finish all " + numRounds + " rounds of the game.  This is the second practice round. Please again turn over as many cards as you would like to, given the number of loss cards and the amounts that you can win or lose if you turn over a gain or loss card, as shown below.</div></div>"+
 	"<div class = cct-box2>"+
-	"<div class = titleBigBox> <div class = titleboxMiddle1><div class = center-text id = game_round>Game Round: 2</div></div>    <div class = titleboxRight><div class = center-text id = current_round>Konto: 0</div></div>"+
+	"<div class = titleBigBox> <div class = titleboxMiddle1></div>    <div class = titleboxRight><div class = center-text id = current_round>Konto: 0</div></div>"+
 	"<div class = buttonbox><button type='button' class = CCT-btn id = NoCardButton onclick = turnCards()>Skip</button><button type='button' class = CCT-btn id = turnButton onclick = turnCards() disabled>Collect and Reveal</button><button type='button' class = 'CCT-btn select-button' id = collectButton  onclick = collect() disabled>Next Round</button></div></div>"+
 	getBoard(2)
 
