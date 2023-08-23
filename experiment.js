@@ -235,8 +235,6 @@ var getRound = function() {
 			$('#collectButton').prop('disabled', false)
 		}, 1)
 
-		collect()
-
 		return gameState
 	}
 }
@@ -504,7 +502,7 @@ for (var i = 0; i < numLossRounds; i++) {
 var gameSetup =
 	"<div class = cct-box>"+
 	"<div class = titleBigBox>  <h3>Sie spielen die folgenden Runden für  </h3>" + "<div class = titleboxMiddle1><div class = center-text id = current_round>Konto: 0</div></div>"+
-	"<div class = buttonbox><button type='button' id = turnButton class = 'CCT-btn select-button' onclick = endRound()>Collect</button><button type='button' id = collectButton class = 'CCT-btn' disabled>Next Round</button></div></div>"+
+	"<div class = buttonbox3><button type='button' id = turnButton class = 'CCT-btn select-button' onclick = endRound()>Collect</button><button type='button' id = collectButton class = 'CCT-btn' disabled>Next Round</button></div></div>"+
 	getBoard()
 
 var practiceSetup =
