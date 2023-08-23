@@ -78,7 +78,7 @@ var playingForText = function() {
 
 var episodeEndText = function() {
 	return '<div class = centerbox><p class = block-text>In der vorhergegangenen Kondition haben Sie ' + formatAmount(totalPoints) + ' gewonnen' +
-		'</p><p class = block-text>Press <strong>enter</strong> to continue.</p></div>'
+		'</p><p class = block-text>Drücken Sie <strong>Enter</strong>, um fortzufahren.</p></div>'
 }
 
 var appendPayoutData = function(){
@@ -568,7 +568,7 @@ var user_info_block = {
 		'<div class = centerbox><p class = block-text><strong>Enger Freund oder Freundin</strong>' +
 		'<p>In den folgenden Runden werden Sie für einen engen Freund/eine enge Freundin spielen. </p>' +
 	  '<p>Bitte schauen Sie sich die folgenden Bilder an. Die Beziehungen zwischen zwei Personen werden durch die dargestellten Kreise ausgedrückt. Bitte schreiben Sie den Namen eines engen Freundes oder Freundin auf, mit der Sie die durch 7 gekennzeichnete Beziehung haben.Name der Person:</p>' +
-	  '<img src="images/close_friend.png" alt="Freund (8)" width="400">' +
+	  '<img src="images/close_friend.png" alt="Freund (8)" width="500">' +
 	  "<form'><div><input type='text' id='friendName' name='friendName'>" +
 	  "<button class='CCT-btn select-button' onclick='userInfoClick()'>Submit</button>" +
 		'</div></form>',
@@ -577,8 +577,7 @@ var user_info_block = {
 		'<div class = centerbox><p class = block-text><strong>Fremde Person</strong>' +
 		'<p>In den folgenden Runden werden Sie für eine fremde Person spielen.</p>' +
 	  '<p>Bitte schauen Sie sich die folgenden Bilder an. Mit der fremden Person, haben Sie die durch die Kreise symbolisierte Beziehung (mit 1 gekennzeichnet)</p>' +
-	  '<img src="images/strange_friend.png" alt="Nich so freunde (1)" width="400">' +
-		'</div></form>',
+	  '<img src="images/strange_friend.png" alt="Nich so freunde (1)" width="500">'
   ],
   allow_keys: false,
   button_label_next: "Weiter",
@@ -637,7 +636,7 @@ var instruction_node = {
 		// if (friendNameFilled == true){
 		// 	console.log("friendNameFilled: ", friendNameFilled)
 		// 	console.log("friendName: ", friendName)
-		// 	feedback_instruct_text = 'Done with instructions. Press <strong>enter</strong> to continue.'
+		// 	feedback_instruct_text = 'Done with instructions. Drücken Sie <strong>Enter</strong>, um fortzufahren.'
 		// 	return false
 		// }
 		for (i = 0; i < data.length; i++) {
@@ -648,10 +647,10 @@ var instruction_node = {
 		}
 		if (sumInstructTime <= instructTimeThresh * 1000) {
 			feedback_instruct_text =
-				'Read through instructions too quickly.  Please take your time and make sure you understand the instructions.  Press <strong>enter</strong> to continue.'
+				'Read through instructions too quickly.  Please take your time and make sure you understand the instructions.  Drücken Sie <strong>Enter</strong>, um fortzufahren.'
 			return true
 		} else if (sumInstructTime > instructTimeThresh * 1000) {
-			feedback_instruct_text = 'Done with instructions. Press <strong>enter</strong> to continue.'
+			feedback_instruct_text = 'Done with instructions. Drücken Sie <strong>Enter</strong>, um fortzufahren.'
 			return false
 		}
 	}
@@ -664,7 +663,7 @@ var end_block = {
 		trial_id: 'end',
 		exp_id: 'columbia_card_task_hot'
 	},
-	text: '<div class = centerbox><p class = center-block-text>Finished with this task.</p><p class = center-block-text>Press <strong>enter</strong> to continue.</p></div>',
+	text: '<div class = centerbox><p class = center-block-text>Finished with this task.</p><p class = center-block-text>Drücken Sie <strong>Enter</strong>, um fortzufahren.</p></div>',
 	cont_key: [13],
 	timing_post_trial: 0,
   	on_finish: assessPerformance
@@ -763,12 +762,12 @@ var test_node = {
 			if (whichRound > 1 && whichRound % 10 == 1){
 				totalPoints = totalEpisodePoints
 				totalEpisodePoints = 0
-				console.log("== playingFor ", playingFor)
 				if (playingFor == 'sich selbst'){
 					playingFor = friendName
 				} else {
 					playingFor = 'fremde Person'
 				}
+				console.log("== playingFor ", playingFor)
 			}
 
 			lossClicked = false
