@@ -567,7 +567,7 @@ var user_info_block = {
 		'<div class = centerbox><p class = block-text><strong>Freunde</strong>' +
 		'<p>In den folgenden Runden werden Sie für einen engen Freund/eine enge Freundin spielen. </p>' +
 	  '<p>Bitte schauen Sie sich die folgenden Bilder an. Die Beziehungen zwischen zwei Personen werden durch die dargestellten Kreise ausgedrückt. Bitte schreiben Sie den Namen eines engen Freundes oder Freundin auf, mit der Sie die durch 7 gekennzeichnete Beziehung haben.Name der Person:</p>' +
-	  '<img src="close_friend.png" alt="Freund (8)" width="200">' +
+	  '<img src="images/close_friend.png" alt="Freund (8)" width="200">' +
 	  "<form'><div><input type='text' id='friendName' name='friendName'>" +
 	  "<button class='CCT-btn select-button' onclick='userInfoClick()'>Submit</button>" +
 		'</div></form>',
@@ -576,15 +576,15 @@ var user_info_block = {
 		'<div class = centerbox><p class = block-text><strong>Nicht so freunde</strong>' +
 		'<p>In den folgenden Runden werden Sie für eine fremde Person spielen.</p>' +
 	  '<p>Bitte schauen Sie sich die folgenden Bilder an. Mit der fremden Person, haben Sie die durch die Kreise symbolisierte Beziehung (mit 1 gekennzeichnet)</p>' +
-	  '<img src="strange_friend.png" alt="Nich so freunde (1)" width="200">' +
+	  '<img src="images/strange_friend.png" alt="Nich so freunde (1)" width="200">' +
 	  "<form'><div><input type='text' id='strangerName' name='strangerName'>" +
 	  "<button class='CCT-btn select-button' onclick='userInfoClick()'>Submit</button>" +
 		'</div></form>',
   ],
   allow_keys: false,
-  show_clickable_nav: true,
   button_label_next: "Weiter",
   button_label_previous: "Zurück",
+  show_clickable_nav: true,
   timing_post_trial: 1000
 };
 
@@ -614,9 +614,9 @@ var instructions_block = {
 		'</p></div>',
   ],
   allow_keys: false,
-  show_clickable_nav: true,
   button_label_next: "Weiter",
   button_label_previous: "Zurück",
+  show_clickable_nav: true,
   timing_post_trial: 1000
 };
 
@@ -812,7 +812,6 @@ var columbia_card_task_hot_experiment = [];
 
 columbia_card_task_hot_experiment.push(instruction_node);
 columbia_card_task_hot_experiment.push(practice_block1);
-columbia_card_task_hot_experiment.push(practice_block2);
 
 columbia_card_task_hot_experiment.push(start_test_block);
 
