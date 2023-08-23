@@ -71,6 +71,10 @@ var getBoard = function(board_type) {
 	return board
 }
 
+var playingForText = function() {
+	return '<div class = centerbox><p class = block-text>Sie spielen die folgenden Runden für ' + playingFor +
+		'</p><small class = block-text>Drücken Sie <strong>Enter</strong>, um fortzufahren.</small></div>'
+}
 
 var episodeEndText = function() {
 	return '<div class = centerbox><p class = block-text>In der vorhergegangenen Kondition haben Sie ' + formatAmount(totalPoints) + ' gewonnen' +
@@ -132,7 +136,7 @@ var chooseCard = function(clicked_id) {
 		clickedLossCards.push(currID)
 		index = unclickedCards.indexOf(currID, 0)
 		unclickedCards.splice(index, 1)
-		roundPoints = roundPoints - lossAmt
+		roundPoints = 0
 		lossClicked = true
 		roundOver = 2
 	} else { // if you click on a gain card
@@ -167,22 +171,22 @@ var getRound = function() {
 		gainAmt = roundParams[1]
 		lossAmt = roundParams[2]
 
-		gameState = appendTextAfter(gameState, 'playing for ', playingFor)
+		gameState = appendTextAfter(gameState, 'Runden für ', playingFor)
 		gameState = appendTextAfter(gameState, 'Game Round: ', whichRound)
 		// gameState = appendTextAfter(gameState, 'Loss Amount: ', lossAmt)
-		gameState = appendTextAfter2(gameState, 'Temporary Account: ', formatAmount(roundPoints), '0')
-		gameState = appendTextAfter2(gameState, 'Global Account: ', formatAmount(totalEpisodePoints), '0')
+		gameState = appendTextAfter2(gameState, 'Konto: ', formatAmount(roundPoints), '0')
+		// gameState = appendTextAfter2(gameState, 'Global Account: ', formatAmount(totalEpisodePoints), '0')
 		// gameState = appendTextAfter(gameState, 'Number of Loss Cards: ', numLossCards)
 		gameState = appendTextAfter(gameState, 'Gain Amount: ', formatAmount(gainAmt))
 		gameState = appendTextAfter(gameState, "endRound()", " disabled")
 		roundOver = 1
 		return gameState
 	} else if (roundOver == 1) { //this is for during the round
-		gameState = appendTextAfter(gameState, 'playing for ', playingFor)
+		gameState = appendTextAfter(gameState, 'Runden für ', playingFor)
 		gameState = appendTextAfter(gameState, 'Game Round: ', whichRound)
 		// gameState = appendTextAfter(gameState, 'Loss Amount: ', lossAmt)
-		gameState = appendTextAfter2(gameState, 'Temporary Account: ', formatAmount(roundPoints), '0')
-		gameState = appendTextAfter2(gameState, 'Global Account: ', formatAmount(totalEpisodePoints), '0')
+		gameState = appendTextAfter2(gameState, 'Konto: ', formatAmount(roundPoints), '0')
+		// gameState = appendTextAfter2(gameState, 'Global Account: ', formatAmount(totalEpisodePoints), '0')
 		// gameState = appendTextAfter(gameState, 'Number of Loss Cards: ', numLossCards)
 		gameState = appendTextAfter(gameState, 'Gain Amount: ', formatAmount(gainAmt))
 		gameState = appendTextAfter(gameState, "noCard()", " disabled")
@@ -193,11 +197,11 @@ var getRound = function() {
 		return gameState
 	} else if (roundOver == 2) { //this is for end the round
 		roundOver = 3
-		gameState = appendTextAfter(gameState, 'playing for ', playingFor)
+		gameState = appendTextAfter(gameState, 'Runden für ', playingFor)
 		gameState = appendTextAfter(gameState, 'Game Round: ', whichRound)
 		// gameState = appendTextAfter(gameState, 'Loss Amount: ', lossAmt)
-		gameState = appendTextAfter2(gameState, 'Temporary Account: ', formatAmount(roundPoints), '0')
-		gameState = appendTextAfter2(gameState, 'Global Account: ', formatAmount(totalEpisodePoints), '0')
+		gameState = appendTextAfter2(gameState, 'Konto: ', formatAmount(roundPoints), '0')
+		// gameState = appendTextAfter2(gameState, 'Global Account: ', formatAmount(totalEpisodePoints), '0')
 		// gameState = appendTextAfter(gameState, 'Number of Loss Cards: ', numLossCards)
 		gameState = appendTextAfter(gameState, 'Gain Amount: ', formatAmount(gainAmt))
 		gameState = appendTextAfter2(gameState, "id = collectButton class = 'CCT-btn", " select-button' onclick = collect()", "'")
@@ -265,8 +269,8 @@ var turnOneCard = function(whichCard, win) {
 function doSetTimeout(card_i, delay, points, totalEpisodePoints, win) {
 	CCT_timeouts.push(setTimeout(function() {
 		turnOneCard(card_i, win);
-		document.getElementById("current_round").innerHTML = 'Temporary Account: ' + points
-		document.getElementById("global_account").innerHTML = 'Global Account: ' + totalEpisodePoints
+		document.getElementById("current_round").innerHTML = 'Konto: ' + points
+		// document.getElementById("global_account").innerHTML = 'Global Account: ' + totalEpisodePoints
 	}, delay));
 }
 
@@ -322,17 +326,17 @@ var instructCard = function(clicked_id) {
 	appendTextAfter(gameState, 'turnButton', ' onclick = turnCards()')
 	if (whichLossCards.indexOf(currID) == -1) {
 		instructPoints = instructPoints + gainAmt
-		document.getElementById('current_round').innerHTML = 'Temporary Account: ' + formatAmount(instructPoints);
-		document.getElementById("global_account").innerHTML = 'Global Account: ' + formatAmount(totalEpisodePoints)
+		document.getElementById('current_round').innerHTML = 'Konto: ' + formatAmount(instructPoints);
+		// document.getElementById("global_account").innerHTML = 'Global Account: ' + formatAmount(totalEpisodePoints)
 		document.getElementById(clicked_id).disabled = true;
 
 		document.getElementById(clicked_id).src =
 			'images/final_coin.png';
 	} else if (whichLossCards.indexOf(currID) != -1) {
-		instructPoints = instructPoints - lossAmt
+		instructPoints = 0
 		document.getElementById(clicked_id).disabled = true;
-		document.getElementById('current_round').innerHTML = 'Temporary Account: ' + formatAmount(instructPoints);
-		document.getElementById("global_account").innerHTML = 'Global Account: ' + formatAmount(totalEpisodePoints)
+		document.getElementById('current_round').innerHTML = 'Konto: ' + formatAmount(instructPoints);
+		// document.getElementById("global_account").innerHTML = 'Global Account: ' + formatAmount(totalEpisodePoints)
 		document.getElementById(clicked_id).src =
 			'images/final_lion.png';
 		 $("input.card_image").attr("disabled", true);
@@ -466,9 +470,8 @@ var prize1 = 0
 var prize2 = 0
 var prize3 = 0
 var friendName = ""
-var strangerName = ""
 var friendNameFilled = false
-var playingFor = "Yourself"
+var playingFor = "sich selbst"
 
 // this params array is organized such that the 0 index = the number of loss cards in round, the 1 index = the gain amount of each happy card, and the 2nd index = the loss amount when you turn over a sad face
 var paramsArray = [
@@ -498,21 +501,21 @@ for (var i = 0; i < numLossRounds; i++) {
 
 var gameSetup =
 	"<div class = cct-box>"+
-	"<div class = titleBigBox>  <h3>Now you're playing for </h3>" + "<div class = titleboxMiddle1><div class = center-text id = game_round>Game Round: </div></div>  <div class = titleboxRight1><div class = center-text id = global_account>Global Account: 0</div></div>   <div class = titleboxRight><div class = center-text id = current_round>Temporary Account: 0</div></div>"+
+	"<div class = titleBigBox>  <h3>Sie spielen die folgenden Runden für  </h3>" + "<div class = titleboxMiddle1><div class = center-text id = game_round>Game Round: </div></div>  <div class = titleboxRight><div class = center-text id = current_round>Konto: 0</div></div>"+
 	"<div class = buttonbox><button type='button' id = NoCardButton class = 'CCT-btn select-button' onclick = noCard()>Skip</button><button type='button' id = turnButton class = 'CCT-btn select-button' onclick = endRound()>Collect and Reveal</button><button type='button' id = collectButton class = 'CCT-btn' disabled>Next Round</button></div></div>"+
 	getBoard()
 
 var practiceSetup =
 	"<div class = practiceText><div class = block-text2 id = instruct1><strong>Practice 1: </strong> As you click on cards, you can see your Round Total change in the box in the upper right.  If you turn over a few cards and then want to stop and go to the next round, click the <strong>Collect and Reveal</strong> button and then <strong>Next Round</strong>.  If turning over cards seems too risky, you can click the <strong>Skip</strong> button, in which case your score for the round will automatically be zero.  This is a practice round, that looks just like the game you will play.  Please select the number of cards you would turn over, given the number of loss cards and the amounts of the gain and loss cards shown below.</div></div>"+
 	"<div class = cct-box2>"+
-	"<div class = titleBigBox> <div class = titleboxMiddle1><div class = center-text id = game_round>Game Round: 1</div></div>    <div class = titleboxRight1><div class = center-text id = global_account>Global Account: 0</div></div>   <div class = titleboxRight><div class = center-text id = current_round>Temporary Account: 0</div></div>"+
+	"<div class = titleBigBox> <div class = titleboxMiddle1><div class = center-text id = game_round>Game Round: 1</div></div>    <div class = titleboxRight><div class = center-text id = current_round>Konto: 0</div></div>"+
 	"<div class = buttonbox><button type='button' class = CCT-btn id = NoCardButton onclick = turnCards()>Skip</button><button type='button' class = CCT-btn id = turnButton onclick = turnCards() disabled>Collect and Reveal</button><button type='button' class = 'CCT-btn select-button' id = collectButton  onclick = collect() disabled>Next Round</button></div></div>"+
 	getBoard(2)
 
 var practiceSetup2 =
 	"<div class = practiceText><div class = block-text2 id = instruct2><strong>Practice 2: </strong> The computer will record your points for each round and will show you the total after you finish all " + numRounds + " rounds of the game.  This is the second practice round. Please again turn over as many cards as you would like to, given the number of loss cards and the amounts that you can win or lose if you turn over a gain or loss card, as shown below.</div></div>"+
 	"<div class = cct-box2>"+
-	"<div class = titleBigBox> <div class = titleboxMiddle1><div class = center-text id = game_round>Game Round: 2</div></div>    <div class = titleboxRight1><div class = center-text id = global_account>Global Account: 0</div></div>   <div class = titleboxRight><div class = center-text id = current_round>Temporary Account: 0</div></div>"+
+	"<div class = titleBigBox> <div class = titleboxMiddle1><div class = center-text id = game_round>Game Round: 2</div></div>    <div class = titleboxRight><div class = center-text id = current_round>Konto: 0</div></div>"+
 	"<div class = buttonbox><button type='button' class = CCT-btn id = NoCardButton onclick = turnCards()>Skip</button><button type='button' class = CCT-btn id = turnButton onclick = turnCards() disabled>Collect and Reveal</button><button type='button' class = 'CCT-btn select-button' id = collectButton  onclick = collect() disabled>Next Round</button></div></div>"+
 	getBoard(2)
 
@@ -549,14 +552,12 @@ var feedback_instruct_block = {
 
 var userInfoClick = function () {
   friendName = document.getElementById("friendName").value;
-  strangerName = document.getElementById("strangerName").value;
   friendNameFilled = true
 
   document.getElementById("jspsych-instructions-next").hidden = false;
   // $('#instructButton').prop('disabled', true);
 
   console.log("friendName: ", friendName)
-  console.log("strangerName: ", strangerName)
 }
 
 var user_info_block = {
@@ -564,21 +565,19 @@ var user_info_block = {
   data: {trial_id: 'user-info'},
   pages: [
   	// - Close friend
-		'<div class = centerbox><p class = block-text><strong>Freunde</strong>' +
+		'<div class = centerbox><p class = block-text><strong>Enger Freund oder Freundin</strong>' +
 		'<p>In den folgenden Runden werden Sie für einen engen Freund/eine enge Freundin spielen. </p>' +
 	  '<p>Bitte schauen Sie sich die folgenden Bilder an. Die Beziehungen zwischen zwei Personen werden durch die dargestellten Kreise ausgedrückt. Bitte schreiben Sie den Namen eines engen Freundes oder Freundin auf, mit der Sie die durch 7 gekennzeichnete Beziehung haben.Name der Person:</p>' +
-	  '<img src="images/close_friend.png" alt="Freund (8)" width="200">' +
+	  '<img src="images/close_friend.png" alt="Freund (8)" width="400">' +
 	  "<form'><div><input type='text' id='friendName' name='friendName'>" +
 	  "<button class='CCT-btn select-button' onclick='userInfoClick()'>Submit</button>" +
 		'</div></form>',
 
 		// - Distant friend
-		'<div class = centerbox><p class = block-text><strong>Nicht so freunde</strong>' +
+		'<div class = centerbox><p class = block-text><strong>Fremde Person</strong>' +
 		'<p>In den folgenden Runden werden Sie für eine fremde Person spielen.</p>' +
 	  '<p>Bitte schauen Sie sich die folgenden Bilder an. Mit der fremden Person, haben Sie die durch die Kreise symbolisierte Beziehung (mit 1 gekennzeichnet)</p>' +
-	  '<img src="images/strange_friend.png" alt="Nich so freunde (1)" width="200">' +
-	  "<form'><div><input type='text' id='strangerName' name='strangerName'>" +
-	  "<button class='CCT-btn select-button' onclick='userInfoClick()'>Submit</button>" +
+	  '<img src="images/strange_friend.png" alt="Nich so freunde (1)" width="400">' +
 		'</div></form>',
   ],
   allow_keys: false,
@@ -594,9 +593,9 @@ var instructions_block = {
   data: {trial_id: 'instruction'},
   pages: [
 		'<div class = centerbox><p class = block-text><strong>Anleitung</strong>'+
-		'<p>-Im Folgenden präsentieren wir Ihnen 32 geschlossene Boxen. Hinter 31  Boxen sind jeweils 0,10 € versteckt. Jede der Boxen kann durch einen Mausklick geöffnet werden. Sie können in beliebiger Reihenfolge so viele Boxen öffnen, wie Sie möchten. Sie können jederzeit aufhören zu spielen, um ihre Gewinne in dieser Runde zu sichern. Dafür müssen Sie auf die Schaltfläche "Geld sammeln" klicken.</p>' +
-		'<p>-Hinter einer Box befindet sich allerdings ein "Löwe“, der alle Gewinne zunichte macht. Sobald der Löwe erscheint, verlieren Sie sämtliche Gewinne in dieser Runde . Nachdem Sie sich entweder die Gewinne gesichert haben oder der Löwe erschienen ist, beginnt eine neue Runde. </p>'+
-		'<p>-Beachten Sie, dass Sie höhere Gewinne erzielen, je mehr Boxen Sie öffnen. Zugleich erhöht sich mit jedem Öffnen einer weiteren Box auch die Wahrscheinlichkeit, den Löwen zu erwischen und damit sämtliche gewinne der Runde zu verlieren.</p>',
+		'<p>Im Folgenden präsentieren wir Ihnen 32 geschlossene Boxen. Hinter 31  Boxen sind jeweils 0,10 € versteckt. Jede der Boxen kann durch einen Mausklick geöffnet werden. Sie können in beliebiger Reihenfolge so viele Boxen öffnen, wie Sie möchten. Sie können jederzeit aufhören zu spielen, um ihre Gewinne in dieser Runde zu sichern. Dafür müssen Sie auf die Schaltfläche "Geld sammeln" klicken.</p>' +
+		'<p>Hinter einer Box befindet sich allerdings ein "Löwe“, der alle Gewinne zunichte macht. Sobald der Löwe erscheint, verlieren Sie sämtliche Gewinne in dieser Runde . Nachdem Sie sich entweder die Gewinne gesichert haben oder der Löwe erschienen ist, beginnt eine neue Runde. </p>'+
+		'<p>Beachten Sie, dass Sie höhere Gewinne erzielen, je mehr Boxen Sie öffnen. Zugleich erhöht sich mit jedem Öffnen einer weiteren Box auch die Wahrscheinlichkeit, den Löwen zu erwischen und damit sämtliche gewinne der Runde zu verlieren.</p>',
 		
 	  '<div class = centerbox><p class = block-text><strong>Geschlossene Box:</strong>'+
 	  '<p>So sehen geschlossene Boxen aus. Drehen Sie die Box um, indem Sie sie anklicken.</p>'+
@@ -610,7 +609,7 @@ var instructions_block = {
 		"<p><input type='image' src='images/final_coin.png' style='width:110px'>"+
 		'<p><strong>Box mit Löwe</strong></p>'+
 		"<p><input type='image' src='images/final_lion.png' style='width:110px'></p>"+
-		'<p>Sobald Sie die Box mit dem Löwen auswählen, verlieren Sie sämtliches zuvor gewonnenes Geld und das Spiel ist vorbei.</p>'+
+		'<p>Sobald der Löwe erscheint, verlieren Sie sämtliche Gewinne in dieser Runde.</p>'+
 		'</p></div>',
   ],
   allow_keys: false,
@@ -765,10 +764,10 @@ var test_node = {
 				totalPoints = totalEpisodePoints
 				totalEpisodePoints = 0
 				console.log("== playingFor ", playingFor)
-				if (playingFor == 'Yourself'){
+				if (playingFor == 'sich selbst'){
 					playingFor = friendName
 				} else {
-					playingFor = strangerName
+					playingFor = 'fremde Person'
 				}
 			}
 
@@ -780,6 +779,12 @@ var test_node = {
 	}
 }
 
+var playing_for_text = {
+	type: 'poldrack-text',
+	text: playingForText,
+	cont_key: [13],
+	timing_post_trial: 1000
+};
 
 var payout_text = {
 	type: 'poldrack-text',
@@ -818,6 +823,7 @@ columbia_card_task_hot_experiment.push(start_test_block);
 
 // Tarek: Structure is here
 // First episode
+columbia_card_task_hot_experiment.push(playing_for_text);
 for (i = 0; i < numRounds; i++) {
 	columbia_card_task_hot_experiment.push(test_node);
 }
@@ -826,6 +832,7 @@ columbia_card_task_hot_experiment.push(payoutTrial);
 columbia_card_task_hot_experiment.push(payout_text);
 
 // Second Episode
+columbia_card_task_hot_experiment.push(playing_for_text);
 for (i = 0; i < numRounds; i++) {
 	columbia_card_task_hot_experiment.push(test_node);
 }
@@ -834,6 +841,7 @@ columbia_card_task_hot_experiment.push(payoutTrial);
 columbia_card_task_hot_experiment.push(payout_text);
 
 // Third Episode
+columbia_card_task_hot_experiment.push(playing_for_text);
 for (i = 0; i < numRounds; i++) {
 	columbia_card_task_hot_experiment.push(test_node);
 }
