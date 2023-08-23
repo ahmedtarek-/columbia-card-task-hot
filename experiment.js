@@ -233,7 +233,9 @@ var getRound = function() {
 				'images/final_coin.png';
 			}
 			$('#collectButton').prop('disabled', false)
-		}, 10)
+		}, 1)
+
+		currID = 'collectButton'
 
 		return gameState
 	}
@@ -502,7 +504,7 @@ for (var i = 0; i < numLossRounds; i++) {
 var gameSetup =
 	"<div class = cct-box>"+
 	"<div class = titleBigBox>  <h3>Sie spielen die folgenden Runden für  </h3>" + "<div class = titleboxMiddle1></div> <div class = titleboxRight><div class = center-text id = current_round>Konto: 0</div></div>"+
-	"<div class = buttonbox><button type='button' id = NoCardButton class = 'CCT-btn select-button' onclick = noCard()>Skip</button><button type='button' id = turnButton class = 'CCT-btn select-button' onclick = endRound()>Collect and Reveal</button><button type='button' id = collectButton class = 'CCT-btn' disabled>Next Round</button></div></div>"+
+	"<div class = buttonbox><button type='button' id = turnButton class = 'CCT-btn select-button' onclick = endRound()>Collect</button><button type='button' id = collectButton class = 'CCT-btn' disabled>Next Round</button></div></div>"+
 	getBoard()
 
 var practiceSetup =
@@ -747,6 +749,7 @@ var test_node = {
 	loop_function: function(data) {
 		if (currID == 'collectButton') {
 			// Tarek: Apparently here is where we reset variables for a round
+			// This is when we click next round
 			roundPointsArray.push(roundPoints)
 			totalEpisodePoints += roundPoints
 			roundOver = 0
