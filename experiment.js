@@ -233,7 +233,7 @@ var getRound = function() {
 				'images/final_coin.png';
 			}
 			$('#collectButton').prop('disabled', false)
-		}, 1)
+		}, 10)
 
 		return gameState
 	}
