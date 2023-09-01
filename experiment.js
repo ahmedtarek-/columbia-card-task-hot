@@ -183,6 +183,7 @@ var getRound = function() {
 		roundOver = 1
 		return gameState
 	} else if (roundOver == 1) { //this is for during the round
+		console.log("\n-- we arrived in roundOver 1")
 		gameState = appendTextAfter(gameState, 'Runden für ', playingFor)
 		// gameState = appendTextAfter(gameState, 'Game Round: ', whichRound)
 		// gameState = appendTextAfter(gameState, 'Loss Amount: ', lossAmt)
@@ -327,6 +328,7 @@ var instructCard = function(clicked_id) {
 	document.getElementById("turnButton").disabled = false;
 	appendTextAfter(gameState, 'turnButton', ' onclick = turnCards()')
 	if (whichLossCards.indexOf(currID) == -1) {
+		console.log("Weird condition 1: ", clicked_id)
 		instructPoints = instructPoints + gainAmt
 		document.getElementById('current_round').innerHTML = 'Konto: ' + formatAmount(instructPoints);
 		// document.getElementById("global_account").innerHTML = 'Global Account: ' + formatAmount(totalEpisodePoints)
@@ -335,6 +337,7 @@ var instructCard = function(clicked_id) {
 		document.getElementById(clicked_id).src =
 			'images/final_coin.png';
 	} else if (whichLossCards.indexOf(currID) != -1) {
+		console.log("Weird condition 2: ", clicked_id)
 		instructPoints = 0
 		document.getElementById(clicked_id).disabled = true;
 		document.getElementById('current_round').innerHTML = 'Konto: ' + formatAmount(instructPoints);
