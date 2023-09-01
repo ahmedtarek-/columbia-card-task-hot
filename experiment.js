@@ -114,6 +114,7 @@ var noCard = function() {
 }
 
 var endRound = function() {
+	console.log("\n--END ROUND METHOD")
 	currID = 'endRoundButton'
 	roundOver = 2
 }
@@ -196,6 +197,7 @@ var getRound = function() {
 		}
 		return gameState
 	} else if (roundOver == 2) { //this is for end the round
+		console.log("\n-- we arrived in roundOver 2")
 		roundOver = 3
 		gameState = appendTextAfter(gameState, 'Runden für ', playingFor)
 		// gameState = appendTextAfter(gameState, 'Game Round: ', whichRound)
