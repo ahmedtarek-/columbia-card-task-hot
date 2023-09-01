@@ -179,7 +179,7 @@ var getRound = function() {
 		// gameState = appendTextAfter2(gameState, 'Global Account: ', formatAmount(totalEpisodePoints), '0')
 		// gameState = appendTextAfter(gameState, 'Number of Loss Cards: ', numLossCards)
 		gameState = appendTextAfter(gameState, 'Gain Amount: ', formatAmount(gainAmt))
-		gameState = appendTextAfter(gameState, "endRound()", " disabled")
+		// gameState = appendTextAfter(gameState, "endRound()", " disabled")
 		roundOver = 1
 		return gameState
 	} else if (roundOver == 1) { //this is for during the round
