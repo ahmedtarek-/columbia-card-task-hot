@@ -191,8 +191,8 @@ var getRound = function() {
 		// gameState = appendTextAfter2(gameState, 'Global Account: ', formatAmount(totalEpisodePoints), '0')
 		// gameState = appendTextAfter(gameState, 'Number of Loss Cards: ', numLossCards)
 		gameState = appendTextAfter(gameState, 'Gain Amount: ', formatAmount(gainAmt))
-		gameState = appendTextAfter(gameState, "noCard()", " disabled")
-		gameState = appendTextAfter2(gameState, "class = 'CCT-btn "," ' disabled", "select-button' onclick = noCard()")
+		// gameState = appendTextAfter(gameState, "noCard()", " disabled")
+		// gameState = appendTextAfter2(gameState, "class = 'CCT-btn "," ' disabled", "select-button' onclick = noCard()")
 		for (i = 0; i < clickedGainCards.length; i++) {
 			gameState = appendTextAfter2(gameState, "id = " + "" + clickedGainCards[i] + ""," class = 'card_image' src='images/final_coin.png' style='width:70px; height:70px;'", " class = 'card_image select-button' src='images/final_closed.png' style='width:70px; height:70px;' onclick = chooseCard(this.id)")
 		}
@@ -209,7 +209,7 @@ var getRound = function() {
 		gameState = appendTextAfter(gameState, 'Gain Amount: ', formatAmount(gainAmt))
 		gameState = appendTextAfter2(gameState, "id = collectButton class = 'CCT-btn", " select-button' onclick = collect()", "'")
 		gameState = appendTextAfter(gameState, "endRound()", " disabled")
-		gameState = appendTextAfter(gameState, "noCard()", " disabled")
+		// gameState = appendTextAfter(gameState, "noCard()", " disabled")
 		
 		clickedCards = clickedGainCards.concat(clickedLossCards)
 		var notClicked = cardArray.filter(function(x) { return (jQuery.inArray(x,clickedCards) == -1)})
