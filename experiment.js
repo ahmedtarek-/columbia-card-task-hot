@@ -581,10 +581,10 @@ var close_friend_block = {
 		'<p>In den folgenden Runden werden Sie für einen engen Freund/eine enge Freundin spielen. </p>' +
 	  '<p>Bitte schauen Sie sich die folgenden Bilder an. Die Beziehungen zwischen zwei Personen werden durch die dargestellten Kreise ausgedrückt. Bitte schreiben Sie den Namen eines engen Freundes oder Freundin auf, mit der Sie die durch 7 gekennzeichnete Beziehung haben.</p>' +
 	  '<img src="images/close_friend.png" alt="Freund (8)" width="500">' +
-	  '<p>Vorname der Person:</p>'
+	  '<p>Vorname der Person:</p>' +
 	  "<form'><div><input type='text' id='friendName' name='friendName'>" +
 	  "<button class='CCT-btn select-button' onclick='userInfoClick()'>Submit</button>" +
-		'</div></form>',
+		'</div></form>'
   ],
   allow_keys: false,
   button_label_next: "Weiter",
