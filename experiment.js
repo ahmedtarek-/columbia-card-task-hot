@@ -78,9 +78,9 @@ var playingForText = function() {
 
 var episodeEndText = function() {
 	return '<div class = centerbox><h3>Spielzusammenfassung</h3>' +
-		'<p class = block-text>Sie haben ' + formatAmount(selfTotalPoints) + ' für sich selbst gewonnen.' +
-		'Sie haben ' + formatAmount(closeFriendTotalPoints) + ' für ' + friendName + ' gewonnen.' +
-		'Sie haben ' + formatAmount(distantFriendTotalPoints) + ' für eine fremde Person gewonnen.' +
+		'<p class = block-text>Sie haben ' + formatAmount(selfTotalPoints) + ' für sich selbst gewonnen.</p>' +
+		'<p class = block-text>Sie haben ' + formatAmount(closeFriendTotalPoints) + ' für ' + friendName + ' gewonnen. </p>' +
+		'<p class = block-text>Sie haben ' + formatAmount(distantFriendTotalPoints) + ' für eine fremde Person gewonnen. </p>' +
 		'</p><p class = block-text>Drücken Sie <strong>Enter</strong>, um fortzufahren.</p></div>'
 }
 
