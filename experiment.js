@@ -85,18 +85,16 @@ var episodeEndText = function() {
 }
 
 var appendPayoutData = function(){
-	jsPsych.data.addDataToLastTrial({reward: [prize1, prize2, prize3]})
+	jsPsych.data.addDataToLastTrial({
+		rewards: [selfTotalPoints, closeFriendTotalPoints, distantFriendTotalPoints],
+		friendName: friendName
+	})
 }
 
 var appendTestData = function() {
 	jsPsych.data.addDataToLastTrial({
 		which_round: whichRound,
 		num_click_in_round: whichClickInRound,
-		num_loss_cards: numLossCards,
-		gain_amount: gainAmt,
-		loss_amount: lossAmt,
-		round_points: roundPoints,
-		clicked_on_loss_card: lossClicked,
 		round_type: round_type
 	})
 }
@@ -749,9 +747,6 @@ var practice_block1 = {
 	response_ends_trial: true,
 	on_finish: function() {
 		jsPsych.data.addDataToLastTrial({
-			num_loss_cards: numLossCards,
-			gain_amount: gainAmt,
-			loss_amount: lossAmt,
 			instruct_points: instructPoints,
 		})
 		instructPoints = 0
@@ -771,10 +766,7 @@ var practice_block2 = {
 	response_ends_trial: true,
 	on_finish: function() {
 		jsPsych.data.addDataToLastTrial({
-			num_loss_cards: numLossCards,
-			gain_amount: gainAmt,
-			loss_amount: lossAmt,
-			instruct_points: instructPoints,
+			instruct_points: instructPoints
 		})
 		instructPoints = 0
 	}
