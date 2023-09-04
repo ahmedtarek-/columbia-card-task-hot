@@ -565,6 +565,7 @@ var feedback_instruct_block = {
 var userInfoClick = function () {
   friendName = document.getElementById("friendName").value;
   friendNameFilled = true
+  playingFor = friendName
 
   document.getElementById("jspsych-instructions-next").hidden = false;
   // $('#instructButton').prop('disabled', true);
@@ -813,7 +814,6 @@ var test_node = {
 
 			if (whichRound > 1 && whichRound % 10 == 1){
 				totalPoints = totalEpisodePoints
-				totalEpisodePoints = 0
 				if (playingFor == 'sich selbst'){
 					selfTotalPoints = totalEpisodePoints
 					playingFor = friendName
@@ -823,6 +823,7 @@ var test_node = {
 				} else {
 					distantFriendTotalPoints = totalEpisodePoints
 				}
+				totalEpisodePoints = 0
 				console.log("== playingFor ", playingFor)
 				console.log("== selfTotalPoints ", selfTotalPoints)
 				console.log("== closeFriendTotalPoints ", closeFriendTotalPoints)
