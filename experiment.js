@@ -86,7 +86,11 @@ var episodeEndText = function() {
 
 var appendPayoutData = function(){
 	jsPsych.data.addDataToLastTrial({
-		rewards: [selfTotalPoints, closeFriendTotalPoints, distantFriendTotalPoints],
+		rewards: {
+			selfTotalPoints: selfTotalPoints,
+			closeFriendTotalPoints: closeFriendTotalPoints,
+			distantFriendTotalPoints: distantFriendTotalPoints
+		},
 		friendName: friendName
 	})
 }
