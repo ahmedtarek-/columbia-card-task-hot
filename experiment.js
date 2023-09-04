@@ -77,7 +77,10 @@ var playingForText = function() {
 }
 
 var episodeEndText = function() {
-	return '<div class = centerbox><p class = block-text>In der vorhergegangenen Kondition haben Sie ' + formatAmount(totalPoints) + ' gewonnen' +
+	return '<div class = centerbox><h3>Spielzusammenfassung</h3>' +
+		'<p class = block-text>Sie haben ' + formatAmount(selfTotalPoints) + ' für sich selbst gewonnen.' +
+		'Sie haben ' + formatAmount(closeFriendTotalPoints) + ' für ' + friendName + ' gewonnen.' +
+		'Sie haben ' + formatAmount(distantFriendTotalPoints) + ' für eine fremde Person gewonnen.' +
 		'</p><p class = block-text>Drücken Sie <strong>Enter</strong>, um fortzufahren.</p></div>'
 }
 
@@ -478,6 +481,10 @@ var friendName = ""
 var friendNameFilled = false
 var playingFor = "sich selbst"
 
+var selfTotalPoints = 0
+var closeFriendTotalPoints = 0
+var distantFriendTotalPoints = 0
+
 // this params array is organized such that the 0 index = the number of loss cards in round, the 1 index = the gain amount of each happy card, and the 2nd index = the loss amount when you turn over a sad face
 var paramsArray = [
 	[1, 10, 1000],
@@ -511,7 +518,7 @@ var gameSetup =
 	getBoard()
 
 var practiceSetup =
-	"<div class = practiceText><div class = block-text2 id = instruct1><strong>Practice 1: </strong> As you click on cards, you can see your Round Total change in the box in the upper right.  If you turn over a few cards and then want to stop and go to the next round, click the <strong>Collect and Reveal</strong> button and then <strong>Next Round</strong>.  If turning over cards seems too risky, you can click the <strong>Skip</strong> button, in which case your score for the round will automatically be zero.  This is a practice round, that looks just like the game you will play.  Please select the number of cards you would turn over, given the number of loss cards and the amounts of the gain and loss cards shown below.</div></div>"+
+	"<div class = practiceText><div class = block-text2 id = instruct1><strong>Beispielrunde: </strong> Im untenstehenden Beispiel sehen Sie die 32 geschlossene Boxen. Hinter einer dieser Boxen befindet sich der 'Löwe', hinter den restlichen Boxen ist Geld versteckt. Nehmen wir an, Sie haben sich entschlossen, 20 Boxen zu öffnen. Bitte klicken Sie auf die Schaltfläche 'Ergebnis sehen', um zu sehen, was passiert: In diesem Beispiel befand sich hinter der siebzehnten Box, die Sie geöffnet haben, der Löwe. Sie hatten 1,60 € für die ersten 16 Boxen mit Geld gesammelt, haben dies aber wieder verloren, nachdem der Löwe in der siebzehnten Box erschien. Wie Sie gesehen haben, endet die Runde sofort, wenn der Löwe erscheint und eine neue Runde beginnt.</div></div>"+
 	"<div class = cct-box2>"+
 	"<div class = titleBigBox>   <div class = titleboxMiddle1><div class = center-text id = current_round>Konto: 0</div></div>"+
 	"<div class = buttonbox><button type='button' class = CCT-btn id = NoCardButton onclick = turnCards()>Skip</button><button type='button' class = CCT-btn id = turnButton onclick = turnCards() disabled>Collect and Reveal</button><button type='button' class = 'CCT-btn select-button' id = collectButton  onclick = collect() disabled>Next Round</button></div></div>"+
@@ -565,19 +572,31 @@ var userInfoClick = function () {
   console.log("friendName: ", friendName)
 }
 
-var user_info_block = {
-  type: 'poldrack-instructions',
+var close_friend_block = {
+	type: 'poldrack-instructions',
   data: {trial_id: 'user-info'},
   pages: [
   	// - Close friend
 		'<div class = centerbox><p class = block-text><strong>Enger Freund oder Freundin</strong>' +
 		'<p>In den folgenden Runden werden Sie für einen engen Freund/eine enge Freundin spielen. </p>' +
-	  '<p>Bitte schauen Sie sich die folgenden Bilder an. Die Beziehungen zwischen zwei Personen werden durch die dargestellten Kreise ausgedrückt. Bitte schreiben Sie den Namen eines engen Freundes oder Freundin auf, mit der Sie die durch 7 gekennzeichnete Beziehung haben.Name der Person:</p>' +
+	  '<p>Bitte schauen Sie sich die folgenden Bilder an. Die Beziehungen zwischen zwei Personen werden durch die dargestellten Kreise ausgedrückt. Bitte schreiben Sie den Namen eines engen Freundes oder Freundin auf, mit der Sie die durch 7 gekennzeichnete Beziehung haben.</p>' +
 	  '<img src="images/close_friend.png" alt="Freund (8)" width="500">' +
+	  '<p>Vorname der Person:</p>'
 	  "<form'><div><input type='text' id='friendName' name='friendName'>" +
 	  "<button class='CCT-btn select-button' onclick='userInfoClick()'>Submit</button>" +
 		'</div></form>',
+  ],
+  allow_keys: false,
+  button_label_next: "Weiter",
+  button_label_previous: "Zurück",
+  show_clickable_nav: true,
+  timing_post_trial: 1000
+}
 
+var distant_friend_block = {
+	type: 'poldrack-instructions',
+  data: {trial_id: 'user-info'},
+  pages: [
 		// - Distant friend
 		'<div class = centerbox><p class = block-text><strong>Fremde Person</strong>' +
 		'<p>In den folgenden Runden werden Sie für eine fremde Person spielen.</p>' +
@@ -589,7 +608,34 @@ var user_info_block = {
   button_label_previous: "Zurück",
   show_clickable_nav: true,
   timing_post_trial: 1000
-};
+}
+
+// var user_info_block = {
+//   type: 'poldrack-instructions',
+//   data: {trial_id: 'user-info'},
+//   pages: [
+//   	// - Close friend
+// 		'<div class = centerbox><p class = block-text><strong>Enger Freund oder Freundin</strong>' +
+// 		'<p>In den folgenden Runden werden Sie für einen engen Freund/eine enge Freundin spielen. </p>' +
+// 	  '<p>Bitte schauen Sie sich die folgenden Bilder an. Die Beziehungen zwischen zwei Personen werden durch die dargestellten Kreise ausgedrückt. Bitte schreiben Sie den Namen eines engen Freundes oder Freundin auf, mit der Sie die durch 7 gekennzeichnete Beziehung haben.</p>' +
+// 	  '<img src="images/close_friend.png" alt="Freund (8)" width="500">' +
+// 	  '<p>Vorname der Person:</p>'
+// 	  "<form'><div><input type='text' id='friendName' name='friendName'>" +
+// 	  "<button class='CCT-btn select-button' onclick='userInfoClick()'>Submit</button>" +
+// 		'</div></form>',
+
+// 		// - Distant friend
+// 		'<div class = centerbox><p class = block-text><strong>Fremde Person</strong>' +
+// 		'<p>In den folgenden Runden werden Sie für eine fremde Person spielen.</p>' +
+// 	  '<p>Bitte schauen Sie sich die folgenden Bilder an. Mit der fremden Person, haben Sie die durch die Kreise symbolisierte Beziehung (mit 1 gekennzeichnet)</p>' +
+// 	  '<img src="images/strange_friend.png" alt="Nich so freunde (1)" width="500">'
+//   ],
+//   allow_keys: false,
+//   button_label_next: "Weiter",
+//   button_label_previous: "Zurück",
+//   show_clickable_nav: true,
+//   timing_post_trial: 1000
+// };
 
 /// This ensures that the subject does not read through the instructions too quickly.  If they do it too quickly, then we will go over the loop again.
 var instructions_block = {
@@ -627,7 +673,7 @@ var instructions_block = {
 // || friendName != "" || friendName != null
 // console.log("-- We got the friend name and hence leaving")
 var instruction_node = {
-	timeline: [feedback_instruct_block, instructions_block, user_info_block],
+	timeline: [feedback_instruct_block, instructions_block],
 	/* This function defines stopping criteria */
 	loop_function: function(data) {
 		$('#jspsych-instructions-next').click(function() {
@@ -769,11 +815,18 @@ var test_node = {
 				totalPoints = totalEpisodePoints
 				totalEpisodePoints = 0
 				if (playingFor == 'sich selbst'){
+					selfTotalPoints = totalEpisodePoints
 					playingFor = friendName
-				} else {
+				} else if (playingFor == friendName) {
+					closeFriendTotalPoints = totalEpisodePoints
 					playingFor = 'fremde Person'
+				} else {
+					distantFriendTotalPoints = totalEpisodePoints
 				}
 				console.log("== playingFor ", playingFor)
+				console.log("== selfTotalPoints ", selfTotalPoints)
+				console.log("== closeFriendTotalPoints ", closeFriendTotalPoints)
+				console.log("== distantFriendTotalPoints ", distantFriendTotalPoints)
 			}
 
 			lossClicked = false
@@ -834,18 +887,20 @@ for (i = 0; i < numRounds; i++) {
 }
 
 columbia_card_task_hot_experiment.push(payoutTrial);
-columbia_card_task_hot_experiment.push(payout_text);
+// columbia_card_task_hot_experiment.push(payout_text);
 
 // Second Episode
+columbia_card_task_hot_experiment.push(close_friend_block);
 columbia_card_task_hot_experiment.push(playing_for_text);
 for (i = 0; i < numRounds; i++) {
 	columbia_card_task_hot_experiment.push(test_node);
 }
 
 columbia_card_task_hot_experiment.push(payoutTrial);
-columbia_card_task_hot_experiment.push(payout_text);
+// columbia_card_task_hot_experiment.push(payout_text);
 
 // Third Episode
+columbia_card_task_hot_experiment.push(distant_friend_block);
 columbia_card_task_hot_experiment.push(playing_for_text);
 for (i = 0; i < numRounds; i++) {
 	columbia_card_task_hot_experiment.push(test_node);
