@@ -845,6 +845,7 @@ var test_node = {
 					distantFriendTotalPoints = totalEpisodePoints
 				}
 				totalEpisodePoints = 0
+				console.log("== whichEpisode ", whichEpisode)
 				console.log("== playingFor ", playingFor)
 				console.log("== selfTotalPoints ", selfTotalPoints)
 				console.log("== closeFriendTotalPoints ", closeFriendTotalPoints)
@@ -904,10 +905,10 @@ columbia_card_task_hot_experiment.push(start_test_block);
 for (j = 0; j < 3; j++){
 	whichEpisode = episodesOrder[j]
 	
-	if (episodesOrder[j] == "self"){
+	if (whichEpisode === "self"){
 		playingFor = "sich selbst"
 		columbia_card_task_hot_experiment.push(playing_for_text);
-	} else if (episodesOrder[j] == "friend") {
+	} else if (whichEpisode === "friend") {
 		columbia_card_task_hot_experiment.push(close_friend_block);
 		playingFor = friendName
 		columbia_card_task_hot_experiment.push(playing_for_text);
