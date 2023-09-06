@@ -835,12 +835,12 @@ var test_node = {
 
 			if (whichRound > 1 && whichRound % 10 == 1){
 				totalPoints = totalEpisodePoints
-				if (playingFor == 'sich selbst'){
+				if (whichEpisode == "self"){
 					selfTotalPoints = totalEpisodePoints
-					playingFor = friendName
-				} else if (playingFor == friendName) {
+					// playingFor = friendName
+				} else if (whichEpisode == "friend") {
 					closeFriendTotalPoints = totalEpisodePoints
-					playingFor = 'fremde Person'
+					// playingFor = 'fremde Person'
 				} else {
 					distantFriendTotalPoints = totalEpisodePoints
 				}
@@ -902,7 +902,8 @@ columbia_card_task_hot_experiment.push(start_test_block);
 
 
 for (j = 0; j < 3; j++){
-	// Self episode
+	whichEpisode = episodesOrder[j]
+	
 	if (episodesOrder[j] == "self"){
 		playingFor = "sich selbst"
 		columbia_card_task_hot_experiment.push(playing_for_text);
