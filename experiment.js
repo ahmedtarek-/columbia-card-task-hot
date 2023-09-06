@@ -91,6 +91,7 @@ var appendPayoutData = function(){
 			closeFriendTotalPoints: closeFriendTotalPoints,
 			distantFriendTotalPoints: distantFriendTotalPoints
 		},
+		episodesOrder: episodesOrder,
 		friendName: friendName
 	})
 }
