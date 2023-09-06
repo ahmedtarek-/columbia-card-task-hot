@@ -581,8 +581,8 @@ var close_friend_block = {
   pages: [
   	// - Close friend
 		'<div class = centerbox><p class = block-text><strong>Enger Freund oder Freundin</strong>' +
-		'<p>In den folgenden Runden werden Sie für einen engen Freund/eine enge Freundin spielen. </p>' +
-	  '<p>Bitte schauen Sie sich die folgenden Bilder an. Die Beziehungen zwischen zwei Personen werden durch die dargestellten Kreise ausgedrückt. Bitte schreiben Sie den Namen eines engen Freundes oder Freundin auf, mit der Sie die durch 7 gekennzeichnete Beziehung haben.</p>' +
+		'<p>In den folgenden Runden spielen Sie für einen engen Freund/eine enge Freundin.</p>' +
+	  '<p>Bitte schauen Sie sich die folgenden Bilder an. Die Beziehungen zwischen zwei Personen werden durch die dargestellten Kreise ausgedrückt. Bitte schreiben Sie den Vornamen eines</p>' +
 	  '<img src="images/close_friend.png" alt="Freund (8)" width="500">' +
 	  '<p>Vorname der Person:</p>' +
 	  "<form'><div><input type='text' id='friendName' name='friendName'>" +
@@ -602,8 +602,8 @@ var distant_friend_block = {
   pages: [
 		// - Distant friend
 		'<div class = centerbox><p class = block-text><strong>Fremde Person</strong>' +
-		'<p>In den folgenden Runden werden Sie für eine fremde Person spielen.</p>' +
-	  '<p>Bitte schauen Sie sich die folgenden Bilder an. Mit der fremden Person, haben Sie die durch die Kreise symbolisierte Beziehung (mit 1 gekennzeichnet)</p>' +
+		'<p>In den folgenden Runden spielen Sie für eine fremde (Ihnen nicht bekannte) Person.</p>' +
+	  '<p>Bitte schauen Sie sich die folgenden Bilder an. Die Beziehungen zwischen zwei Personen werden durch die dargestellten Kreise ausgedrückt. Mit der fremden Person haben Sie die </p>' +
 	  '<img src="images/strange_friend.png" alt="Nich so freunde (1)" width="500">'
   ],
   allow_keys: false,
@@ -646,23 +646,23 @@ var instructions_block = {
   data: {trial_id: 'instruction'},
   pages: [
 		'<div class = centerbox><p class = block-text><strong>Anleitung</strong>'+
-		'<p>Im Folgenden präsentieren wir Ihnen 32 geschlossene Boxen. Hinter 31  Boxen sind jeweils 0,10 € versteckt. Jede der Boxen kann durch einen Mausklick geöffnet werden. Sie können in beliebiger Reihenfolge so viele Boxen öffnen, wie Sie möchten. Sie können jederzeit aufhören zu spielen, um ihre Gewinne in dieser Runde zu sichern. Dafür müssen Sie auf die Schaltfläche "Geld sammeln" klicken.</p>' +
-		'<p>Hinter einer Box befindet sich allerdings ein "Löwe“, der alle Gewinne zunichte macht. Sobald der Löwe erscheint, verlieren Sie sämtliche Gewinne in dieser Runde . Nachdem Sie sich entweder die Gewinne gesichert haben oder der Löwe erschienen ist, beginnt eine neue Runde. </p>'+
-		'<p>Beachten Sie, dass Sie höhere Gewinne erzielen, je mehr Boxen Sie öffnen. Zugleich erhöht sich mit jedem Öffnen einer weiteren Box auch die Wahrscheinlichkeit, den Löwen zu erwischen und damit sämtliche gewinne der Runde zu verlieren.</p>',
+		'<p>Im Folgenden präsentieren wir Ihnen 32 geschlossene Boxen. Hinter 31  Boxen sind jeweils 0,10 € versteckt. Hinter einer Box verbirgt sich ein Löwe. Jede der Boxen kann durch einen Mausklick geöffnet werden. Sie können in beliebiger Reihenfolge so viele Boxen öffnen, wie Sie möchten. Sie können jederzeit aufhören zu spielen, um ihre Gewinne in dieser Runde zu sichern. Dafür müssen Sie auf die Schaltfläche "Geld sammeln" klicken.</p>' +
+		'<p>Hinter einer Box befindet sich allerdings ein "Löwe“. Sobald der Löwe erscheint, verlieren Sie sämtliche Gewinne dieser Runde. Nachdem Sie sich entweder die Gewinne gesichert haben oder der Löwe erschienen ist, beginnt eine neue Runde.</p>'+
+		'<p>Hinweis: Je mehr Boxen Sie öffnen, desto höhere Gewinne erzielen Sie. Zugleich erhöht sich mit jedem Öffnen einer weiteren Box auch die Wahrscheinlichkeit, den Löwen „zu erwischen“ und damit sämtliche Gewinne der Runde zu verlieren.</p>',
 		
 	  '<div class = centerbox><p class = block-text><strong>Geschlossene Box:</strong>'+
-	  '<p>So sehen geschlossene Boxen aus. Drehen Sie die Box um, indem Sie sie anklicken.</p>'+
+	  '<p>So sehen geschlossene Boxen aus. Öffnen Sie die Box, indem Sie sie anklicken.</p>'+
 	  "<p><input type='image' id = '133' src='images/final_closed.png' style='width:110px' onclick = instructButton(this.id)>"+
 		'</p></div>',
 		
 		// ------
 		'<div class = centerbox><p class = block-text>'+
 		'<p><strong>Box mit Geld</strong></p>'+
-		'<p>Für jede Box, hinter der Geld versteckt ist, gewinnen Sie 0,10 €.</p>'+
+		'<p>Für jede geöffnete Box, hinter der Geld versteckt ist, gewinnen Sie 0,10€.</p>'+
 		"<p><input type='image' src='images/final_coin.png' style='width:110px'>"+
 		'<p><strong>Box mit Löwe</strong></p>'+
 		"<p><input type='image' src='images/final_lion.png' style='width:110px'></p>"+
-		'<p>Sobald der Löwe erscheint, verlieren Sie sämtliche Gewinne in dieser Runde.</p>'+
+		'<p>Sobald Sie die Box mit dem Löwen auswählen, verlieren Sie sämtliche Gewinne dieser Runde und eine neue Runde beginnt.</p>'+
 		'</p></div>',
   ],
   allow_keys: false,
