@@ -497,8 +497,8 @@ var prize3 = 0
 // Variables for different episode
 var episodesOrder = jsPsych.randomization.shuffle(["self", "friend", "stranger"])
 var whichEpisode = episodesOrder[0]
-console.log("- episodesOrder: ", episodesOrder)
-console.log("- whichEpisode: ", whichEpisode)
+console.log("- Initial episodesOrder: ", episodesOrder)
+console.log("- Initial whichEpisode: ", whichEpisode)
 
 var friendName = ""
 var friendNameFilled = false
@@ -834,16 +834,29 @@ var test_node = {
 			}
 
 			if (whichRound > 1 && whichRound % 10 == 1){
+				whichEpisodeIndx = parseInt(whichRound / 10)
+				
 				totalPoints = totalEpisodePoints
+
+				// Assigning points for the past episode
 				if (whichEpisode == "self"){
 					selfTotalPoints = totalEpisodePoints
-					// playingFor = friendName
 				} else if (whichEpisode == "friend") {
 					closeFriendTotalPoints = totalEpisodePoints
-					// playingFor = 'fremde Person'
 				} else {
 					distantFriendTotalPoints = totalEpisodePoints
 				}
+				whichEpisode = episodesOrder[whichEpisodeIndx]
+
+				// Assigning the playing for when we know who is it
+				if (whichEpisode == "self"){
+					playingFor = 'sich selbst'
+				} else if (whichEpisode == "friend") {
+					playingFor = friendName
+				} else {
+					playingFor = 'fremde Person'
+				}
+
 				totalEpisodePoints = 0
 				console.log("== whichEpisode ", whichEpisode)
 				console.log("== playingFor ", playingFor)
@@ -903,17 +916,13 @@ columbia_card_task_hot_experiment.push(start_test_block);
 
 
 for (j = 0; j < 3; j++){
-	whichEpisode = episodesOrder[j]
 	
-	if (whichEpisode === "self"){
-		playingFor = "sich selbst"
+	if (episodesOrder[j] === "self"){
 		columbia_card_task_hot_experiment.push(playing_for_text);
-	} else if (whichEpisode === "friend") {
+	} else if (episodesOrder[j] === "friend") {
 		columbia_card_task_hot_experiment.push(close_friend_block);
-		playingFor = friendName
 		columbia_card_task_hot_experiment.push(playing_for_text);
 	} else {
-		playingFor = "fremde Person"
 		columbia_card_task_hot_experiment.push(distant_friend_block);
 	}
 
