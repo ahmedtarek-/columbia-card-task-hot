@@ -99,9 +99,23 @@ var appendTestData = function() {
 	jsPsych.data.addDataToLastTrial({
 		which_round: whichRound,
 		num_click_in_round: whichClickInRound,
-		round_type: round_type
+		which_episode: whichEpisode,
+		lion_to_appear_at: lossClickAt,
 	})
 }
+
+// var whichEpisode = function() {
+// 	var roundType = "self"
+// 	if (playingFor != 'sich selbst'){
+// 		if (playingFor == friendName) {
+// 			roundType = "friend"
+// 		} else {
+// 			roundType = "stranger"
+// 		}
+// 	}
+
+// 	return roundType
+// }
 
 // Functions for "top" buttons during test (no card, end round, collect)
 var collect = function() {
@@ -463,7 +477,7 @@ var lossRounds = jsPsych.randomization.shuffle([1,2,3,4,5,6,7,8,9,10,11,12,13,14
 var riggedLossCards = []
 var lossClicked = false
 var whichClickInRound = 0
-var lossClickAt = 5
+var lossClickAt = getRandomInt(2, 32)
 var whichRound = 1
 var round_type = lossRounds.indexOf(whichRound)==-1 ? 'rigged_win' : 'rigged_loss'
 var roundPoints = 0
@@ -479,13 +493,24 @@ var whichLossCards = []
 var prize1 = 0
 var prize2 = 0
 var prize3 = 0
+
+// Variables for different episode
+var episodesOrder = jsPsych.randomization.shuffle(["self", "friend", "stranger"])
+var whichEpisode = episodesOrder[0]
+console.log("- episodesOrder: ", episodesOrder)
+console.log("- whichEpisode: ", whichEpisode)
+
 var friendName = ""
 var friendNameFilled = false
+
+
 var playingFor = "sich selbst"
 
 var selfTotalPoints = 0
 var closeFriendTotalPoints = 0
 var distantFriendTotalPoints = 0
+
+
 
 // this params array is organized such that the 0 index = the number of loss cards in round, the 1 index = the gain amount of each happy card, and the 2nd index = the loss amount when you turn over a sad face
 var paramsArray = [
@@ -802,7 +827,7 @@ var test_node = {
 			roundPoints = 0
 			whichClickInRound = 0
 			whichRound = whichRound + 1
-			lossClickAt = getRandomInt(2, 32) 
+			lossClickAt = getRandomInt(2, 32)
 			round_type = lossRounds.indexOf(whichRound)==-1 ? 'rigged_win' : 'rigged_loss'
 			if (round_type == 'rigged_loss') {
 				whichLossCards = [riggedLossCards.shift()]
@@ -876,35 +901,52 @@ columbia_card_task_hot_experiment.push(practice_block1);
 columbia_card_task_hot_experiment.push(start_test_block);
 
 
-// Tarek: Structure is here
-// First episode
-columbia_card_task_hot_experiment.push(playing_for_text);
-for (i = 0; i < numRounds; i++) {
-	columbia_card_task_hot_experiment.push(test_node);
+for (j = 0; j < 3; j++){
+	// Self episode
+	if (episodesOrder[j] == "self"){
+		playingFor = "sich selbst"
+		columbia_card_task_hot_experiment.push(playing_for_text);
+	} else if (episodesOrder[j] == "friend") {
+		columbia_card_task_hot_experiment.push(close_friend_block);
+		playingFor = friendName
+		columbia_card_task_hot_experiment.push(playing_for_text);
+	} else {
+		playingFor = "fremde Person"
+		columbia_card_task_hot_experiment.push(distant_friend_block);
+	}
+
+
+	for (i = 0; i < numRounds; i++) {
+		columbia_card_task_hot_experiment.push(test_node);
+	}
+	columbia_card_task_hot_experiment.push(payoutTrial);
 }
 
-columbia_card_task_hot_experiment.push(payoutTrial);
-// columbia_card_task_hot_experiment.push(payout_text);
 
-// Second Episode
-columbia_card_task_hot_experiment.push(close_friend_block);
-columbia_card_task_hot_experiment.push(playing_for_text);
-for (i = 0; i < numRounds; i++) {
-	columbia_card_task_hot_experiment.push(test_node);
-}
 
-columbia_card_task_hot_experiment.push(payoutTrial);
-// columbia_card_task_hot_experiment.push(payout_text);
+// // Second Episode
+// columbia_card_task_hot_experiment.push(close_friend_block);
+// columbia_card_task_hot_experiment.push(playing_for_text);
+// for (i = 0; i < numRounds; i++) {
+// 	columbia_card_task_hot_experiment.push(test_node);
+// }
+// columbia_card_task_hot_experiment.push(payoutTrial);
+
 
 // Third Episode
-columbia_card_task_hot_experiment.push(distant_friend_block);
-columbia_card_task_hot_experiment.push(playing_for_text);
-for (i = 0; i < numRounds; i++) {
-	columbia_card_task_hot_experiment.push(test_node);
-}
+// columbia_card_task_hot_experiment.push(distant_friend_block);
+// columbia_card_task_hot_experiment.push(playing_for_text);
+// for (i = 0; i < numRounds; i++) {
+// 	columbia_card_task_hot_experiment.push(test_node);
+// }
+// columbia_card_task_hot_experiment.push(payoutTrial);
 
-columbia_card_task_hot_experiment.push(payoutTrial);
+
+// Show final summary
 columbia_card_task_hot_experiment.push(payout_text);
+
+// Show feedback page
 columbia_card_task_hot_experiment.push(post_task_block);
 
 columbia_card_task_hot_experiment.push(end_block);
+
