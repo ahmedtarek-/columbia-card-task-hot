@@ -581,8 +581,8 @@ var manipulation_check_self = {
        trial_id: "manipulation_check_self"
    },
    questions: ['<p class = center-block-text style = "font-size: 20px">Für wen haben Sie das vorherige Spiel gespielt?</p>'],
-   rows: [10],
-   columns: [20]
+   rows: [2],
+   columns: [10]
 };
 
 var manipulation_check_friend = {
@@ -591,8 +591,8 @@ var manipulation_check_friend = {
        trial_id: "manipulation_check_friend"
    },
    questions: ['<p class = center-block-text style = "font-size: 20px">Für wen haben Sie das vorherige Spiel gespielt?</p>'],
-   rows: [10],
-   columns: [20]
+   rows: [2],
+   columns: [10]
 };
 
 var manipulation_check_stranger = {
@@ -601,8 +601,8 @@ var manipulation_check_stranger = {
        trial_id: "manipulation_check_stranger"
    },
    questions: ['<p class = center-block-text style = "font-size: 20px">Für wen haben Sie das vorherige Spiel gespielt?</p>'],
-   rows: [10],
-   columns: [20]
+   rows: [2],
+   columns: [10]
 };
 
 /* define static blocks */
