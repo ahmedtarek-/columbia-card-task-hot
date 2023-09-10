@@ -627,7 +627,7 @@ var userInfoClick = function () {
 
   // document.getElementById("jspsych-instructions-next").hidden = false;
   // $('#instructButton').prop('disabled', true);
-  document.getElementById('userInfoFeedback').innerHTML = 'Danke'
+  // document.getElementById('userInfoFeedback').innerHTML = 'Danke'
 
   console.log("friendName: ", friendName)
 }
