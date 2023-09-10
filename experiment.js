@@ -575,6 +575,36 @@ var post_task_block = {
    columns: [60,60]
 };
 
+var manipulation_check_self = {
+   type: 'survey-text',
+   data: {
+       trial_id: "manipulation_check_self"
+   },
+   questions: ['<p class = center-block-text style = "font-size: 20px">Für wen haben Sie das vorherige Spiel gespielt?</p>'],
+   rows: [10],
+   columns: [20]
+};
+
+var manipulation_check_friend = {
+   type: 'survey-text',
+   data: {
+       trial_id: "manipulation_check_friend"
+   },
+   questions: ['<p class = center-block-text style = "font-size: 20px">Für wen haben Sie das vorherige Spiel gespielt?</p>'],
+   rows: [10],
+   columns: [20]
+};
+
+var manipulation_check_stranger = {
+   type: 'survey-text',
+   data: {
+       trial_id: "manipulation_check_stranger"
+   },
+   questions: ['<p class = center-block-text style = "font-size: 20px">Für wen haben Sie das vorherige Spiel gespielt?</p>'],
+   rows: [10],
+   columns: [20]
+};
+
 /* define static blocks */
 
 var feedback_instruct_text =
@@ -932,6 +962,14 @@ for (j = 0; j < 3; j++){
 		columbia_card_task_hot_experiment.push(test_node);
 	}
 	columbia_card_task_hot_experiment.push(payoutTrial);
+
+	if (episodesOrder[j] === "self"){
+		columbia_card_task_hot_experiment.push(manipulation_check_self);
+	} else if (episodesOrder[j] === "friend") {
+		columbia_card_task_hot_experiment.push(manipulation_check_friend);
+	} else {
+		columbia_card_task_hot_experiment.push(manipulation_check_stranger);
+	}
 }
 
 
@@ -958,7 +996,7 @@ for (j = 0; j < 3; j++){
 columbia_card_task_hot_experiment.push(payout_text);
 
 // Show feedback page
-columbia_card_task_hot_experiment.push(post_task_block);
+// columbia_card_task_hot_experiment.push(post_task_block);
 
 columbia_card_task_hot_experiment.push(end_block);
 
