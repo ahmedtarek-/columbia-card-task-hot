@@ -627,7 +627,7 @@ var userInfoClick = function () {
 
   // document.getElementById("jspsych-instructions-next").hidden = false;
   // $('#instructButton').prop('disabled', true);
-  document.getElementById('userInfoForm').innerHTML = 'Danke'
+  document.getElementById('userInfoFeedback').innerHTML = 'Danke'
 
   console.log("friendName: ", friendName)
 }
@@ -644,7 +644,8 @@ var close_friend_block = {
 	  '<p>Vorname der Person:</p>' +
 	  "<div id='userInfoForm'><form><div><input type='text' id='friendName' name='friendName'>" +
 	  "<button class='CCT-btn select-button' onclick='userInfoClick()'>Submit</button>" +
-		'</div></form></div>'
+		'</div></form></div>' +
+		"<div id='userInfoFeedback'></div>"
   ],
   allow_keys: false,
   button_label_next: "Weiter",
