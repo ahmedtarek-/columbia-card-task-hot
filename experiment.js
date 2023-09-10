@@ -627,7 +627,6 @@ var userInfoClick = function () {
 
   document.getElementById("jspsych-instructions-next").hidden = false;
   // $('#instructButton').prop('disabled', true);
-  // document.getElementById('userInfoFeedback').innerHTML = 'Danke'
 
   console.log("friendName: ", friendName)
 }
@@ -642,7 +641,7 @@ var close_friend_block = {
 	  '<p>Bitte schauen Sie sich die folgenden Bilder an. Die Beziehungen zwischen zwei Personen werden durch die dargestellten Kreise ausgedrückt. Bitte schreiben Sie den Vornamen eines</p>' +
 	  '<img src="images/close_friend.png" alt="Freund (8)" width="500">' +
 	  '<p>Vorname der Person:</p>' +
-	  "<form><div><input type='text' id='friendName' name='friendName'>" +
+	  "<form'><div><input type='text' id='friendName' name='friendName'>" +
 	  "<button class='CCT-btn select-button' onclick='userInfoClick()'>Submit</button>" +
 		'</div></form>'
   ],
@@ -997,7 +996,7 @@ for (j = 0; j < 3; j++){
 columbia_card_task_hot_experiment.push(payout_text);
 
 // Show feedback page
-// columbia_card_task_hot_experiment.push(post_task_block);
+columbia_card_task_hot_experiment.push(post_task_block);
 
 columbia_card_task_hot_experiment.push(end_block);
 
