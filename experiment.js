@@ -625,9 +625,9 @@ var userInfoClick = function () {
   friendNameFilled = true
   playingFor = friendName
 
-  document.getElementById("jspsych-instructions-next").hidden = false;
-  document.getElementById("userInfoForm").hidden = true;
+  // document.getElementById("jspsych-instructions-next").hidden = false;
   // $('#instructButton').prop('disabled', true);
+  document.getElementById('userInfoForm').innerHTML = 'Danke'
 
   console.log("friendName: ", friendName)
 }
@@ -642,9 +642,9 @@ var close_friend_block = {
 	  '<p>Bitte schauen Sie sich die folgenden Bilder an. Die Beziehungen zwischen zwei Personen werden durch die dargestellten Kreise ausgedrückt. Bitte schreiben Sie den Vornamen eines</p>' +
 	  '<img src="images/close_friend.png" alt="Freund (8)" width="500">' +
 	  '<p>Vorname der Person:</p>' +
-	  "<form id='userInfoForm'><div><input type='text' id='friendName' name='friendName'>" +
+	  "<div id='userInfoForm'><form><div><input type='text' id='friendName' name='friendName'>" +
 	  "<button class='CCT-btn select-button' onclick='userInfoClick()'>Submit</button>" +
-		'</div></form>'
+		'</div></form></div>'
   ],
   allow_keys: false,
   button_label_next: "Weiter",
