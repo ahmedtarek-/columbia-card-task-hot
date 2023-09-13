@@ -574,7 +574,7 @@ var manipulation_check_self = {
    },
    questions: ['<p class = center-block-text style = "font-size: 20px">Für wen haben Sie das vorherige Spiel gespielt?</p>'],
    rows: [2],
-   columns: [10]
+   columns: [20]
 };
 
 var manipulation_check_friend = {
@@ -584,7 +584,7 @@ var manipulation_check_friend = {
    },
    questions: ['<p class = center-block-text style = "font-size: 20px">Für wen haben Sie das vorherige Spiel gespielt?</p>'],
    rows: [2],
-   columns: [10]
+   columns: [20]
 };
 
 var manipulation_check_stranger = {
@@ -594,7 +594,7 @@ var manipulation_check_stranger = {
    },
    questions: ['<p class = center-block-text style = "font-size: 20px">Für wen haben Sie das vorherige Spiel gespielt?</p>'],
    rows: [2],
-   columns: [10]
+   columns: [20]
 };
 
 /* define static blocks */
@@ -613,7 +613,7 @@ var feedback_instruct_block = {
 };
 
 var userInfoClick = function () {
-  friendName = document.getElementById("friendName").value;
+  friendName = document.getElementById("friendNameValue").value;
   friendNameFilled = true
   playingFor = friendName
 
@@ -636,7 +636,7 @@ var close_friend_block = {
 	  '<img src="images/close_friend.png" alt="Freund (8)" width="500">' +
 	  '<p>Vorname der Person:</p>' +
 	  "<p id='friendName'></p>" +
-	  "<form'><div id='userInfoForm'><input type='text' id='friendName' name='friendName'>" +
+	  "<form'><div id='userInfoForm'><input type='text' id='friendNameValue' name='friendName'>" +
 	  "<button class='CCT-btn select-button' onclick='userInfoClick()'>Submit</button>" +
 		'</div></form>'
   ],
