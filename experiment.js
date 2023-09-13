@@ -153,7 +153,6 @@ var chooseCard = function(clicked_id) {
 	// [Tarek] Old condition: if ((clickedGainCards.length+1) == whichLossCards) {
 	if (whichClickInRound == lossClickAt) {
 		// Tarek: Loss card clicked
-		console.log("== My new condition of checking if clicks hit number of loss cards in there")
 		clickedLossCards.push(currID)
 		index = unclickedCards.indexOf(currID, 0)
 		unclickedCards.splice(index, 1)
@@ -177,7 +176,6 @@ var getRandomInt = function (min, max) {
 }
 
 var getRound = function() {
-	console.log("-- INSIDE get roundd")
 	var gameState = gameSetup
 	if (roundOver === 0) { //this is for the start of a round
 		whichClickInRound = 0
@@ -203,7 +201,6 @@ var getRound = function() {
 		roundOver = 1
 		return gameState
 	} else if (roundOver == 1) { //this is for during the round
-		console.log("\n-- we arrived in roundOver 1")
 		gameState = appendTextAfter(gameState, 'Runden für ', playingFor)
 		// gameState = appendTextAfter(gameState, 'Game Round: ', whichRound)
 		// gameState = appendTextAfter(gameState, 'Loss Amount: ', lossAmt)
@@ -218,7 +215,6 @@ var getRound = function() {
 		}
 		return gameState
 	} else if (roundOver == 2) { //this is for end the round
-		console.log("\n-- we arrived in roundOver 2")
 		roundOver = 3
 		gameState = appendTextAfter(gameState, 'Runden für ', playingFor)
 		// gameState = appendTextAfter(gameState, 'Game Round: ', whichRound)
@@ -348,7 +344,6 @@ var instructCard = function(clicked_id) {
 	document.getElementById("turnButton").disabled = false;
 	appendTextAfter(gameState, 'turnButton', ' onclick = turnCards()')
 	if (whichLossCards.indexOf(currID) == -1) {
-		console.log("Weird condition 1: ", clicked_id)
 		instructPoints = instructPoints + gainAmt
 		document.getElementById('current_round').innerHTML = 'Konto: ' + formatAmount(instructPoints);
 		// document.getElementById("global_account").innerHTML = 'Global Account: ' + formatAmount(totalEpisodePoints)
@@ -357,7 +352,6 @@ var instructCard = function(clicked_id) {
 		document.getElementById(clicked_id).src =
 			'images/final_coin.png';
 	} else if (whichLossCards.indexOf(currID) != -1) {
-		console.log("Weird condition 2: ", clicked_id)
 		instructPoints = 0
 		document.getElementById(clicked_id).disabled = true;
 		document.getElementById('current_round').innerHTML = 'Konto: ' + formatAmount(instructPoints);
@@ -440,8 +434,6 @@ var instructFunction2 = function() {
 	// delay += 250
 	total_points -= 250
 	totalEpisodePoints = total_points
-	console.log("Inside instructFunction2")
-	console.log(roundPointsArray)
 	doSetTimeout(13, delay, total_points, totalEpisodePoints, 'loss')
 	CCT_timeouts.push(setTimeout(function() {
 		document.getElementById("instruct2").innerHTML =
@@ -546,7 +538,7 @@ var gameSetup =
 	getBoard()
 
 var practiceSetup =
-	"<div class = practiceText><div class = block-text2 id = instruct1><strong>Beispielrunde: </strong> Im untenstehenden Beispiel sehen Sie die 32 geschlossene Boxen. Hinter einer dieser Boxen befindet sich der 'Löwe', hinter den restlichen Boxen ist Geld versteckt. Nehmen wir an, Sie haben sich entschlossen, 20 Boxen zu öffnen. Bitte klicken Sie auf die Schaltfläche 'Ergebnis sehen', um zu sehen, was passiert: In diesem Beispiel befand sich hinter der siebzehnten Box, die Sie geöffnet haben, der Löwe. Sie hatten 1,60 € für die ersten 16 Boxen mit Geld gesammelt, haben dies aber wieder verloren, nachdem der Löwe in der siebzehnten Box erschien. Wie Sie gesehen haben, endet die Runde sofort, wenn der Löwe erscheint und eine neue Runde beginnt.</div></div>"+
+	"<div class = practiceText><div class = block-text2 id = instruct1><strong>Übungsrunde: </strong> Im folgenden Beispiel sehen Sie die 32 geschlossene Boxen. Hinter einer dieser Boxen befindet sich der "Löwe", hinter den restlichen Boxen ist Geld versteckt. Dies ist eine Übungsrunde, die genauso aussieht wie das Spiel, das Sie spielen werden. Bitte öffnen Sie mit einem Mausklick so viele Boxen, wie Sie möchten. Wenn Sie aufhören und Ihre Gewinne in dieser Runde sichern möchten, klicken Sie auf die Schaltfläche „Geld sammeln“. Sobald der Löwe erscheint, verlieren Sie sämtliche Gewinne dieser Runde.</div></div>"+
 	"<div class = cct-box2>"+
 	"<div class = titleBigBox>   <div class = titleboxMiddle1><div class = center-text id = current_round>Konto: 0</div></div>"+
 	"<div class = buttonbox><button type='button' class = CCT-btn id = NoCardButton onclick = turnCards()>Skip</button><button type='button' class = CCT-btn id = turnButton onclick = turnCards() disabled>Collect and Reveal</button><button type='button' class = 'CCT-btn select-button' id = collectButton  onclick = collect() disabled>Next Round</button></div></div>"+
@@ -626,6 +618,7 @@ var userInfoClick = function () {
   playingFor = friendName
 
   document.getElementById("jspsych-instructions-next").hidden = false;
+  document.getElementById("userInfoForm").hidden = true;
   // $('#instructButton').prop('disabled', true);
 
   console.log("friendName: ", friendName)
@@ -638,12 +631,12 @@ var close_friend_block = {
   	// - Close friend
 		'<div class = centerbox><p class = block-text><strong>Enger Freund oder Freundin</strong>' +
 		'<p>In den folgenden Runden spielen Sie für einen engen Freund/eine enge Freundin.</p>' +
-	  '<p>Bitte schauen Sie sich die folgenden Bilder an. Die Beziehungen zwischen zwei Personen werden durch die dargestellten Kreise ausgedrückt. Bitte schreiben Sie den Vornamen eines</p>' +
+	  '<p>Bitte schauen Sie sich die folgenden Bilder an. Die Beziehungen zwischen zwei Personen werden durch die dargestellten Kreise ausgedrückt. Bitte schreiben Sie den Vornamen eines engen Freundes oder Freundin auf, mit der Sie die durch 7 gekennzeichnete Beziehung haben.</p>' +
 	  '<img src="images/close_friend.png" alt="Freund (8)" width="500">' +
 	  '<p>Vorname der Person:</p>' +
-	  "<form'><div><input type='text' id='friendName' name='friendName'>" +
+	  "<div id='userInfoForm'><form'><div><input type='text' id='friendName' name='friendName'>" +
 	  "<button class='CCT-btn select-button' onclick='userInfoClick()'>Submit</button>" +
-		'</div></form>'
+		'</div></form><div>'
   ],
   allow_keys: false,
   button_label_next: "Weiter",
@@ -659,7 +652,7 @@ var distant_friend_block = {
 		// - Distant friend
 		'<div class = centerbox><p class = block-text><strong>Fremde Person</strong>' +
 		'<p>In den folgenden Runden spielen Sie für eine fremde (Ihnen nicht bekannte) Person.</p>' +
-	  '<p>Bitte schauen Sie sich die folgenden Bilder an. Die Beziehungen zwischen zwei Personen werden durch die dargestellten Kreise ausgedrückt. Mit der fremden Person haben Sie die </p>' +
+	  '<p>Bitte schauen Sie sich die folgenden Bilder an. Die Beziehungen zwischen zwei Personen werden durch die dargestellten Kreise ausgedrückt. Mit der fremden Person haben Sie die durch 1 gekennzeichnete Beziehung. </p>' +
 	  '<img src="images/strange_friend.png" alt="Nich so freunde (1)" width="500">'
   ],
   allow_keys: false,
@@ -702,7 +695,7 @@ var instructions_block = {
   data: {trial_id: 'instruction'},
   pages: [
 		'<div class = centerbox><p class = block-text><strong>Anleitung</strong>'+
-		'<p>Im Folgenden präsentieren wir Ihnen 32 geschlossene Boxen. Hinter 31  Boxen sind jeweils 0,10 € versteckt. Hinter einer Box verbirgt sich ein Löwe. Jede der Boxen kann durch einen Mausklick geöffnet werden. Sie können in beliebiger Reihenfolge so viele Boxen öffnen, wie Sie möchten. Sie können jederzeit aufhören zu spielen, um ihre Gewinne in dieser Runde zu sichern. Dafür müssen Sie auf die Schaltfläche "Geld sammeln" klicken.</p>' +
+		'<p>Im Folgenden präsentieren wir Ihnen 32 geschlossene Boxen. Hinter 31  Boxen sind jeweils 0,10 € versteckt. Hinter einer Box verbirgt sich ein Löwe. Jede der Boxen kann durch einen Mausklick geöffnet werden. Sie können in beliebiger Reihenfolge so viele Boxen öffnen, wie Sie möchten. Sie können jederzeit aufhören zu spielen, um Ihre Gewinne in dieser Runde zu sichern. Dafür müssen Sie auf die Schaltfläche "Geld sammeln" klicken.</p>' +
 		'<p>Hinter einer Box befindet sich allerdings ein "Löwe“. Sobald der Löwe erscheint, verlieren Sie sämtliche Gewinne dieser Runde. Nachdem Sie sich entweder die Gewinne gesichert haben oder der Löwe erschienen ist, beginnt eine neue Runde.</p>'+
 		'<p>Hinweis: Je mehr Boxen Sie öffnen, desto höhere Gewinne erzielen Sie. Zugleich erhöht sich mit jedem Öffnen einer weiteren Box auch die Wahrscheinlichkeit, den Löwen „zu erwischen“ und damit sämtliche Gewinne der Runde zu verlieren.</p>',
 		
@@ -737,18 +730,11 @@ var instruction_node = {
 	loop_function: function(data) {
 		$('#jspsych-instructions-next').click(function() {
 			// overriding functionality
-			console.log("inside overriden button")
+			
 			friendName = document.getElementById("friendName").value;
 		  friendNameFilled = true
 
-		  console.log("friendName: ", friendName)
 		})
-		// if (friendNameFilled == true){
-		// 	console.log("friendNameFilled: ", friendNameFilled)
-		// 	console.log("friendName: ", friendName)
-		// 	feedback_instruct_text = 'Done with instructions. Drücken Sie <strong>Enter</strong>, um fortzufahren.'
-		// 	return false
-		// }
 		for (i = 0; i < data.length; i++) {
 			if ((data[i].trial_type == 'poldrack-instructions') && (data[i].rt != -1)) {
 				rt = data[i].rt
