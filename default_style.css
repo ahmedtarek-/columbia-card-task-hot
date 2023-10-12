@@ -304,11 +304,11 @@ label.jspsych-poldrack-survey-multi-choice-text input[type="radio"] {
 }
 
 #jspsych-instructions-next, #jspsych-instructions-back {
- width: 250px;
+ width: 270px;
 }
 
 #jspsych-instructions-next, #jspsych-instructions-back {
-  padding: 12px 40px 12px 40px;
+  padding: 12px 10px 12px 10px;
 }
 
 .jspsych-btn:hover, #jspsych-instructions-next:hover, #jspsych-instructions-back:hover {
