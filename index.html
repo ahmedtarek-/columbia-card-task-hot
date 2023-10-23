@@ -50,14 +50,14 @@ $( document ).ready(function() {
                          type: "POST",
                          url: '/expfactory/save',
                          data: { "data": data },
-                         success: function(){ document.location = "/next" },
+                         success: function(){ document.location = "/expfactory/next" },
                          dataType: "application/json",
 
                          // Endpoint not running, local save
                          error: function(err) {
 
                              if (err.status == 200){
-                                 document.location = "/next";
+                                 document.location = "/expfactory/next";
                              } else {
                                  // If error, assue local save
                                  jsPsych.data.localSave('columbia-card-task-hot_results.csv', 'csv');
