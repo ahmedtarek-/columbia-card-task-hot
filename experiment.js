@@ -498,11 +498,13 @@ var friendNameFilled = false
 
 
 var playingFor = "sich selbst"
+if (whichEpisode == "stranger"){
+	playingFor = 'fremde Person'
+}
 
 var selfTotalPoints = 0
 var closeFriendTotalPoints = 0
 var distantFriendTotalPoints = 0
-
 
 
 // this params array is organized such that the 0 index = the number of loss cards in round, the 1 index = the gain amount of each happy card, and the 2nd index = the loss amount when you turn over a sad face
