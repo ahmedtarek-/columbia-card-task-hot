@@ -499,7 +499,7 @@ var friendNameFilled = false
 
 var playingFor = "sich selbst"
 if (whichEpisode == "stranger"){
-	playingFor = 'fremde Person'
+	playingFor = 'eine fremde Person'
 }
 
 var selfTotalPoints = 0
@@ -536,21 +536,21 @@ for (var i = 0; i < numLossRounds; i++) {
 var gameSetup =
 	"<div class = cct-box>"+
 	"<div class = titleBigBox>  <h3>Sie spielen die folgenden Runden für  </h3>" + "<div class = titleboxMiddle1><div class = center-text id = current_round>Konto: 0</div></div>"+
-	"<div class = buttonbox3><button type='button' id = turnButton class = 'CCT-btn select-button' onclick = endRound()>Collect</button><button type='button' id = collectButton class = 'CCT-btn' disabled>Next Round</button></div></div>"+
+	"<div class = buttonbox3><button type='button' id = turnButton class = 'CCT-btn select-button' onclick = endRound()>Geld sammeln</button><button type='button' id = collectButton class = 'CCT-btn' disabled>nächste Runde</button></div></div>"+
 	getBoard()
 
 var practiceSetup =
-	"<div class = practiceText><div class = block-text2 id = instruct1><strong>Übungsrunde: </strong> Im folgenden Beispiel sehen Sie die 32 geschlossene Boxen. Hinter einer dieser Boxen befindet sich der 'Löwe', hinter den restlichen Boxen ist Geld versteckt. Dies ist eine Übungsrunde, die genauso aussieht wie das Spiel, das Sie spielen werden. Bitte öffnen Sie mit einem Mausklick so viele Boxen, wie Sie möchten. Wenn Sie aufhören und Ihre Gewinne in dieser Runde sichern möchten, klicken Sie auf die Schaltfläche 'Geld sammeln'. Sobald der Löwe erscheint, verlieren Sie sämtliche Gewinne dieser Runde.</div></div>"+
+	"<div class = practiceText><div class = block-text2 id = instruct1><strong>Übungsrunde: </strong> Im folgenden Beispiel sehen Sie die 32 geschlossene Boxen. Hinter einer dieser Boxen befindet sich der Löwe, hinter den restlichen Boxen ist Geld versteckt. Dies ist eine Übungsrunde, die genauso aussieht wie das Spiel, das Sie spielen werden. Bitte öffnen Sie mit einem Mausklick so viele Boxen, wie Sie möchten. Wenn Sie aufhören und Ihre Gewinne in dieser Runde sichern möchten, klicken Sie auf die Schaltfläche 'Geld sammeln'. Sobald der Löwe erscheint, verlieren Sie sämtliche Gewinne dieser Runde.</div></div>"+
 	"<div class = cct-box2>"+
 	"<div class = titleBigBox>   <div class = titleboxMiddle1><div class = center-text id = current_round>Konto: 0</div></div>"+
-	"<div class = buttonbox><button type='button' class = CCT-btn id = NoCardButton onclick = turnCards()>Skip</button><button type='button' class = CCT-btn id = turnButton onclick = turnCards() disabled>Collect and Reveal</button><button type='button' class = 'CCT-btn select-button' id = collectButton  onclick = collect() disabled>Next Round</button></div></div>"+
+	"<div class = buttonbox><button type='button' class = CCT-btn id = NoCardButton onclick = turnCards()>Skip</button><button type='button' class = CCT-btn id = turnButton onclick = turnCards() disabled>Geld sammeln</button><button type='button' class = 'CCT-btn select-button' id = collectButton  onclick = collect() disabled>nächste Runde</button></div></div>"+
 	getBoard(2)
 
 var practiceSetup2 =
 	"<div class = practiceText><div class = block-text2 id = instruct2><strong>Practice 2: </strong> The computer will record your points for each round and will show you the total after you finish all " + numRounds + " rounds of the game.  This is the second practice round. Please again turn over as many cards as you would like to, given the number of loss cards and the amounts that you can win or lose if you turn over a gain or loss card, as shown below.</div></div>"+
 	"<div class = cct-box2>"+
 	"<div class = titleBigBox>   <div class = titleboxMiddle1><div class = center-text id = current_round>Konto: 0</div></div>"+
-	"<div class = buttonbox><button type='button' class = CCT-btn id = NoCardButton onclick = turnCards()>Skip</button><button type='button' class = CCT-btn id = turnButton onclick = turnCards() disabled>Collect and Reveal</button><button type='button' class = 'CCT-btn select-button' id = collectButton  onclick = collect() disabled>Next Round</button></div></div>"+
+	"<div class = buttonbox><button type='button' class = CCT-btn id = NoCardButton onclick = turnCards()>Skip</button><button type='button' class = CCT-btn id = turnButton onclick = turnCards() disabled>Geld sammeln</button><button type='button' class = 'CCT-btn select-button' id = collectButton  onclick = collect() disabled>nächste Runde</button></div></div>"+
 	getBoard(2)
 
 
@@ -602,7 +602,7 @@ var manipulation_check_stranger = {
 /* define static blocks */
 
 var feedback_instruct_text =
-	"Welcome to the experiment. This task will take around 25 minutes. Press <strong>enter</strong> to begin."
+	"Willkommen zu diesem Experiment. Diese Aufgabe wird etwa 25 Minuten dauern. Drücken Sie die <strong>Eingabetaste</strong>, um zu beginnen"
 var feedback_instruct_block = {
 	type: 'poldrack-text',
 	cont_key: [13],
@@ -655,7 +655,7 @@ var distant_friend_block = {
   pages: [
 		// - Distant friend
 		'<div class = centerbox><p class = block-text><strong>Fremde Person</strong>' +
-		'<p>In den folgenden Runden spielen Sie für eine fremde (Ihnen nicht bekannte) Person.</p>' +
+		'<p>In den folgenden Runden spielen Sie für eine fremde (Ihnen nicht bekannte) Person. Alle Gewinne in den folgenden Runden werden für diese Person erspielt.</p>' +
 	  '<p>Bitte schauen Sie sich die folgenden Bilder an. Die Beziehungen zwischen zwei Personen werden durch die dargestellten Kreise ausgedrückt. Mit der fremden Person haben Sie die durch 1 gekennzeichnete Beziehung. </p>' +
 	  '<img src="images/strange_friend.png" alt="Nich so freunde (1)" width="500">'
   ],
@@ -700,7 +700,7 @@ var instructions_block = {
   pages: [
 		'<div class = centerbox><p class = block-text><strong>Anleitung</strong>'+
 		'<p>Im Folgenden präsentieren wir Ihnen 32 geschlossene Boxen. Hinter 31  Boxen sind jeweils 0,10 € versteckt. Hinter einer Box verbirgt sich ein Löwe. Jede der Boxen kann durch einen Mausklick geöffnet werden. Sie können in beliebiger Reihenfolge so viele Boxen öffnen, wie Sie möchten. Sie können jederzeit aufhören zu spielen, um Ihre Gewinne in dieser Runde zu sichern. Dafür müssen Sie auf die Schaltfläche "Geld sammeln" klicken.</p>' +
-		'<p>Hinter einer Box befindet sich allerdings ein "Löwe“. Sobald der Löwe erscheint, verlieren Sie sämtliche Gewinne dieser Runde. Nachdem Sie sich entweder die Gewinne gesichert haben oder der Löwe erschienen ist, beginnt eine neue Runde.</p>'+
+		'<p>Hinter einer Box befindet sich allerdings ein Löwe. Sobald der Löwe erscheint, verlieren Sie sämtliche Gewinne dieser Runde. Nachdem Sie sich entweder die Gewinne gesichert haben oder der Löwe erschienen ist, beginnt eine neue Runde.</p>'+
 		'<p>Hinweis: Je mehr Boxen Sie öffnen, desto höhere Gewinne erzielen Sie. Zugleich erhöht sich mit jedem Öffnen einer weiteren Box auch die Wahrscheinlichkeit, den Löwen „zu erwischen“ und damit sämtliche Gewinne der Runde zu verlieren.</p>',
 		
 	  '<div class = centerbox><p class = block-text><strong>Geschlossene Box:</strong>'+
@@ -875,7 +875,7 @@ var test_node = {
 				} else if (whichEpisode == "friend") {
 					playingFor = friendName
 				} else {
-					playingFor = 'fremde Person'
+					playingFor = 'eine fremde Person'
 				}
 
 				totalEpisodePoints = 0
