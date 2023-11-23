@@ -168,7 +168,7 @@ var chooseCard = function(clicked_id) {
 }
 
 var formatAmount = function(amount) {
-	return amount/100 + " €"
+	return amount/1 + " Bonuspunkte"
 }
 
 var getRandomInt = function (min, max) {
@@ -188,11 +188,10 @@ var getRound = function() {
 		roundParams = shuffledParamsArray.shift()
 		numLossCards = 1
 		gainAmt = roundParams[1]
-		lossAmt = roundParams[2]
+	
 
 		gameState = appendTextAfter(gameState, 'Runden für ', playingFor)
 		// gameState = appendTextAfter(gameState, 'Game Round: ', whichRound)
-		// gameState = appendTextAfter(gameState, 'Loss Amount: ', lossAmt)
 		gameState = appendTextAfter2(gameState, 'Konto: ', formatAmount(roundPoints), '0')
 		// gameState = appendTextAfter2(gameState, 'Global Account: ', formatAmount(totalEpisodePoints), '0')
 		// gameState = appendTextAfter(gameState, 'Number of Loss Cards: ', numLossCards)
@@ -203,7 +202,6 @@ var getRound = function() {
 	} else if (roundOver == 1) { //this is for during the round
 		gameState = appendTextAfter(gameState, 'Runden für ', playingFor)
 		// gameState = appendTextAfter(gameState, 'Game Round: ', whichRound)
-		// gameState = appendTextAfter(gameState, 'Loss Amount: ', lossAmt)
 		gameState = appendTextAfter2(gameState, 'Konto: ', formatAmount(roundPoints), '0')
 		// gameState = appendTextAfter2(gameState, 'Global Account: ', formatAmount(totalEpisodePoints), '0')
 		// gameState = appendTextAfter(gameState, 'Number of Loss Cards: ', numLossCards)
@@ -218,7 +216,6 @@ var getRound = function() {
 		roundOver = 3
 		gameState = appendTextAfter(gameState, 'Runden für ', playingFor)
 		// gameState = appendTextAfter(gameState, 'Game Round: ', whichRound)
-		// gameState = appendTextAfter(gameState, 'Loss Amount: ', lossAmt)
 		gameState = appendTextAfter2(gameState, 'Konto: ', formatAmount(roundPoints), '0')
 		// gameState = appendTextAfter2(gameState, 'Global Account: ', formatAmount(totalEpisodePoints), '0')
 		// gameState = appendTextAfter(gameState, 'Number of Loss Cards: ', numLossCards)
@@ -302,8 +299,8 @@ var getPractice1 = function() {
 	clickedLossCards = [] 
 	numLossCards = 1
 	// In cents
-	gainAmt = 10
-	lossAmt = 1000
+	gainAmt = 1
+
 
 	shuffledCardArray = jsPsych.randomization.repeat(cardArray, 1)
 	whichLossCards = [] //this determines which are loss cards at the beginning of each round
@@ -323,8 +320,8 @@ var getPractice2 = function() {
 	clickedGainCards = [] //num
 	clickedLossCards = [] //num
 	numLossCards = 1
-	gainAmt = 10
-	lossAmt = 1000
+	gainAmt = 1
+
 
 	shuffledCardArray = jsPsych.randomization.repeat(cardArray, 1)
 	whichLossCards = [] //this determines which are loss cards at the beginning of each round
@@ -461,7 +458,6 @@ var performance_var = 0
 var currID = ""
 var numLossCards = ""
 var gainAmt = ""
-var lossAmt = ""
 var CCT_timeouts = []
 var numWinRounds =  24
 var numLossRounds = 4
@@ -536,21 +532,21 @@ for (var i = 0; i < numLossRounds; i++) {
 var gameSetup =
 	"<div class = cct-box>"+
 	"<div class = titleBigBox>  <h3>Sie spielen die folgenden Runden für  </h3>" + "<div class = titleboxMiddle1><div class = center-text id = current_round>Konto: 0</div></div>"+
-	"<div class = buttonbox3><button type='button' id = turnButton class = 'CCT-btn select-button' onclick = endRound()>Geld sammeln</button><button type='button' id = collectButton class = 'CCT-btn' disabled>nächste Runde</button></div></div>"+
+	"<div class = buttonbox3><button type='button' id = turnButton class = 'CCT-btn select-button' onclick = endRound()>Punkte sammeln</button><button type='button' id = collectButton class = 'CCT-btn' disabled>nächste Runde</button></div></div>"+
 	getBoard()
 
 var practiceSetup =
-	"<div class = practiceText><div class = block-text2 id = instruct1><strong>Übungsrunde: </strong> Im folgenden Beispiel sehen Sie die 32 geschlossene Boxen. Hinter einer dieser Boxen befindet sich der Löwe, hinter den restlichen Boxen ist Geld versteckt. Dies ist eine Übungsrunde, die genauso aussieht wie das Spiel, das Sie spielen werden. Bitte öffnen Sie mit einem Mausklick so viele Boxen, wie Sie möchten. Wenn Sie aufhören und Ihre Gewinne in dieser Runde sichern möchten, klicken Sie auf die Schaltfläche 'Geld sammeln'. Sobald der Löwe erscheint, verlieren Sie sämtliche Gewinne dieser Runde.</div></div>"+
+	"<div class = practiceText><div class = block-text2 id = instruct1><strong>Übungsrunde: </strong> Im folgenden Beispiel sehen Sie die 32 geschlossene Boxen. Hinter einer dieser Boxen befindet sich der Löwe, hinter den restlichen Boxen sind Goldtaler versteckt. Dies ist eine Übungsrunde, die genauso aussieht wie das Spiel, das Sie spielen werden. Bitte öffnen Sie mit einem Mausklick so viele Boxen, wie Sie möchten. Wenn Sie aufhören und Ihre Gewinne in dieser Runde sichern möchten, klicken Sie auf die Schaltfläche 'Punkte sammeln'. Sobald der Löwe erscheint, verlieren Sie sämtliche Gewinne dieser Runde.</div></div>"+
 	"<div class = cct-box2>"+
 	"<div class = titleBigBox>   <div class = titleboxMiddle1><div class = center-text id = current_round>Konto: 0</div></div>"+
-	"<div class = buttonbox><button type='button' class = CCT-btn id = NoCardButton onclick = turnCards()>Skip</button><button type='button' class = CCT-btn id = turnButton onclick = turnCards() disabled>Geld sammeln</button><button type='button' class = 'CCT-btn select-button' id = collectButton  onclick = collect() disabled>nächste Runde</button></div></div>"+
+	"<div class = buttonbox><button type='button' class = CCT-btn id = NoCardButton onclick = turnCards()>Skip</button><button type='button' class = CCT-btn id = turnButton onclick = turnCards() disabled>Punkte sammeln</button><button type='button' class = 'CCT-btn select-button' id = collectButton  onclick = collect() disabled>nächste Runde</button></div></div>"+
 	getBoard(2)
 
 var practiceSetup2 =
 	"<div class = practiceText><div class = block-text2 id = instruct2><strong>Practice 2: </strong> The computer will record your points for each round and will show you the total after you finish all " + numRounds + " rounds of the game.  This is the second practice round. Please again turn over as many cards as you would like to, given the number of loss cards and the amounts that you can win or lose if you turn over a gain or loss card, as shown below.</div></div>"+
 	"<div class = cct-box2>"+
 	"<div class = titleBigBox>   <div class = titleboxMiddle1><div class = center-text id = current_round>Konto: 0</div></div>"+
-	"<div class = buttonbox><button type='button' class = CCT-btn id = NoCardButton onclick = turnCards()>Skip</button><button type='button' class = CCT-btn id = turnButton onclick = turnCards() disabled>Geld sammeln</button><button type='button' class = 'CCT-btn select-button' id = collectButton  onclick = collect() disabled>nächste Runde</button></div></div>"+
+	"<div class = buttonbox><button type='button' class = CCT-btn id = NoCardButton onclick = turnCards()>Skip</button><button type='button' class = CCT-btn id = turnButton onclick = turnCards() disabled>Punkte sammeln</button><button type='button' class = 'CCT-btn select-button' id = collectButton  onclick = collect() disabled>nächste Runde</button></div></div>"+
 	getBoard(2)
 
 
@@ -699,7 +695,7 @@ var instructions_block = {
   data: {trial_id: 'instruction'},
   pages: [
 		'<div class = centerbox><p class = block-text><strong>Anleitung</strong>'+
-		'<p>Im Folgenden präsentieren wir Ihnen 32 geschlossene Boxen. Hinter 31  Boxen sind jeweils 0,10 € versteckt. Hinter einer Box verbirgt sich ein Löwe. Jede der Boxen kann durch einen Mausklick geöffnet werden. Sie können in beliebiger Reihenfolge so viele Boxen öffnen, wie Sie möchten. Sie können jederzeit aufhören zu spielen, um Ihre Gewinne in dieser Runde zu sichern. Dafür müssen Sie auf die Schaltfläche "Geld sammeln" klicken.</p>' +
+		'<p>Im Folgenden präsentieren wir Ihnen 32 geschlossene Boxen. Hinter 31 Boxen ist jeweils 1 Goldtaler versteckt. Hinter einer Box verbirgt sich ein Löwe. Jede der Boxen kann durch einen Mausklick geöffnet werden. Sie können in beliebiger Reihenfolge so viele Boxen öffnen, wie Sie möchten. Sie können jederzeit aufhören zu spielen, um Ihre Gewinne in dieser Runde zu sichern. Dafür müssen Sie auf die Schaltfläche "Punkte sammeln" klicken.</p>' +
 		'<p>Hinter einer Box befindet sich allerdings ein Löwe. Sobald der Löwe erscheint, verlieren Sie sämtliche Gewinne dieser Runde. Nachdem Sie sich entweder die Gewinne gesichert haben oder der Löwe erschienen ist, beginnt eine neue Runde.</p>'+
 		'<p>Hinweis: Je mehr Boxen Sie öffnen, desto höhere Gewinne erzielen Sie. Zugleich erhöht sich mit jedem Öffnen einer weiteren Box auch die Wahrscheinlichkeit, den Löwen „zu erwischen“ und damit sämtliche Gewinne der Runde zu verlieren.</p>',
 		
@@ -710,8 +706,8 @@ var instructions_block = {
 		
 		// ------
 		'<div class = centerbox><p class = block-text>'+
-		'<p><strong>Box mit Geld</strong></p>'+
-		'<p>Für jede geöffnete Box, hinter der Geld versteckt ist, gewinnen Sie 0,10€.</p>'+
+		'<p><strong>Box mit Goldtaler</strong></p>'+
+		'<p>Für jede geöffnete Box, hinter der ein Goldtaler versteckt ist, gewinnen Sie 1 Bonuspunkt.</p>'+
 		"<p><input type='image' src='images/final_coin.png' style='width:110px'>"+
 		'<p><strong>Box mit Löwe</strong></p>'+
 		"<p><input type='image' src='images/final_lion.png' style='width:110px'></p>"+
@@ -986,7 +982,7 @@ for (j = 0; j < 3; j++){
 columbia_card_task_hot_experiment.push(payout_text);
 
 // Show feedback page
-columbia_card_task_hot_experiment.push(post_task_block);
+// columbia_card_task_hot_experiment.push(post_task_block);
 
 columbia_card_task_hot_experiment.push(end_block);
 
