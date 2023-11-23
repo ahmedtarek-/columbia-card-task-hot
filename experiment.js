@@ -168,7 +168,7 @@ var chooseCard = function(clicked_id) {
 }
 
 var formatAmount = function(amount) {
-	return amount/1 + " Bonuspunkte"
+	return amount + " Bonuspunkte"
 }
 
 var getRandomInt = function (min, max) {
@@ -376,7 +376,7 @@ var instructFunction = function() {
 
 	var cards_to_turn = [1, 17, 18, 15, 27, 31, 8]
 	var total_points = 0
-	var points_per_card = 10
+	var points_per_card = 1
 	var delay = 0
 	for (var i = 0; i < cards_to_turn.length; i++) {
 		var card_i = cards_to_turn[i]
@@ -387,7 +387,7 @@ var instructFunction = function() {
 	}
 	CCT_timeouts.push(setTimeout(function() {
 		document.getElementById("instruct1").innerHTML =
-		'<strong>Example 1: </strong>In the example below, you see 32 unknown cards. The display shows you that 1 of these cards is a loss card. It also tells you that turning over each gain card is worth 10 points to you, and that turning over the loss card will cost you 750 points. Let us suppose you decided to turn over 7 cards and then decided to stop. Please click the "See Result" button to see what happens: <font color = "red">Luckily, none of the seven cards you turned over happened to be the loss card, so your score for this round was 70. Please click the next button.</font>'
+		'<strong>Example 1: </strong>In the example below, you see 32 unknown cards. The display shows you that 1 of these cards is a loss card. It also tells you that turning over each gain card is worth 1 point to you, and that turning over the loss card will cost you 750 points. Let us suppose you decided to turn over 7 cards and then decided to stop. Please click the "See Result" button to see what happens: <font color = "red">Luckily, none of the seven cards you turned over happened to be the loss card, so your score for this round was 70. Please click the next button.</font>'
 		}, delay))
 }
 
@@ -505,16 +505,16 @@ var distantFriendTotalPoints = 0
 
 // this params array is organized such that the 0 index = the number of loss cards in round, the 1 index = the gain amount of each happy card, and the 2nd index = the loss amount when you turn over a sad face
 var paramsArray = [
-	[1, 10, 1000],
-	[1, 10, 1000],
-	[1, 10, 1000],
-	[1, 10, 1000],
-	[1, 10, 1000],
-	[1, 10, 1000],
-	[1, 10, 1000],
-	[1, 10, 1000],
-	[1, 10, 1000],
-	[1, 10, 1000]
+	[1, 1, 1000],
+	[1, 1, 1000],
+	[1, 1, 1000],
+	[1, 1, 1000],
+	[1, 1, 1000],
+	[1, 1, 1000],
+	[1, 1, 1000],
+	[1, 1, 1000],
+	[1, 1, 1000],
+	[1, 1, 1000]
 ]
 
 var cardArray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23,
