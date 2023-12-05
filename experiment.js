@@ -301,7 +301,6 @@ var getPractice1 = function() {
 	// In cents
 	gainAmt = 1
 
-
 	shuffledCardArray = jsPsych.randomization.repeat(cardArray, 1)
 	whichLossCards = [] //this determines which are loss cards at the beginning of each round
 	for (i = 0; i < numLossCards; i++) {
@@ -759,7 +758,7 @@ var end_block = {
 		trial_id: 'end',
 		exp_id: 'columbia_card_task_hot'
 	},
-	text: '<div class = centerbox><p class = center-block-text>Finished with this task.</p><p class = center-block-text>Drücken Sie <strong>Enter</strong>, um fortzufahren.</p></div>',
+	text: '<div class = centerbox><p class = center-block-text>Sie sind mit dieser Aufgabe fertig.</p><p class = center-block-text>Drücken Sie <strong>Enter</strong>, um fortzufahren.</p></div>',
 	cont_key: [13],
 	timing_post_trial: 0,
   	on_finish: assessPerformance
@@ -770,7 +769,7 @@ var start_test_block = {
 	data: {
 		trial_id: 'test_intro'
 	},
-	text: '<div class = centerbox><p class = center-block-text>We will now start the test. Press <strong>enter</strong> to begin.</p></div>',
+	text: '<div class = centerbox><p class = center-block-text>Die Aufgabe beginnt nun. Drücken Sie zum Starten die <strong>Eingabetaste</strong>.</p></div>',
 	cont_key: [13],
 	timing_post_trial: 1000,
 	on_finish: function(){
