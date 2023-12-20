@@ -37,6 +37,8 @@ jsPsych.plugins['poldrack-instructions'] = (function() {
     var last_page_update_time = start_time;
 
     function show_current_page() {
+      console.log("[DEBUG] Trial:")
+      console.log(trial);
       if (trial.show_clickable_nav) {
 
         var nav_html = "<div class='jspsych-instructions-nav'>";

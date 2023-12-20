@@ -483,7 +483,9 @@ var prize2 = 0
 var prize3 = 0
 
 // Variables for different episode
-var episodesOrder = jsPsych.randomization.shuffle(["self", "friend", "stranger"])
+// TODO change
+// var episodesOrder = jsPsych.randomization.shuffle(["self", "friend", "stranger"])
+var episodesOrder = ["friend", "stranger", "self"]
 var whichEpisode = episodesOrder[0]
 console.log("- Initial episodesOrder: ", episodesOrder)
 console.log("- Initial whichEpisode: ", whichEpisode)
@@ -624,7 +626,7 @@ var userInfoClick = function () {
 
 var close_friend_block = {
 	type: 'poldrack-instructions',
-  data: {trial_id: 'user-info'},
+  data: {trial_id: 'user-info', disable_instruction_button: true},
   pages: [
   	// - Close friend
 		'<div class = centerbox><p class = block-text><strong>Enger Freund oder Freundin</strong>' +
@@ -646,7 +648,7 @@ var close_friend_block = {
 
 var distant_friend_block = {
 	type: 'poldrack-instructions',
-  data: {trial_id: 'user-info'},
+  data: {trial_id: 'user-info', disable_instruction_button: false},
   pages: [
 		// - Distant friend
 		'<div class = centerbox><p class = block-text><strong>Fremde Person</strong>' +
