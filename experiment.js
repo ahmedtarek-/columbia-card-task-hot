@@ -483,9 +483,7 @@ var prize2 = 0
 var prize3 = 0
 
 // Variables for different episode
-// TODO change
-// var episodesOrder = jsPsych.randomization.shuffle(["self", "friend", "stranger"])
-var episodesOrder = ["friend", "stranger", "self"]
+var episodesOrder = jsPsych.randomization.shuffle(["self", "friend", "stranger"])
 var whichEpisode = episodesOrder[0]
 console.log("- Initial episodesOrder: ", episodesOrder)
 console.log("- Initial whichEpisode: ", whichEpisode)
