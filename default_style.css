@@ -316,6 +316,12 @@ label.jspsych-poldrack-survey-multi-choice-text input[type="radio"] {
   background-color: darkblue;
 }
 
+#jspsych-instructions-next:disabled {
+  border: 1px solid #999999;
+  background-color: #cccccc;
+  color: #666666;
+}
+
 #jspsych-survey-multi-choice-next {
   padding-bottom: 10px;
 }

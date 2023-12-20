@@ -41,7 +41,7 @@ jsPsych.plugins['poldrack-instructions'] = (function() {
 
         var nav_html = "<div class='jspsych-instructions-nav'>";
         if (trial.pages.length == 1) {
-          nav_html += "<button id='jspsych-instructions-next'>Instruktionen abschließen</button>"
+          nav_html += "<button id='jspsych-instructions-next' disabled>Instruktionen abschließen</button>"
         } else {
           if (current_page == 0) {
             nav_html += "<button id='jspsych-instructions-next'>Weiter</button>"

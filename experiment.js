@@ -614,7 +614,7 @@ var userInfoClick = function () {
   friendNameFilled = true
   playingFor = friendName
 
-  document.getElementById("jspsych-instructions-next").hidden = false;
+  document.getElementById("jspsych-instructions-next").disabled = false;
   document.getElementById("userInfoForm").hidden = true;
   document.getElementById("friendName").innerHTML = friendName
   // $('#instructButton').prop('disabled', true);
