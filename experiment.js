@@ -693,7 +693,7 @@ var distant_friend_block = {
 /// This ensures that the subject does not read through the instructions too quickly.  If they do it too quickly, then we will go over the loop again.
 var instructions_block = {
   type: 'poldrack-instructions',
-  data: {trial_id: 'instruction'},
+  data: {trial_id: 'instruction', disable_instruction_button: false},
   pages: [
 		'<div class = centerbox><p class = block-text><strong>Anleitung</strong>'+
 		'<p>Im Folgenden präsentieren wir Ihnen 32 geschlossene Boxen. Hinter 31 Boxen ist jeweils 1 Goldtaler versteckt. Hinter einer Box verbirgt sich ein Löwe. Jede der Boxen kann durch einen Mausklick geöffnet werden. Sie können in beliebiger Reihenfolge so viele Boxen öffnen, wie Sie möchten. Sie können jederzeit aufhören zu spielen, um Ihre Gewinne in dieser Runde zu sichern. Dafür müssen Sie auf die Schaltfläche "Punkte sammeln" klicken.</p>' +
